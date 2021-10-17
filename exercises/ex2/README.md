@@ -33,7 +33,7 @@ After completing these steps you will have created a Pipeline that triggers the 
 1. Log on to SAP Data Intelligence and enter the Launchpad application. Then start the ***Modeler*** application.
    - Follow the link to your assigned Data Intelligence instance, e.g. https://vsystem.ingress.dh-pmydlxeu.dhaas-live.shoot.live.k8s-hana.ondemand.com/login/.
    - The tenant name is **"workshop"** (not "dat161" like in the screenshots).
-   - In the next pop-up window, enter your assigned user name (e.g. ***"TA99"***) and your individual password received from the DI user registration.<br><br>
+   - In the next pop-up window, enter your assigned user name (e.g. ***"TA99"***) and your individual password received from the DI user registration.<br>
    ![](/exercises/ex2/images/ex1-002c.JPG)<br><br>
    ![](/exercises/ex2/images/ex1-002d.JPG)<br><br>
    - From the Launchpad, start the ***Modeler*** application by clicking on the corresponding tile.<br><br>
@@ -49,7 +49,7 @@ After completing these steps you will have created a Pipeline that triggers the 
 ![](/exercises/ex2/images/ex2-006b.JPG)<br><br>
 
 5. In the pop-up windows, select the **"Creation of EPM Sales Order"** option. Then click ***OK***.<br><br>
-![](/exercises/ex2/images/ex2-007b.JPG)<br><br>
+![](/exercises/ex2/images/ex2-007b.JPG)<br>
 
 6. From the list of Operators, drag the ***Terminal*** operator into the Pipeline canvas. Connect **the output port of the Custom ABAP Operator with the input port of the Terminal operator**. Then connect the **output port of the Terminal operator with the input port of the Custom ABAP Operator**.<br>
 With this Pipeline setup, we can - from the Terminal UI - trigger the ABAP Operator call and the reception of confirmation message at the same time.<br><br>
