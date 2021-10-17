@@ -58,7 +58,7 @@ With this Pipeline setup, we can - from the Terminal UI - trigger the ABAP Opera
 7. ***Save*** the Pipeline and enter the following parameters prompted in the pop-up windows:<br>
    - Name: `teched.XXXX.EPM_FM_Call_SO_Generator`, where XXXX is your user name, for example "teched.TA99.EPM_FM_Call_SO_Generator"
    - Description: `XXXX - Generate EPM SO data via ABAP FM call`, where XXXX is your user name, for example "TA99 - Generate EPM SO data via ABAP FM call"
-   - Category: `dat161'.
+   - Category: `dat161'. <br>
 ![](/exercises/ex2/images/ex2-009b.JPG)<br><br>
 8.	***Run*** your Pipeline. After the Pipeline status has changed from ***pending*** to ***running***, right-click on the ***Terminal*** operator and click on ***Open UI***.<br><br>
 ![](/exercises/ex2/images/ex2-010b.JPG)<br><br>
@@ -104,5 +104,5 @@ In the Deep Dive demos and in the Exercises, we have jointly worked on the imple
 In case you have asked yourself if there are similar options for the integration with other ABAP systems such as ECC or BW, the answer is 'yes'! In these cases, you can make use of the unmodifying DMIS add-on, which provides the ABAP Pipeline Engine also for these systems.<br>
 This given, you can realize real-time replication scenarios via SLT integration to SAP Data Intelligence, leverage the ODP Reader operators, and also trigger function module execution on ECC or BW systems, too.<br>
 More information can be found [here](https://blogs.sap.com/2019/10/29/abap-integration-for-sap-data-hub-and-sap-data-intelligence-overview-blog/).<br><br>
-**THANK YOU VERY MUCH** for having participated in this Deep Dive and Hands On workshop. We hope you have enjoyed it!
+**THANK YOU VERY MUCH** for having participated in this Deep Dive and Hands On workshop. We hope you have enjoyed it!<br><br>
 Daniel Ingenhaag and Bengt Mertens<br><br>
