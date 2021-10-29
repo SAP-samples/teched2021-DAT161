@@ -30,9 +30,9 @@ ABAP Edition | Minimum version | Recommended Version
 ------------ | --------------- | -------------------
 S/4HANA on Premise | OP1909 + Note 2873666 |
 S/4HANA Cloud | CE2002 | 
-Netweaver < 7.52 (ECC, BW, SRM, ...) | Add-On DMIS 2011 SP17 + Note 2857333 or 2857334 | Add-On DMIS 2011 SP19
 Netweaver >= 7.52 (ECC, BW, SRM, ...) | Add-On DMIS 2018 SP02 + Note 2845347 | Add-On DMIS 2018 SP04
-Netweaver >= 4.6C & <7.00 via dedicated SLT Server | Add-On DMIS 2011/2018 considering DMIS [version dependency](https://help.sap.com/doc/7824ad784dd242928fade9b62cdb171c/3.0.04/en-US/Installation_Guide_2020.pdf) | Use latest DMIS SP
+Netweaver >= 7.00 & < 7.52 (ECC, BW, SRM, ...) | Add-On DMIS 2011 SP17 + Note 2857333 or 2857334 | Add-On DMIS 2011 SP19
+Netweaver >= 4.6C & < 7.00 via dedicated SLT Server | Add-On DMIS 2011/2018 considering DMIS [version dependency](https://help.sap.com/doc/7824ad784dd242928fade9b62cdb171c/3.0.04/en-US/Installation_Guide_2020.pdf) | Use latest DMIS SP
 > **Note:**
 > Please always also consult the most up-to-date Availability Matrix.
 
@@ -64,8 +64,8 @@ Here is a step-by-step guideline for creating a custom ABAP Operator. In the spe
 1. Logon to the SAP GUI of your conneted S/4HANA system and run transaction `DHAPE` (ABAP Editor), enter `DHAPE_CREATE_OPERATOR_CLASS` and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
 ![](images/dd2-002a.JPG)<br>
 
-  Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPERATOR_CLASS and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
-  ![](images/dd2-002b.JPG)<br>
+   Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPERATOR_CLASS and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
+   ![](images/dd2-002b.JPG)<br>
 
 2. Enter the required parameters and ***Execute***.<br><br>
 ![](images/dd2-003a.JPG)<br>
