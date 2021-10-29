@@ -64,8 +64,8 @@ Here is a step-by-step guideline for creating a custom ABAP Operator. In the spe
 1. Logon to the SAP GUI of your conneted S/4HANA system and run transaction `DHAPE` (ABAP Editor), enter `DHAPE_CREATE_OPERATOR_CLASS` and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
 ![](images/dd2-002a.JPG)<br>
 
-Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPERATOR_CLASS and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
-![](images/dd2-002b.JPG)<br>
+  Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPERATOR_CLASS and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
+  ![](images/dd2-002b.JPG)<br>
 
 2. Enter the required parameters and ***Execute***.<br><br>
 ![](images/dd2-003a.JPG)<br>
@@ -76,10 +76,10 @@ Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHA
 4. You should now see the following screen. Close that windows by clicking ***Exit*** (or ***Shift+F3***).<br><br>
 ![](images/dd2-005a.JPG)<br>
 
-5. Go back to transaction `DHAPE` and click on “Operator BaDI Implementation Generator” 
+5. Go back to transaction `DHAPE` and click on “Operator BaDI Implementation Generator” <br><br>
 ![](images/dd2-006a.JPG)<br>
 
-Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPER_BADI_IMPL and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
+   Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPER_BADI_IMPL and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
 
 6. Enter the required parameters and ***Execute***.<br><br>
 ![](images/dd2-007a.JPG)<br>
@@ -102,7 +102,7 @@ Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHA
 12. On the next screen, double click on the local class `lcl_process`.<br><br>
 ![](images/dd2-013b.JPG)<br>
 
-13. As we are going to implement a new method `on_data`, we have to declare the method in the class definition.<br>
+13. As we are going to implement a new method `on_data`, we have to declare the method in the class definition.<br><br>
 Add the following code snippet:<br>
 ```abap
   PRIVATE SECTION.
@@ -110,7 +110,7 @@ Add the following code snippet:<br>
 ```
 ![](images/dd2-014b.JPG)<br>
 
-14. We can outcomment the parameter value retrieval (see line 30 in screenshot below).<br>
+14. We can outcomment the parameter value retrieval (see line 30 in screenshot below).<br><br>
 Then overwrite the existing `step( )` method with the following code:<br>
 ```abap
   METHOD if_dhape_graph_process~step.
@@ -246,7 +246,7 @@ The integration of ABAP Operators is done via Pipelines in the SAP Data Intelige
 6.	As you can see, the ABAP Operator node in the Pipeline canvas gets automatically updated with the operator's name in S/4HANA and the ports that we have defined in the previous section of this Deep Dive demo. (The `GET_INFO( )`method in our operator's ABAP class provides the corresponding meta information.)<br><br>
 ![](images/dd2-021b.JPG)<br><br>
 
-7.	For verifying the functionality of the ABAP Operator call, we'll be using a ***Terminal*** Operator in the Pipeline. This operator allows the sending of user inputs and the reception of the results. Drag the ***Terminal*** icon from the Operator list and drop it onto the Pipeline canvas. Then connect<br>
+7.	For verifying the functionality of the ABAP Operator call, we'll be using a ***Terminal*** Operator in the Pipeline. This operator allows the sending of user inputs and the reception of the results. Drag the ***Terminal*** icon from the Operator list and drop it onto the Pipeline canvas. Then connect<br><br>
 - the output port of the ABAP Operator with the input port of the Terminal Operator and
 - the output port of the Terminal Operator with the input port of the ABAP Operator.
 Then ***Save*** the Pipeline.<br><br>
@@ -274,10 +274,9 @@ You can try out the following tables and CDS Views:
 	- I_LISTEDSUBSTANCEDEFNAMESAP
 	- I_GLACCOUNTINCOMPANYCODE
 
-
-![](images/dd2-027b.JPG)<br><br>
-
-11.	Don't forget to stop the Pipeline again if you haven't embedded a ***Graph Terminator*** before.<br><br>
+  ![](images/dd2-027b.JPG)<br><br>
+	
+12.	Don't forget to stop the Pipeline again if you haven't embedded a ***Graph Terminator*** before.<br><br>
 ![](images/dd2-028b.JPG)<br><br>
 
 ## Summary
