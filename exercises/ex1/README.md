@@ -109,10 +109,10 @@ Now connect the ***output port of the HANA Client*** with the ***input port of t
 	 Click the browse button next to Table name and select your user schema “XXXX_EPM_TARGET”, where XXXX refers to your user name, e.g. “TA99_EPM_TARGET. <br><br>
 ![](/exercises/ex1/images/ex1-023b.JPG)<br><br>
 
-Double click on your user schema and inside your user schema you will find a pre-defined table with your user id “XXXX_BUSINESS_PARTNER”, e.g. “TA99_BUSINESS_PARTNER”
+Double click on your user schema and inside your user schema you will find a pre-defined table with your user id “XXXX_BUSINESS_PARTNER”, e.g. “TA99_BUSINESS_PARTNER” <br><br>
 ![](/exercises/ex1/images/ex1-024b.JPG)<br><br>
 
-Click on ***OK*** to save your target table selection.
+Click on ***OK*** to save your target table selection.<br><br>
 ![](/exercises/ex1/images/ex1-025b.JPG)<br><br>
 
 Make sure the following additional configuration settings are applied to define the correct format of the incoming csv data stream:
@@ -133,8 +133,8 @@ Make sure the following additional configuration settings are applied to define 
 6. Now ***Save*** your Pipeline, verify the validation results and - if okay - run the Pipeline by clicking on the ***Play*** symbol in the menue bar.<br><br>
 ![](/exercises/ex1/images/ex1-028b.JPG)<br><br>
 
-In this case the validation shows two warnings that can be ignored. The topic about the missing resources is optional if you want to define specific resources to a graph with a minimum and maximum number of CPU + memory the graph is allowed to use.
-More information can be found here: https://help.sap.com/viewer/1c1341f6911f4da5a35b191b40b426c8/Cloud/en-US/b0a5a31101304ef6be7ce3708aadceea.html?q=resources 
+	In this case the validation shows two warnings that can be ignored. The topic about the missing resources is optional if you want to define specific resources to a graph with a minimum and maximum number of CPU + memory the graph is allowed to use.
+	More information can be found here: https://help.sap.com/viewer/1c1341f6911f4da5a35b191b40b426c8/Cloud/en-US/b0a5a31101304ef6be7ce3708aadceea.html?q=resources <br>
 
 
 7. Once the Pipeline has the status ***running***, click on the ***Wiretap*** operator and then click its ***Open UI*** icon.<br><br>
@@ -176,7 +176,7 @@ Now you can see that the EPM Customer data got loaded into a target table in HAN
 In the next section, we'll also take care for the Sales Order transaction data from EPM and will right away establish a replication (initial load plus following delta processing) transfer mode.
 
 1. In SAP Data Intelligence, open the ***Modeler*** application. Make sure the scope of the Modeler UI is on tab ***Graphs*** (see left side). Then click the ***+*** button to create a new Pipeline.<br><br>
-![](/exercises/ex1/images/ex1-003b.JPG)<br><br>
+![](/exercises/ex1/images/ex1-004b.JPG)<br><br>
 
 2. Now a new Pipeline canvas is opened on the right side and the Modeler UI automatically switches the scope to the ***Operators*** tab (see left side). In the list of operators, drag the ABAP CDS Reader and drop it into the Pipeline canvas. Click the ABAP CDS Reader node in the canvas one time and then click the ***configuration*** icon.<br><br>
 ![](/exercises/ex1/images/ex1-006b.JPG)<br><br>
@@ -237,10 +237,10 @@ More information can be found here: https://help.sap.com/viewer/1c1341f6911f4da5
 
 
 14.	Once the status of your Pipeline has changed to ***running***, click on the ***Wiretap*** operator node one time and then on its ***Open UI*** icon.<br><br>
-![](/exercises/ex1/images/ex1-046b.JPG)<br><br>
+![](/exercises/ex1/images/ex1-048b.JPG)<br><br>
 
 15. In the ***Wiretap UI*** you should now see the processed Sales Order messages coming from the ABAP CDS Reader. This proves that the integration with the S/4HANA CDS View is working as expected.<br><br>
-![](/exercises/ex1/images/ex1-047b.JPG)<br><br>
+![](/exercises/ex1/images/ex1-049b.JPG)<br><br>
 
 16. For validating the correct creation of the file in S3, please leverage the Data Intelligence Metadata Explorer again. Go back to the Launchpad and start the Metadata Explorer application, if not already launched from the previous exercise.<br><br>
 
@@ -253,7 +253,7 @@ More information can be found here: https://help.sap.com/viewer/1c1341f6911f4da5
 19. On the next drill-down view, click on the **`DAT161`** directory that you had specified in the ***Write File*** operator, and then drill down to your specific User directory, for example **`TA99`**.<br><br>
 ![](/exercises/ex1/images/ex1-052b.JPG)<br><br>
 
-20. If your Pipeline ran successfully, you'll find a file with your specified name (`Sales_Order.csv`) Open the ***More Actions*** menue and select ***View Fact Sheet***.<br><br>
+20. If your Pipeline ran successfully, you'll find a file with your specified name (`Sales_Order.csv`) Click on the glasses icon ***View Fact Sheet*** to open up the Fact Sheet for the CSV file. <br><br>
 ![](/exercises/ex1/images/ex1-053b.JPG)<br><br>
 
 21. In the ***Fact Sheet***, which provides some more overview and statistical information about the new file, go to tab ***Data Preview***.<br><br>
@@ -262,7 +262,7 @@ More information can be found here: https://help.sap.com/viewer/1c1341f6911f4da5
 22. Success! Now you can see that the EPM Customer data got loaded into the target file in S3. While the Pipeline is running, this file would get automatically updated with each change in the S/4HANA data sources (the tables `SNWD_SO`, `SNWD_SO_I`, `SNWD_PD`, `SNWD_TEXTS` joined through the ABAP CDS View `Z_CDS_SO_SOI_Delta`).<br><br>
 ![](/exercises/ex1/images/ex1-055b.JPG)<br><br>
 
-21. However, in order to go on with the exercise, please stop the Pipeline for now. We will validate the delta processing in Exercise 2.<br><br>
+23. However, in order to go on with the exercise, please stop the Pipeline for now. We will validate the delta processing in Exercise 2.<br><br>
 ![](/exercises/ex1/images/ex1-056b.JPG)<br><br>
 
 **Congratulations!** You have created the Sales Order extraction from a delta-enabled, more complex ABAP CDS View into the S3 Object Store. Because you have chosen the transfer mode ***"Replication"*** in the CDS Reader operator configuration, the Pipeline has conducted the Initial Load and would now wait for any changes (inserts, updates, deletions) in the S/HANA EPM Sales Order object as long as it is running.
@@ -306,9 +306,9 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
    - **Storage Type**: `S3`
    - **S3 Configuration**: After clicking on the pencil icon, select `Configuration Manager`and as connection ID `TechEd2020_S3`<br><br>
    - Increase the **Fetch size** to `10000`
-
-   - Then click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT262** and select the file **`Sales_Order_Staging`**. Then click ***OK***.<br><br>
-     ![](/exercises/ex1/images/ex1-064b.JPG)<br><br>
+   
+   Then click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT262** and select the file **`Sales_Order_Staging`**. Then click ***OK***.<br><br>
+   ![](/exercises/ex1/images/ex1-064b.JPG)<br><br>
      
 10. Select Service to S3 and select the previously used Connection ID Teched_S3: <br><br> 
 ![](/exercises/ex1/images/ex1-065b.JPG)<br><br>
@@ -317,18 +317,19 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 ![](/exercises/ex1/images/ex1-066b.JPG)<br><br>
 
 
-Once you select the target file, the dialog will automatically capture metadata of the csv file, e.g. delimiters and whether the file includes header information or not.<br><br>
-![](/exercises/ex1/images/ex1-067b.JPG)<br><br>
+	Once you select the target file, the dialog will automatically capture metadata of the csv file, e.g. delimiters and whether the file includes header information or not.<br><br>
+	![](/exercises/ex1/images/ex1-067b.JPG)<br><br>
 
-In the Source option you will now see that file path has been updated: <br><br>
-![](/exercises/ex1/images/ex1-068b.JPG)<br><br>
+	In the Source option you will now see that file path has been updated: <br><br>
+	![](/exercises/ex1/images/ex1-068b.JPG)<br><br>
 
 12. Set the parameter Fall on String Truncation  to false by switching it off: <br><br>
 ![](/exercises/ex1/images/ex1-069b.JPG)<br><br>
 
-You are now able to open the ***Data Preview*** of the connected file in S3. Give it a try, if you want!<br>
-![](/exercises/ex1/images/ex1-070b.JPG)<br><br>
-![](/exercises/ex1/images/ex1-071b.JPG)<br><br>
+	You are now able to open the ***Data Preview*** of the connected file in S3. Give it a try, if you want!<br><br>
+	For the Preview you can choose between the preview of data how is stored in the source or the adapted data in case you have performed any changes:<br><br>
+	![](/exercises/ex1/images/ex1-070b.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-071b.JPG)<br><br>
 
 
 13. Now connect the **upper output port ("file") of the File Writer** operator with the **input port of the Structured File Consumer** operator. The ***Structured File Consumer*** operator takes the signal on the input port just as a trigger for commencing its logic. It's an optional input but our approach ensures that the operator is only executed after the file from the previous node has been successfully written on S3. (If the input port of a Structured File Consumer is not connected, the operator will start with the Pipeline execution.)<br>
@@ -339,45 +340,45 @@ When you create the link between the operators, a conversion of the data type is
 14.	Now we need to a ***Table Consumer*** operator for the Customer master data extraction from HANA Cloud. Go to the operator tab on the left-hand panel to drag and drop the Table Consumer operator in your graph.<br><br>
 ![](/exercises/ex1/images/ex1-074b.JPG)<br><br>
 
-In case the ***To File Operator*** has been added in a similar way as above, you can easily move it to another position within your pipeline depending on your needs. <br><br>
+	In case the ***To File Operator*** has been added in a similar way as above, you can easily move it to another position within your pipeline depending on your needs. <br><br>
 
-14. On this new operator, open the configuration panel and click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT262** and select the file **`Customer_Master.csv`**. Then click ***OK***..<br><br>
+15. On this new operator, open the configuration panel and click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT262** and select the file **`Customer_Master.csv`**. Then click ***OK***..<br><br>
 ![](/exercises/ex1/images/ex1-075b.JPG)<br><br>
 
-Select the service to “HANA_DB” and choose “TechEd_HANA” as Connection ID, which has been used as target for storing the Customer Master Data in our previous exercise. <br><br>
-![](/exercises/ex1/images/ex1-076b.JPG)<br><br>
+	Select the service to “HANA_DB” and choose “TechEd_HANA” as Connection ID, which has been used as target for storing the Customer Master Data in our previous exercise. <br><br>
+	![](/exercises/ex1/images/ex1-076b.JPG)<br><br>
 
-Click on the Browse button of the Source parameter: <br><br>
-![](/exercises/ex1/images/ex1-077b.JPG)<br><br>
+	Click on the Browse button of the Source parameter: <br><br>
+	![](/exercises/ex1/images/ex1-077b.JPG)<br><br>
 
-The following selectin screen appears. Now drilldown into your user HANA schema in HANA Cloud where you have stored your Customer Data and confirm the selection with a click on ***OK***, e.g.: <br><br>
-xxxx_EPM_TARGET / xxxx_BUSINESS_PARTNER, where xxxx stands for your user ID, e.g. TA99_EPM_TARGET / TA99_BUSINESS_PARTNER  <br><br> 
+	The following selectin screen appears. Now drilldown into your user HANA schema in HANA Cloud where you have stored your Customer Data and confirm the selection with a click on ***OK***, e.g.: <br><br>
+	xxxx_EPM_TARGET / xxxx_BUSINESS_PARTNER, where xxxx stands for your user ID, e.g. TA99_EPM_TARGET / TA99_BUSINESS_PARTNER  <br><br> 
 
-![](/exercises/ex1/images/ex1-078b.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-078b.JPG)<br><br>
 
-15. Once you selected the Customer data in HANA, the dialog will automatically fetch the metadata of the table and show on the bottom of the screen: <br><br> 
+16. Once you selected the Customer data in HANA, the dialog will automatically fetch the metadata of the table and show on the bottom of the screen: <br><br> 
 ![](/exercises/ex1/images/ex1-079b.JPG)<br><br>
 
-16. From the list of operators on the left side, drag the ***Data Transform*** operator and drop it into the Pipeline canvas. Then connect the ***output port of the Structured File Consumer*** and the output port of the ***Table Consumer *** with the ***Data Transform box***. This will create the needed input ports of the Data Transform operator.<br><br>
+17. From the list of operators on the left side, drag the ***Data Transform*** operator and drop it into the Pipeline canvas. Then connect the ***output port of the Structured File Consumer*** and the output port of the ***Table Consumer *** with the ***Data Transform box***. This will create the needed input ports of the Data Transform operator.<br><br>
 ![](/exercises/ex1/images/ex1-080b.JPG)<br><br>
 
-17. Double-click on the ***Data Transform*** operator.<br><br>
+18. Double-click on the ***Data Transform*** operator.<br><br>
 ![](/exercises/ex1/images/ex1-081b.JPG)<br><br>
 
-18. In the details view, from the list of Data Operations on the left side, drag the ***Join*** operation into the canvas with the existing two ***input nodes*** and connect these with the ***Join*** operation.<br><br>
+19. In the details view, from the list of Data Operations on the left side, drag the ***Join*** operation into the canvas with the existing two ***input nodes*** and connect these with the ***Join*** operation.<br><br>
 ![](/exercises/ex1/images/ex1-082b.JPG)<br><br>
 
-19. Double-click on the ***Join*** operation.<br><br>
+20. Double-click on the ***Join*** operation.<br><br>
 ![](/exercises/ex1/images/ex1-083b.JPG)<br><br>
 
-20. Re-arrange the position of input tables on the canvas as per your convenience and then connect the **"C5" field of Join_Input1** (Sales Order) with the **"C0" field of Join_Input2** (Customer). This will map the Customer GUID fields of the two tables. We're using an INNER JOIN.<br><br>
+21. Re-arrange the position of input tables on the canvas as per your convenience and then connect the **"C5" field of Join_Input1** (Sales Order) with the **"C0" field of Join_Input2** (Customer). This will map the Customer GUID fields of the two tables. We're using an INNER JOIN.<br><br>
 ![](/exercises/ex1/images/ex1-084b.JPG)<br><br>
 
-21. Connect ***"BUYERGUID" field of Join_Input1*** (Sales Order) with the ***"NODEKEY" field of Join_Input2*** (Customer). This will map the Customer GUID fields of the two tables. We're using an INNER JOIN..<br><br>
+22. Connect ***"BUYERGUID" field of Join_Input1*** (Sales Order) with the ***"NODEKEY" field of Join_Input2*** (Customer). This will map the Customer GUID fields of the two tables. We're using an INNER JOIN..<br><br>
 ![](/exercises/ex1/images/ex1-085b.JPG)<br><br>
 
-You can leave the default settings displayed in the Join Definition screen: <br><br>
-![](/exercises/ex1/images/ex1-086b.JPG)<br><br>
+	You can leave the default settings displayed in the Join Definition screen: <br><br>
+	![](/exercises/ex1/images/ex1-086b.JPG)<br><br>
 
 23. Proceed to tab ***Columns*** in order to select the output fields. Click on the ***Auto map by name*** icon (see red box), which enter all fields of the two input nodes to the list of output fields.<br><br> 
 ![](/exercises/ex1/images/ex1-087b.JPG)<br><br>
@@ -400,22 +401,22 @@ You can leave the default settings displayed in the Join Definition screen: <br>
 29. Open the configuration panel of the ***Structured File Producer*** operator aby clicking on the Edit / Pencil icon of the Target Configuration to start the configuration of your target S3 scenario:<br>
     ![](/exercises/ex1/images/ex1-107b.JPG)<br><br>
 	
-	Select S3 as ***Service*** and use Connection ID ***TechEd_S3***
+	Select S3 as ***Service*** and use Connection ID ***TechEd_S3***. <br><br>
 	![](/exercises/ex1/images/ex1-108b.JPG)<br><br>
 	
-	Click on the ***Browse*** Button of ***Target*** parameter:
+	Click on the ***Browse*** Button of ***Target*** parameter: <br><br>
 	![](/exercises/ex1/images/ex1-109b.JPG)<br><br>
 	
-	Browse to the path in S3 with /DAT161/XXXX, where XXXX stands for your user ID e.g. /DAT161/TA99 and click on + icon:
+	Browse to the path in S3 with /DAT161/XXXX, where XXXX stands for your user ID e.g. /DAT161/TA99 and click on + icon: <br><br>
 	![](/exercises/ex1/images/ex1-110b.JPG)<br><br>
 	
-	Enter a name of the target name of the CSV file, e.g. ***Enriched_Sales_Order.csv*** and click on ***Add***
+	Enter a name of the target name of the CSV file, e.g. ***Enriched_Sales_Order.csv*** and click on ***Add*** <br><br>
 	![](/exercises/ex1/images/ex1-102.JPG)<br><br>
 	
-	You will now see the file is being added in the S3 Object store. Select it and click on ***OK***.
+	You will now see the file is being added in the S3 Object store. Select it and click on ***OK***.<br><br>
 	![](/exercises/ex1/images/ex1-103.JPG)<br><br>
 	
-	The Target is now being updated to the file you specified. In addition please check the following configurations:
+	The Target is now being updated to the file you specified. In addition please check the following configurations: <br><br>
 
     - **Format:** `CSV`
     - Leave the **CSV Properties** as-is
