@@ -411,10 +411,10 @@ When you create the link between the operators, a conversion of the data type is
 	![](/exercises/ex1/images/ex1-110b.JPG)<br><br>
 	
 	Enter a name of the target name of the CSV file, e.g. ***Enriched_Sales_Order.csv*** and click on ***Add*** <br><br>
-	![](/exercises/ex1/images/ex1-102.jpg)<br><br>
+	![](/exercises/ex1/images/ex1-102.JPG)<br><br>
 	
 	You will now see the file is being added in the S3 Object store. Select it and click on ***OK***.<br><br>
-	![](/exercises/ex1/images/ex1-103.jpg)<br><br>
+	![](/exercises/ex1/images/ex1-103.JPG)<br><br>
 	
 	The Target is now being updated to the file you specified. In addition please check the following configurations: <br><br>
 
@@ -423,7 +423,7 @@ When you create the link between the operators, a conversion of the data type is
     - **Header:** ON
     - **Write Part Files** should be `False`<br><br>
 	
-	![](/exercises/ex1/images/ex1-104.jpg)<br><br>
+	![](/exercises/ex1/images/ex1-104.JPG)<br><br>
 	
     ***Save*** the Pipeline <br><br>
 	
