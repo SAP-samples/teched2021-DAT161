@@ -107,28 +107,28 @@ Now connect the ***output port of the HANA Client*** with the ***input port of t
    - Output in Batches: **False**
    - Table Name: 
 	 Click the browse button next to Table name and select your user schema “XXXX_EPM_TARGET”, where XXXX refers to your user name, e.g. “TA99_EPM_TARGET. <br><br>
-![](/exercises/ex1/images/ex1-023b.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-023b.JPG)<br><br>
 
-Double click on your user schema and inside your user schema you will find a pre-defined table with your user id “XXXX_BUSINESS_PARTNER”, e.g. “TA99_BUSINESS_PARTNER” <br><br>
-![](/exercises/ex1/images/ex1-024b.JPG)<br><br>
+	Double click on your user schema and inside your user schema you will find a pre-defined table with your user id “XXXX_BUSINESS_PARTNER”, e.g. “TA99_BUSINESS_PARTNER” <br><br>
+	![](/exercises/ex1/images/ex1-024b.JPG)<br><br>
 
-Click on ***OK*** to save your target table selection.<br><br>
-![](/exercises/ex1/images/ex1-025b.JPG)<br><br>
+	Click on ***OK*** to save your target table selection.<br><br>
+	![](/exercises/ex1/images/ex1-025b.JPG)<br><br>
 
-Make sure the following additional configuration settings are applied to define the correct format of the incoming csv data stream:
-•	Input Format: ***CSV***
-•	CSV Mode: ***Batch***
-•	CSV Record delimiter: ***\n***
-•	CSV field delimiter: ***,***
-•	CSV quote delimiter: ***“***
-•	CSV header: ***Ignore***
-•	Insert mode: ***INSERT***
-•	Table Initialization: ***None***
-•	Terminate on Error: ***True***
+	Make sure the following additional configuration settings are applied to define the correct format of the incoming csv data stream:
+	•	Input Format: ***CSV***
+	•	CSV Mode: ***Batch***
+	•	CSV Record delimiter: ***\n***
+	•	CSV field delimiter: ***,***
+	•	CSV quote delimiter: ***“***
+	•	CSV header: ***Ignore***
+	•	Insert mode: ***INSERT***
+	•	Table Initialization: ***None***
+	•	Terminate on Error: ***True***
 
-![](/exercises/ex1/images/ex1-026b.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-026b.JPG)<br><br>
 
-![](/exercises/ex1/images/ex1-027b.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-027b.JPG)<br><br>
 
 6. Now ***Save*** your Pipeline, verify the validation results and - if okay - run the Pipeline by clicking on the ***Play*** symbol in the menue bar.<br><br>
 ![](/exercises/ex1/images/ex1-028b.JPG)<br><br>
@@ -158,15 +158,15 @@ Make sure the following additional configuration settings are applied to define 
 13. On the next screen search for your user schema that you selected in your Pipeline, e.g. XXXX_EPM_TARGET, where XXXX stands for your user ID.<br><br>
 ![](/exercises/ex1/images/ex1-035b.JPG)<br><br>
 
-15. Select your HANA table that you previously selected in the HANA Client operator and open the factsheet by clicking on the glasses “View Fact Sheet” option on the right-hand side of your table:<br><br>
+14. Select your HANA table that you previously selected in the HANA Client operator and open the factsheet by clicking on the glasses “View Fact Sheet” option on the right-hand side of your table:<br><br>
 ![](/exercises/ex1/images/ex1-036b.JPG)<br><br>
 
-16. If your Pipeline ran successfully, you'll see data in your table once you switch to the tab ***Data Preview***<br><br>
+15. If your Pipeline ran successfully, you'll see data in your table once you switch to the tab ***Data Preview***<br><br>
 ![](/exercises/ex1/images/ex1-037b.JPG)<br><br>
 
 Now you can see that the EPM Customer data got loaded into a target table in HANA Cloud. Success!
 
-17. In the Overview section you can find additional metadata of the HANA table such as the column names + data types of our Business Partner table:. Success!<br><br>
+16. In the Overview section you can find additional metadata of the HANA table such as the column names + data types of our Business Partner table:. Success!<br><br>
 ![](/exercises/ex1/images/ex1-038b.JPG)<br><br>
 
 **Very well done!** You have implemented a Pipeline that extracts Initial Load data from an ABAP CDS View in S/4HANA to a table stored in a target HANA Cloud database.
@@ -199,19 +199,19 @@ In the next section, we'll also take care for the Sales Order transaction data f
 7. From the operator list on the left side, drag and drop the ***Get Header*** operator into the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Get Header operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-040b.JPG)<br><br>
 
-7.	From the operator list on the left side, drag the ***Wiretab*** operator and drop it into the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Wiretab operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
+8.	From the operator list on the left side, drag the ***Wiretab*** operator and drop it into the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Wiretab operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-041b.JPG)<br><br>
 
-8. From the list of operators, drag the ***Write File*** operator and drop it in the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Wiretap operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
+9. From the list of operators, drag the ***Write File*** operator and drop it in the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Wiretap operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-042b.JPG)<br><br>
 
-9. The message format from the Wiretap operator output must be transformed to a file format. For this reason you are prompted to choose an appropriate converter operator. On the pop-up window, select the first option (transfer the content). Click ***OK***.<br><br>
+10. The message format from the Wiretap operator output must be transformed to a file format. For this reason you are prompted to choose an appropriate converter operator. On the pop-up window, select the first option (transfer the content). Click ***OK***.<br><br>
 ![](/exercises/ex1/images/ex1-043b.JPG)<br><br>
 
-10. Click on the ***Write File*** operator and click its ***configuration*** icon.<br><br>
+11. Click on the ***Write File*** operator and click its ***configuration*** icon.<br><br>
 ![](/exercises/ex1/images/ex1-044b.JPG)<br><br>
 
-11. Enter the needed configuration parameters for the ***Write File*** operator. These are:
+12. Enter the needed configuration parameters for the ***Write File*** operator. These are:
    - Label: **`Sales Order to S3`**
    - Connection: Choose type ***Connection Management*** and then the connection ID **`TechEd2020_S3`**
    - Path mode: **`Static (from configuration)`**
@@ -220,7 +220,7 @@ In the next section, we'll also take care for the Sales Order transaction data f
    - Join batches: **`True`**<br><br>
 ![](/exercises/ex1/images/ex1-045b.JPG)<br><br>
 
-12.	***Save*** your Pipeline.
+13.	***Save*** your Pipeline.
       - Click on the Disk symbol in the menue bar.
       - Because you save the Sales Order Pipeline for the first time, you are prompted for some inputs.<br>
       - As Name, enter **`teched.XXXX.EPM_SalesOrder_Replication_to_S3`**, where **XXXX** is your user name, for example "teched.TA99.EPM_SalesOrder_Replication_to_S3".<br>
@@ -229,40 +229,40 @@ In the next section, we'll also take care for the Sales Order transaction data f
       - Click ***OK***.<br><br>
       ![](/exercises/ex1/images/ex1-046b.JPG)<br><br>
 
-13.	After you have saved the Pipeline, it will get validated by SAP Data Intelligence. Check the validation results. If okay, you can now execute the Pipeline by clicking the ***Play*** icon in the menue bar. Then change to the ***Status*** tab in the Modeler UI status section on the lower right side.<br><br>
+14.	After you have saved the Pipeline, it will get validated by SAP Data Intelligence. Check the validation results. If okay, you can now execute the Pipeline by clicking the ***Play*** icon in the menue bar. Then change to the ***Status*** tab in the Modeler UI status section on the lower right side.<br><br>
 ![](/exercises/ex1/images/ex1-047b.JPG)<br><br>
 
-In this case the validation shows one warning that can be ignored. The topic about the missing resources is optional if you want to define specific resources to a graph with a minimum and maximum number of CPU + memory the graph is allowed to use.<br>
-More information can be found here: https://help.sap.com/viewer/1c1341f6911f4da5a35b191b40b426c8/Cloud/en-US/b0a5a31101304ef6be7ce3708aadceea.html?q=resources 
+	In this case the validation shows one warning that can be ignored. The topic about the missing resources is optional if you want to define specific resources to a graph with a minimum and maximum number of CPU + memory the graph is allowed to use.<br>
+	More information can be found here: https://help.sap.com/viewer/1c1341f6911f4da5a35b191b40b426c8/Cloud/en-US/b0a5a31101304ef6be7ce3708aadceea.html?q=resources 
 
 
-14.	Once the status of your Pipeline has changed to ***running***, click on the ***Wiretap*** operator node one time and then on its ***Open UI*** icon.<br><br>
+15.	Once the status of your Pipeline has changed to ***running***, click on the ***Wiretap*** operator node one time and then on its ***Open UI*** icon.<br><br>
 ![](/exercises/ex1/images/ex1-048b.JPG)<br><br>
 
-15. In the ***Wiretap UI*** you should now see the processed Sales Order messages coming from the ABAP CDS Reader. This proves that the integration with the S/4HANA CDS View is working as expected.<br><br>
+16. In the ***Wiretap UI*** you should now see the processed Sales Order messages coming from the ABAP CDS Reader. This proves that the integration with the S/4HANA CDS View is working as expected.<br><br>
 ![](/exercises/ex1/images/ex1-049b.JPG)<br><br>
 
-16. For validating the correct creation of the file in S3, please leverage the Data Intelligence Metadata Explorer again. Go back to the Launchpad and start the Metadata Explorer application, if not already launched from the previous exercise.<br><br>
+17. For validating the correct creation of the file in S3, please leverage the Data Intelligence Metadata Explorer again. Go back to the Launchpad and start the Metadata Explorer application, if not already launched from the previous exercise.<br><br>
 
-17. In the ***Metadata Explorer*** application main menue, click on ***Browse Connections***.<br><br>
+18. In the ***Metadata Explorer*** application main menue, click on ***Browse Connections***.<br><br>
 ![](/exercises/ex1/images/ex1-050b.JPG)<br><br>
 
-18. In order to easily find our connection to the target S3 Object Store, you may leverage the search functionality. Enter `TechEd_s` into the search field and click on the spyclass icon. Click on the **`TechEd2020_S3`** tile.<br><br>
+19. In order to easily find our connection to the target S3 Object Store, you may leverage the search functionality. Enter `TechEd_s` into the search field and click on the spyclass icon. Click on the **`TechEd2020_S3`** tile.<br><br>
 ![](/exercises/ex1/images/ex1-051b.JPG)<br><br>
 
-19. On the next drill-down view, click on the **`DAT161`** directory that you had specified in the ***Write File*** operator, and then drill down to your specific User directory, for example **`TA99`**.<br><br>
+20. On the next drill-down view, click on the **`DAT161`** directory that you had specified in the ***Write File*** operator, and then drill down to your specific User directory, for example **`TA99`**.<br><br>
 ![](/exercises/ex1/images/ex1-052b.JPG)<br><br>
 
-20. If your Pipeline ran successfully, you'll find a file with your specified name (`Sales_Order.csv`) Click on the glasses icon ***View Fact Sheet*** to open up the Fact Sheet for the CSV file. <br><br>
+21. If your Pipeline ran successfully, you'll find a file with your specified name (`Sales_Order.csv`) Click on the glasses icon ***View Fact Sheet*** to open up the Fact Sheet for the CSV file. <br><br>
 ![](/exercises/ex1/images/ex1-053b.JPG)<br><br>
 
-21. In the ***Fact Sheet***, which provides some more overview and statistical information about the new file, go to tab ***Data Preview***.<br><br>
+22. In the ***Fact Sheet***, which provides some more overview and statistical information about the new file, go to tab ***Data Preview***.<br><br>
 ![](/exercises/ex1/images/ex1-054b.JPG)<br><br>
 
-22. Success! Now you can see that the EPM Customer data got loaded into the target file in S3. While the Pipeline is running, this file would get automatically updated with each change in the S/4HANA data sources (the tables `SNWD_SO`, `SNWD_SO_I`, `SNWD_PD`, `SNWD_TEXTS` joined through the ABAP CDS View `Z_CDS_SO_SOI_Delta`).<br><br>
+23. Success! Now you can see that the EPM Customer data got loaded into the target file in S3. While the Pipeline is running, this file would get automatically updated with each change in the S/4HANA data sources (the tables `SNWD_SO`, `SNWD_SO_I`, `SNWD_PD`, `SNWD_TEXTS` joined through the ABAP CDS View `Z_CDS_SO_SOI_Delta`).<br><br>
 ![](/exercises/ex1/images/ex1-055b.JPG)<br><br>
 
-23. However, in order to go on with the exercise, please stop the Pipeline for now. We will validate the delta processing in Exercise 2.<br><br>
+24. However, in order to go on with the exercise, please stop the Pipeline for now. We will validate the delta processing in Exercise 2.<br><br>
 ![](/exercises/ex1/images/ex1-056b.JPG)<br><br>
 
 **Congratulations!** You have created the Sales Order extraction from a delta-enabled, more complex ABAP CDS View into the S3 Object Store. Because you have chosen the transfer mode ***"Replication"*** in the CDS Reader operator configuration, the Pipeline has conducted the Initial Load and would now wait for any changes (inserts, updates, deletions) in the S/HANA EPM Sales Order object as long as it is running.
@@ -332,10 +332,10 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 	![](/exercises/ex1/images/ex1-071b.JPG)<br><br>
 
 
-13. Now connect the **upper output port ("file") of the File Writer** operator with the **input port of the Structured File Consumer** operator. The ***Structured File Consumer*** operator takes the signal on the input port just as a trigger for commencing its logic. It's an optional input but our approach ensures that the operator is only executed after the file from the previous node has been successfully written on S3. (If the input port of a Structured File Consumer is not connected, the operator will start with the Pipeline execution.)<br>
-When you create the link between the operators, a conversion of the data type is required from type `message.file` to type `message`. The ***Converter*** is automatically proposed when the link between the ports is established. Choose the option for ***Path extraction*** (which reflects the minimum transfer payload, as we use the input just as a trigger signal).<br><br>
-![](/exercises/ex1/images/ex1-072b.JPG)<br><br>
-![](/exercises/ex1/images/ex1-073b.JPG)<br><br>
+13. Now connect the **upper output port ("file") of the File Writer** operator with the **input port of the Structured File Consumer** operator. The ***Structured File Consumer*** operator takes the signal on the input port just as a trigger for commencing its logic. It's an optional input but our approach ensures that the operator is only executed after the file from the previous node has been successfully written on S3. (If the input port of a Structured File Consumer is not connected, the operator will start with the Pipeline execution.)<br><br>
+	When you create the link between the operators, a conversion of the data type is required from type `message.file` to type `message`. The ***Converter*** is automatically proposed when the link between the ports is established. Choose the option for ***Path extraction*** (which reflects the minimum transfer payload, as we use the input just as a trigger signal).<br><br>
+	![](/exercises/ex1/images/ex1-072b.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-073b.JPG)<br><br>
 
 14.	Now we need to a ***Table Consumer*** operator for the Customer master data extraction from HANA Cloud. Go to the operator tab on the left-hand panel to drag and drop the Table Consumer operator in your graph.<br><br>
 ![](/exercises/ex1/images/ex1-074b.JPG)<br><br>
@@ -411,10 +411,10 @@ When you create the link between the operators, a conversion of the data type is
 	![](/exercises/ex1/images/ex1-110b.JPG)<br><br>
 	
 	Enter a name of the target name of the CSV file, e.g. ***Enriched_Sales_Order.csv*** and click on ***Add*** <br><br>
-	![](/exercises/ex1/images/ex1-102c.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-102.JPG)<br><br>
 	
 	You will now see the file is being added in the S3 Object store. Select it and click on ***OK***.<br><br>
-	![](/exercises/ex1/images/ex1-103c.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-103.JPG)<br><br>
 	
 	The Target is now being updated to the file you specified. In addition please check the following configurations: <br><br>
 
@@ -423,7 +423,7 @@ When you create the link between the operators, a conversion of the data type is
     - **Header:** ON
     - **Write Part Files** should be `False`<br><br>
 	
-	![](/exercises/ex1/images/ex1-104c.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-104.JPG)<br><br>
 	
     ***Save*** the Pipeline <br><br>
 	
@@ -458,3 +458,30 @@ Please continue to [Exercise 2 - Triggering the execution of a function module i
 <br><br>
 
 *****************************************************
+<br> **Table of Contents / Navigation**
+
+- **[Overview and Getting Started](exercises/ex0/)**
+     - [Deep Dive demos vs. Exercises](exercises/ex0#deep-dive-vs-exercise-sections-in-this-document)
+     - [Short introduction to the Enterprise Procurement Model (EPM) in ABAP systems](exercises/ex0#short-introduction-to-the-enterprise-procurement-model-epm-in-sap-s4hana)
+     - [Access to the exercises' Data Intelligence environment](exercises/ex0#access-to-the-exercises-data-intelligence-environment)
+
+- **[Deep Dive 1 - ABAP CDS View based data extraction in SAP Data Intelligence](exercises/dd1/)**
+    - [Deep Dive 1.1 - Create a simple ABAP CDS View in ABAP Develoment Tools (ADT)](exercises/dd1#deep-dive-11---create-a-simple-abap-cds-view-in-adt)
+    - [Deep Dive 1.2 - Delta-enablement for simple ABAP CDS Views](exercises/dd1#deep-dive-12---delta-enablement-for-simple-abap-cds-views)
+    - [Deep Dive 1.3 - Create a more complex ABAP CDS View in ADT (joining multiple tables)](exercises/dd1#deep-dive-13---create-a-more-complex-abap-cds-view-in-adt-joining-multiple-tables)
+    - [Deep Dive 1.4 - Delta-enablement for complex ABAP CDS Views (joining multiple tables)](exercises/dd1#deep-dive-14---delta-enablement-for-complex-abap-cds-views-joining-multiple-tables)
+    - [Deep Dive 1.5 - Integrate ABAP CDS Views in SAP Data Intelligence Pipelines](exercises/dd1#deep-dive-15---integrate-abap-cds-views-in-sap-data-intelligence-pipelines)
+    
+- **[Deep Dive 2 - Calling an ABAP function module in SAP S/4HANA from SAP Data Intelligence](exercises/dd2/)**
+    - [Deep Dive 2.1 - Create a custom ABAP Operator in SAP S/4HANA](exercises/dd2#deep-dive-21---create-a-custom-abap-operator-in-sap-s4hana)
+    - [Deep Dive 2.2 - Integrate the custom ABAP Operator in a SAP Data Intelligence Pipeline](exercises/dd2#deep-dive-22---integrate-the-custom-abap-operator-in-a-sap-data-intelligence-pipeline)
+    
+- **[Exercise 1 - Replicating data from S/4HANA ABAP CDS Views in SAP Data Intelligence](exercises/ex1/)**
+    - [Exercise 1.1 - Consume the EPM Business Partner ABAP CDS Views in SAP Data Intelligence](exercises/ex1#exercise-11---consume-the-epm-business-partner-abap-cds-views-in-sap-data-intelligence)
+    - [Exercise 1.2 - Extend the Pipeline to transfer the Customer data into a HANA Cloud Database with Initial Load mode](exercises/ex1#exercise-12---extend-the-pipeline-to-transfer-the-customer-data-into-a-HANA-Cloud-Database-with-with-Initial-Load-mode)
+    - [Exercise 1.3 - Implement a Pipeline for delta transfer of enhanced EPM Sales Order data from S/4HANA to an S3 Object Store](exercises/ex1#exercise-13---implement-a-pipeline-for-delta-transfer-of-enhanced-epm-sales-order-data-from-s4hana-to-an-s3-object-store)
+    - [Exercise 1.4 - Extend the Pipeline for joining Sales Order with Customer data for each change in Sales Orders and persist results in S3](exercises/ex1#exercise-14---extend-the-pipeline-for-joining-sales-order-with-customer-data-for-each-change-in-sales-orders-and-persist-results-in-s3)
+    
+- **[Exercise 2 - Triggering the execution of a function module in a remote S/4HANA system](exercises/ex2/)**
+    - [Exercise 2.1 - Making custom ABAP Operators available in SAP Data Intelligence](exercises/ex2#exercise-21---making-custom-abap-operators-available-in-sap-data-intelligence)
+    - [Exercise 2.2 - Using a custom ABAP Operator to verify your Delta Replication of EPM Sales Orders](exercises/ex2#exercise-22---using-a-custom-abap-operator-to-verify-your-delta-replication-of-epm-sales-orders)
