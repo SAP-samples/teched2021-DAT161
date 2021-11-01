@@ -213,9 +213,9 @@ In the next section, we'll also take care for the Sales Order transaction data f
 
 12. Enter the needed configuration parameters for the ***Write File*** operator. These are:
    - Label: **`Sales Order to S3`**
-   - Connection: Choose type ***Connection Management*** and then the connection ID **`TechEd2020_S3`**
+   - Connection: Choose type ***Connection Management*** and then the connection ID **`TechEd_S3`**
    - Path mode: **`Static (from configuration)`**
-   - Path: **`/DAT161/XXXX/Sales_Order_0001.csv`**, where XXXX is your User name, for example "/DAT161/TA99/Sales_Order.csv"
+   - Path: **`/DAT161/XXXX/Sales_Order_0001.csv`**, where XXXX is your User name, for example "/DAT161/TA99/Sales_Order_0001.csv"
    - Mode: **`Append`**
    - Join batches: **`True`**<br><br>
 ![](/exercises/ex1/images/ex1-045b.JPG)<br><br>
@@ -411,10 +411,10 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 	![](/exercises/ex1/images/ex1-110b.JPG)<br><br>
 	
 	Enter a name of the target name of the CSV file, e.g. ***Enriched_Sales_Order.csv*** and click on ***Add*** <br><br>
-	![](/exercises/ex1/images/ex1-102.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-102b.JPG)<br><br>
 	
 	You will now see the file is being added in the S3 Object store. Select it and click on ***OK***.<br><br>
-	![](/exercises/ex1/images/ex1-103.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-103b.JPG)<br><br>
 	
 	The Target is now being updated to the file you specified. In addition please check the following configurations: <br><br>
 
@@ -423,7 +423,7 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
     - **Header:** ON
     - **Write Part Files** should be `False`<br><br>
 	
-	![](/exercises/ex1/images/ex1-104.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-104b.JPG)<br><br>
 	
     ***Save*** the Pipeline <br><br>
 	
