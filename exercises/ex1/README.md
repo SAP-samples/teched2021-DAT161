@@ -116,15 +116,15 @@ Now connect the ***output port of the HANA Client*** with the ***input port of t
 	![](/exercises/ex1/images/ex1-025b.JPG)<br><br>
 
 	Make sure the following additional configuration settings are applied to define the correct format of the incoming csv data stream:<br><br>
-	•	Input Format: ***CSV*** <br><br>
-	•	CSV Mode: ***Batch*** <br><br>
-	•	CSV Record delimiter: ***\n*** <br><br>
-	•	CSV field delimiter: ***,*** <br><br>
-	•	CSV quote delimiter: ***“*** <br><br>
-	•	CSV header: ***Ignore*** <br><br>
-	•	Insert mode: ***INSERT*** <br><br>
-	•	Table Initialization: ***None*** <br><br>
-	•	Terminate on Error: ***True*** <br><br>
+	- Input Format: ***CSV*** <br>
+	- CSV Mode: ***Batch*** <br>
+	- CSV Record delimiter: ***\n*** <br>
+	- CSV field delimiter: ***,*** <br>
+	- CSV quote delimiter: ***“*** <br>
+	- CSV header: ***Ignore*** <br>
+	- Insert mode: ***INSERT*** <br>
+	- Table Initialization: ***None*** <br>
+	- Terminate on Error: ***True*** <br>
 
 	![](/exercises/ex1/images/ex1-026b.JPG)<br><br>
 
