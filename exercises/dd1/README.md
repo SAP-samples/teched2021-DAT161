@@ -208,7 +208,7 @@ If you haven't provided that value before, you can easily search for and add you
      }
      ```
 
-10. ***Save*** (CTRL+S or ![](/exercises/dd1/images/1-008a.JPG)) and ***Activate*** (CTRL+F3 or ![](/exercises/dd1/images/1-008b.jpeg)) the CDS View.<br><br>
+10. ***Save*** (CTRL+S or ![](/exercises/dd1/images/1-008a.jpeg)) and ***Activate*** (CTRL+F3 or ![](/exercises/dd1/images/1-008b.jpeg)) the CDS View.<br><br>
 
 11. Verify the results in the ***Data Preview*** by pressing ***F8***. Our CDS View data preview should look like this:<br><br>
 ![](/exercises/dd1/images/dd1-016a.jpeg)<br><br>
