@@ -90,7 +90,7 @@ You can now test the delta processing capabilities of the ABAP CDS View based da
 ![](/exercises/ex2/images/ex2-019b.JPG)<br><br>
 11. In the Metadata Explorer main screen, click on ***Browse Connections***.<br><br>
 ![](/exercises/ex2/images/ex2-020b.JPG)<br><br>
-12. Click on the Connection **"TechEd_S3"** and drill further down to the folders **"DAT161"** and that of **your user** (e.g. "TA99").
+12. Click on the Connection **"TechEd_S3"** and drill further down to the folders **"DAT161"** and that of **your user** (e.g. "TA99").<br><br>
 ![](/exercises/ex2/images/ex2-021b.JPG)<br><br>
 ![](/exercises/ex2/images/ex2-022b.JPG)<br><br>
 13. Click on the ***More Actions*** menue (the three dots) of the file ***Enriched_Sales_Orders*** - that contains the delta records - and click on ***View Fact Sheet***.<br> (Remark: this file get overwritten with each data update as S3 does not provide *append* capabilities. If you would like to preserve the complete history, you can still add a *File Reader* and then a *File Writer* operator the to Pipeline behind the *Structured File Writer*. The latter does appends in memory and writes back the completed full recordset to S3.)<br><br>
@@ -105,7 +105,7 @@ In the Deep Dive demos and in the Exercises, we have jointly worked on the imple
 In case you have asked yourself if there are similar options for the integration with other ABAP systems such as ECC or BW, the answer is 'yes'! In these cases, you can make use of the unmodifying DMIS add-on, which provides the ABAP Pipeline Engine also for these systems.<br>
 This given, you can realize real-time replication scenarios via SLT integration to SAP Data Intelligence, leverage the ODP Reader operators, and also trigger function module execution on ECC or BW systems, too.<br>
 More information about general ABAP integration with Data Intelligence can be found [here](https://blogs.sap.com/2019/10/29/abap-integration-for-sap-data-hub-and-sap-data-intelligence-overview-blog/). and an additional example on how to use Custom ABAP Operator with Data Intelligence can be found [here](https://blogs.sap.com/2021/06/01/integrating-abap-function-modules-with-sap-data-intelligence/). <br><br>
-**THANK YOU VERY MUCH** for having participated in this Deep Dive and Hands On workshop. We hope you have enjoyed it!
+**THANK YOU VERY MUCH** for having participated in this Deep Dive and Hands On workshop. We hope you have enjoyed it!<br><br>
 Daniel Ingenhaag and Bengt Mertens<br><br>
 
 
