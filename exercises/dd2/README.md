@@ -29,8 +29,8 @@ ABAP Edition | Minimum version | Recommended Version
 ------------ | --------------- | -------------------
 S/4HANA on Premise | OP1909 + Note 2873666 |
 S/4HANA Cloud | CE2002 | 
-Netweaver >= 7.52 (ECC, BW, SRM, ...) | Add-On DMIS 2018 SP02 + Note 2845347 | Add-On DMIS 2018 SP04
-Netweaver >= 7.00 & < 7.52 (ECC, BW, SRM, ...) | Add-On DMIS 2011 SP17 + Note 2857333 or 2857334 | Add-On DMIS 2011 SP19
+Netweaver >= 7.52 (ECC, BW, SRM, ...) | Add-On DMIS 2018 SP02 + Note 2845347 | Latest DMIS 2018 SP 
+Netweaver >= 7.00 & < 7.52 (ECC, BW, SRM, ...) | Add-On DMIS 2011 SP17 + Note 2857333 or 2857334 | Latest DMIS 2011 SP
 Netweaver >= 4.6C & < 7.00 via dedicated SLT Server | Add-On DMIS 2011/2018 considering DMIS [version dependency](https://help.sap.com/doc/7824ad784dd242928fade9b62cdb171c/3.0.04/en-US/Installation_Guide_2020.pdf) | Use latest DMIS SP
 > **Note:**
 > Please always also consult the most up-to-date Availability Matrix.
@@ -58,7 +58,7 @@ However, in order to reduce manual activities to a minimum, there is a framework
 - `DHAPE_CREATE_OPER_BADI_IMPL`: Create and configure a BAdI implementation
 
 After running these two reports, the generated implementation class can be adapted as needed.<br>
-Here is a step-by-step guideline for creating a custom ABAP Operator. In the specific use case below, the ABAP Operator in S/4HANA should receive a string from a Pipeline ABAP Operator in Data Intelligence, reverses the string, and sends it back to the Pipeline ABAP Operator in Data Intelligence.
+Here is a step-by-step guideline for creating a custom ABAP Operator. In the specific use case below, the ABAP Operator in S/4HANA should receive a input table or CDS View name and send back the record count of the given object to the Pipeline ABAP Operator in Data Intelligence.
 
 1. Logon to the SAP GUI of your conneted S/4HANA system and run transaction `DHAPE` (ABAP Editor), enter `DHAPE_CREATE_OPERATOR_CLASS` and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
 ![](images/dd2-002a.JPG)<br>
@@ -80,7 +80,7 @@ Here is a step-by-step guideline for creating a custom ABAP Operator. In the spe
 
    Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPER_BADI_IMPL and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
 
-6. Enter the required parameters and ***Execute***.<br><br>
+6. Enter the required parameters and ***Execute*** (![](images/Execute.jpeg)).<br><br>
 ![](images/dd2-007a.JPG)<br>
 
 7. Now assign a package or choose 'Local Object', then ***Save*** (![](images/Save.JPG)).<br><br>
@@ -138,7 +138,7 @@ Then overwrite the existing `step( )` method with the following code:<br>
     ENDIF.
   ENDMETHOD.
 ```
-<br> If `has_data( )` returns true, i.e. if the ABAP Operator receives a signal from the corresponding Data Intelligence Pipeline operator, we call the `on_data( )` method, which contains the wanted functionality (reverse an incoming string and send it back). Include the following lines after the `step( )` method:
+<br> If `has_data( )` returns true, i.e. if the ABAP Operator receives a signal from the corresponding Data Intelligence Pipeline operator, we call the `on_data( )` method, which contains the wanted functionality (receive the record count based on a given table or CDS View). Include the following lines after the `step( )` method:
 ```abap
   METHOD on_data.
     DATA lv_data TYPE string.
@@ -222,7 +222,7 @@ The ABAP Operator implementation is now finished. The operator can immediately b
 
 ## Deep Dive 2.2 - Integrate the custom ABAP Operator in a SAP Data Intelligence Pipeline
 
-SAP Data Intelligence provides multiple Operator shells for the integration with ABAP Operators in SAP S/4HANA. On the one hand, there are the Operator shells that point to pre-defined ABAP Operators in ABAP systems, such as ABAP CDS Reader, ODP Reader, SLT Connector, Cluster Table Splitter (for Business Suite systems), or the ABAP Converter. On the other hand, you can also trigger custom ABAP Operators by using the "Custom ABAP Operator" shell.<br>
+SAP Data Intelligence provides multiple Operator shells for the integration with ABAP Operators in SAP S/4HANA. On the one hand, there are the Operator shells that point to pre-defined ABAP Operators in ABAP systems, such as ABAP CDS Reader, ODP Reader, SLT Connector or the ABAP Converter. On the other hand, you can also trigger custom ABAP Operators by using the "Custom ABAP Operator" shell.<br>
 Technically, the approaches for calling function modules in S/4HANA are the same in both cases. The only difference is the namespace under which these ABAP Operators are maintained and selected. While the pre-built Operators belong to the namespace `com.sap.`, custom ABAP Operators are assigned to `customer`.
 
 The integration of ABAP Operators is done via Pipelines in the SAP Data Inteligence Modeler.
