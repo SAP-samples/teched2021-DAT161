@@ -101,11 +101,11 @@ Now connect the ***output port of the HANA Client*** with the ***input port of t
 ![](/exercises/ex1/images/ex1-022b.JPG)<br><br>
 
 
-5. Enter the needed configuration parameters for the ***Write File*** operator. These are:
-   - Label: **`Customer Master to HANA`**
-   - Connection: Choose type ***Connection Management*** and then the connection ID **`TechEd_HANA`**
-   - Output in Batches: **False**
-   - Table Name: 
+5. Enter the needed configuration parameters for the ***Write File*** operator. These are:<br>
+   - Label: **`Customer Master to HANA`**<br>
+   - Connection: Choose type ***Connection Management*** and then the connection ID **`TechEd_HANA`**<br>
+   - Output in Batches: **False**<br>
+   - Table Name: <br>
 	 Click the browse button next to Table name and select your user schema “XXXX_EPM_TARGET”, where XXXX refers to your user name, e.g. “TA99_EPM_TARGET. <br><br>
 	![](/exercises/ex1/images/ex1-023b.JPG)<br><br>
 
@@ -152,7 +152,7 @@ Now connect the ***output port of the HANA Client*** with the ***input port of t
 11. In the ***Metadata Explorer*** application main menue, click on ***Browse Connections***.<br><br>
 ![](/exercises/ex1/images/ex1-033b.JPG)<br><br>
 
-12. In order to easily find our connection to the target S3 Object Store, you may leverage the search functionality. Enter `TechEd` into the search field and click on the spyclass icon. Click on the **`TechEd2020_S3`** tile.<br><br>
+12. In order to easily find our connection to the target HANA Cloud Database, you may leverage the search functionality. Enter `TechEd` into the search field and click on the spyclass icon. Click on the **`TechEd_HANA`** tile.<br><br>
 ![](/exercises/ex1/images/ex1-034b.JPG)<br><br>
 
 13. On the next screen search for your user schema that you selected in your Pipeline, e.g. XXXX_EPM_TARGET, where XXXX stands for your user ID.<br><br>
