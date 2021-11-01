@@ -46,7 +46,7 @@ After completing these steps you will have created a Pipeline that reads EPM Cus
 7.	From the operator list on the left side, drag the ***Get Header*** operator and drop it into the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Get Header operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed. The Get Header Operator is taking care of adding column names of the CDS View as header line into the output CSV data stream. <br><br>
 ![](/exercises/ex1/images/ex1-010b.JPG)<br><br>
 
-8.  From the operator list on the left side, drag the ***Terminal*** operator and drop it into the Pipeline canvas. Then connect the upper output port of the Get Header with the input port of the Terminal operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.
+8.  From the operator list on the left side, drag the ***Terminal*** operator and drop it into the Pipeline canvas. Then connect the upper output port of the Get Header with the input port of the Terminal operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-010c.JPG)<br><br>
 
 8.	The Terminal displays string type data. Because the output of the ABAP CDS Reader is a message, its body/payload needs to be converted into a string. After you have connected the operator ports you are, hence, prompted for a conversion approach. Select the first of the two options (only the body will be processed) and click ***OK***.<br><br>
