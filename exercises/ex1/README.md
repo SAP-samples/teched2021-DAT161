@@ -115,7 +115,7 @@ Now connect the ***output port of the HANA Client*** with the ***input port of t
 	Click on ***OK*** to save your target table selection.<br><br>
 	![](/exercises/ex1/images/ex1-025b.JPG)<br><br>
 
-	Make sure the following additional configuration settings are applied to define the correct format of the incoming csv data stream:<br><br>
+	Make sure the following additional configuration settings are applied to define the correct format of the incoming csv data stream:<br>
 	- Input Format: ***CSV*** <br>
 	- CSV Mode: ***Batch*** <br>
 	- CSV Record delimiter: ***\n*** <br>
@@ -304,10 +304,10 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 
 9. From the list of operators on the left side, drag the ***Structured File Consumer*** operator and drop it into the Pipeline canvas. Then open the configuration panel and do the following entries:
    - **Storage Type**: `S3`
-   - **S3 Configuration**: After clicking on the pencil icon, select `Configuration Manager`and as connection ID `TechEd2020_S3`<br><br>
+   - **S3 Configuration**: After clicking on the pencil icon, select `Configuration Manager`and as connection ID `TechEd_S3`
    - Increase the **Fetch size** to `10000`
    
-   Then click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT262** and select the file **`Sales_Order_Staging`**. Then click ***OK***.<br><br>
+   Then click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT161** and select the file **`Sales_Order_Staging`**. Then click ***OK***.<br><br>
    ![](/exercises/ex1/images/ex1-064b.JPG)<br><br>
      
 10. Select Service to S3 and select the previously used Connection ID Teched_S3: <br><br> 
