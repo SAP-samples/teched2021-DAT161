@@ -19,7 +19,7 @@ There are two variants of this operator type available in SAP Data Intelligence:
 
 In order to use the ABAP Subengine, the following prerequisites have to be met:
 1. A supported ABAP system is available (see table below)
-2. The ABAP system can be reached via RFC or WebSocket RFC (HTTPS is still supported but will get deprecated soon)
+2. The ABAP system can be reached via RFC or WebSocket RFC
 3. A user with the necessary authorizations (see SAP Note [2855052](https://launchpad.support.sap.com/#/notes/2855052))
 4. An RFC or Websocket RFC connection has been created in the Connection Manager
 5. Whitelisting of operators and data objects (tables, views, etc.) in the S/4HANA system (see SAP Note [2831756](https://launchpad.support.sap.com/#/notes/2831756)).<br>
