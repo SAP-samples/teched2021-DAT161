@@ -80,7 +80,7 @@ If you haven't provided that value before, you can easily search for and add you
      }
      ```
 
-8.	***Save (CTRL+S or disk symbol in menue bar)*** and ***Activate (CTRL+F3 or magic wand symbol in menue bar)*** the CDS View.<br>
+8.	***Save (CTRL+S or disk symbol in menu bar)*** and ***Activate (CTRL+F3 or magic wand symbol in menu bar)*** the CDS View.<br>
 (first ![](/exercises/dd1/images/1-008a.jpeg) 
 then ![](/exercises/dd1/images/1-008b.jpeg))<br><br>
 
@@ -322,7 +322,7 @@ In principal, you can leverage the following approach:
 ## Summary
 
 We will leverage the ABAP CDS Views in the following Exercises for a more comprehensive use case.<br>
-But before we do so, we still should take a closer look at SAP Data Intelligence's capabilities with regard to the integration of Function Module calls to S/4HANA.<br><br>
+But before we do so, we still should take a closer look at SAP Data Intelligence's capabilities with regard to the integration of Function Module calls with S/4HANA.<br><br>
 We now continue to [Deep Dive 2 - Calling an ABAP function module in SAP S/4HANA from SAP Data Intelligence](../dd2/README.md)
 
 <br><br>
