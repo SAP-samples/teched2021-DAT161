@@ -115,9 +115,9 @@ Now connect the ***output port of the HANA Client*** with the ***input port of t
 	Click on ***OK*** to save your target table selection.<br><br>
 	![](/exercises/ex1/images/ex1-025b.JPG)<br><br>
 
-	Make sure the following additional configuration settings are applied to define the correct format of the incoming csv data stream:<br>
-	•	Input Format: ***CSV*** <br>
-	•	CSV Mode: ***Batch*** <br>
+	Make sure the following additional configuration settings are applied to define the correct format of the incoming csv data stream:<br><br>
+	•	Input Format: ***CSV*** <br><br>
+	•	CSV Mode: ***Batch*** <br><br>
 	•	CSV Record delimiter: ***\n*** <br>
 	•	CSV field delimiter: ***,*** <br>
 	•	CSV quote delimiter: ***“*** <br>
