@@ -2,7 +2,7 @@
 
 ## Description
 
-This repository contains the material for the SAP TechEd 2020 session called
+This repository contains the material for the SAP TechEd 2021 session called
 DAT161 - Integrating SAP S/4HANA into SAP Data Intelligence: Deep Dive and Hands On.
 
 ## Overview
