@@ -269,7 +269,7 @@ For mapping the key fields of all underlying tables to the fields of the CDS vie
    ```
    ![](/exercises/dd1/images/dd1-018a.jpeg)<br><br>
 
-2. ***Save*** (CTRL+S or ![](/exercises/dd1/images/1-008a.JPG)) and ***Activate*** (CTRL+F3 or ![](/exercises/dd1/images/1-008b.jpeg)) the CDS View.<br><br>
+2. ***Save*** (CTRL+S or ![](/exercises/dd1/images/1-008a.jpeg)) and ***Activate*** (CTRL+F3 or ![](/exercises/dd1/images/1-008b.jpeg)) the CDS View.<br><br>
 
 3. Verify the results in the ***Data Preview*** by pressing ***F8***. The ABAP CDS View should still provide the same data as before delta-enabling.<br><br>
 
