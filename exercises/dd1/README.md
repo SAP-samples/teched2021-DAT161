@@ -23,10 +23,10 @@ In this sub section you can track how to create a CDS (Core Data Services) View 
 
 1. Create a CDS View
 In the context menu of your package choose ***New*** and then choose ***Other ABAP Repository Object***.<br><br>
-![](/exercises/dd1/images/1-001a.JPG)
+![](/exercises/dd1/images/1-001a.jpeg)
 
 2.	Select ***Data Definition***, then choose ***Next***.<br><br>
-![](/exercises/dd1/images/1-002a.JPG)
+![](/exercises/dd1/images/1-002a.jpeg)
 
 3. Enter the following values, then choose Next.
 - Name, e.g. ```Z_CDS_EPM_BUPA```
@@ -38,7 +38,7 @@ In the context menu of your package choose ***New*** and then choose ***Other AB
 ![](/exercises/dd1/images/1-004a.JPG)
 
 5.	Select the entry ***Define View***, then choose ***Finish***.<br><br>
-![](/exercises/dd1/images/1-005a.JPG)
+![](/exercises/dd1/images/1-005a.jpeg)
 
 6.	The new view appears in an editor, with an error showing up because of the still missing SQL View name.<br>
 In this editor, enter value for the SQL View name in the annotation **`@AbapCatalog.sqlViewName`**, e.g. **`Z_SQL_EPM_BUPA`**.<br>
@@ -47,10 +47,10 @@ The SQL view name is the internal/technical name of the view which will be creat
 You should always use the CDS view name in your ABAP applications.<br><br>
 The data source plus its fields have automatically been added to the view definition because of the reference to the data source object we gave in step 3.
 If you haven't provided that value before, you can easily search for and add your data source using the keyboard shortcut ***CTRL+SPACE***.<br><br>
-![](/exercises/dd1/images/1-006a.JPG)
+![](/exercises/dd1/images/1-006a.jpeg)
 
 7.	Delete the not needed fields in the SELECT statement, add the annotation ```@ClientHandling.type: #CLIENT_DEPENDENT``` and beautify the view.<br><br>
-   ![](/exercises/dd1/images/1-007a.JPG)<br><br>
+   ![](/exercises/dd1/images/1-007a.jpeg)<br><br>
    The code may now look as follows:
      ```abap
      @AbapCatalog.sqlViewName: 'Z_SQL_EPM_BUPA'
@@ -81,11 +81,11 @@ If you haven't provided that value before, you can easily search for and add you
      ```
 
 8.	***Save (CTRL+S or disk symbol in menue bar)*** and ***Activate (CTRL+F3 or magic wand symbol in menue bar)*** the CDS View.<br>
-(first ![](/exercises/dd1/images/1-008a.JPG) 
-then ![](/exercises/dd1/images/1-008b.JPG))<br><br>
+(first ![](/exercises/dd1/images/1-008a.jpeg) 
+then ![](/exercises/dd1/images/1-008b.jpeg))<br><br>
 
 9.	We are now able to verify the results in the ***Data Preview*** by choosing ***F8***. Our CDS View data preview should look like this:<br><br>
-![](/exercises/dd1/images/1-009a.JPG)<br><br>
+![](/exercises/dd1/images/1-009a.jpeg)<br><br>
 
 We have now successfully created the first simple CDS View in SAP S/4HANA. In the next step we'll showing how we can enable it for delta processing based on CDC.
 
@@ -108,7 +108,7 @@ Let's continue with the simple ABAP CDS View that we have implemented in the pre
        }
    }
    ```
-   <br>![](/exercises/dd1/images/dd1-011a.JPG)<br><br>
+   <br>![](/exercises/dd1/images/dd1-011a.jpeg)<br><br>
 
 3. ***Save*** (CTRL+S or ![](/exercises/dd1/images/1-008a.JPG)) and ***Activate*** (CTRL+F3 or ![](/exercises/dd1/images/1-008b.JPG)) the CDS View.<br><br>
 
@@ -126,10 +126,10 @@ In a later step, also this ABAP CDS View will be enabled for Change Data Capturi
 
 1. Create a CDS View
 In the context menu of your package choose ***New*** and then choose ***Other ABAP Repository Object***.<br><br>
-![](/exercises/dd1/images/1-001a.JPG)
+![](/exercises/dd1/images/1-001a.jpeg)
 
 2. Select ***Data Definition***, then choose ***Next***.<br><br>
-![](/exercises/dd1/images/1-002a.JPG)
+![](/exercises/dd1/images/1-002a.jpeg)
 
 3. Enter the following values, then choose Next.
 - Name, e.g. ```Z_CDS_EPM_SO```
@@ -141,7 +141,7 @@ In the context menu of your package choose ***New*** and then choose ***Other AB
 ![](/exercises/dd1/images/1-004a.JPG)
 
 5. Select the entry ***Define View***, then choose ***Finish***.<br><br>
-![](/exercises/dd1/images/1-005a.JPG)
+![](/exercises/dd1/images/1-005a.jpeg)
 
 6. The new view appears in an editor, with an error showing up because of the still missing SQL View name.<br>
 In this editor, enter value for the SQL View name in the annotation **`@AbapCatalog.sqlViewName`**, e.g. **`Z_SQL_EPM_SO`**.<br>
@@ -168,10 +168,10 @@ If you haven't provided that value before, you can easily search for and add you
    left outer join snwd_texts as text on prod.name_guid = text.parent_key and text.language = 'E'
    ```
    ...<br><br>
-   ![](/exercises/dd1/images/dd1-014b.JPG)<br><br>
+   ![](/exercises/dd1/images/dd1-014b.jpeg)<br><br>
 
 9.	Add the wanted fields from the other tables in the join condition (and don't forget to make all key fields of all involved tables elements of the ABAP CDS View).<br><br>
-   ![](/exercises/dd1/images/dd1-015a.JPG)<br><br>
+   ![](/exercises/dd1/images/dd1-015a.jpeg)<br><br>
    The ABAP CDS View may now look as follows:
      ```abap
      @AbapCatalog.sqlViewName: 'Z_SQL_EPM_SO'
@@ -208,10 +208,10 @@ If you haven't provided that value before, you can easily search for and add you
      }
      ```
 
-10. ***Save*** (CTRL+S or ![](/exercises/dd1/images/1-008a.JPG)) and ***Activate*** (CTRL+F3 or ![](/exercises/dd1/images/1-008b.JPG)) the CDS View.<br><br>
+10. ***Save*** (CTRL+S or ![](/exercises/dd1/images/1-008a.JPG)) and ***Activate*** (CTRL+F3 or ![](/exercises/dd1/images/1-008b.jpeg)) the CDS View.<br><br>
 
 11. Verify the results in the ***Data Preview*** by pressing ***F8***. Our CDS View data preview should look like this:<br><br>
-![](/exercises/dd1/images/dd1-016a.JPG)<br><br>
+![](/exercises/dd1/images/dd1-016a.jpeg)<br><br>
 
 
 ## Deep Dive 1.4 - Delta-enablement for complex ABAP CDS Views (joining multiple tables)
@@ -228,7 +228,7 @@ Given there are no restrictions applied to the CDS view, the number of records o
 
 Secondly the developer needs to provide the mapping between the key fields of the underlying tables and their exposure as elements in the CDS view. Please check the following figure in which you see the representation of all underlying key fields surfacing in the CDS view.<br>
 
-![](/exercises/dd1/images/dd1-017a.JPG)<br><br>
+![](/exercises/dd1/images/dd1-017a.jpeg)<br><br>
 ***Source:*** [CDS based data extraction – Part II Delta Handling](https://blogs.sap.com/2019/12/16/cds-based-data-extraction-part-ii-delta-handling/) (an excellent blog by Simon Kranig).<br><br>
 
 In case of our EPM tables, we only need to consider one key field per table, which is the field `node_key` in all cases.
@@ -267,9 +267,9 @@ For mapping the key fields of all underlying tables to the fields of the CDS vie
        }
    }
    ```
-   ![](/exercises/dd1/images/dd1-018a.JPG)<br><br>
+   ![](/exercises/dd1/images/dd1-018a.jpeg)<br><br>
 
-2. ***Save*** (CTRL+S or ![](/exercises/dd1/images/1-008a.JPG)) and ***Activate*** (CTRL+F3 or ![](/exercises/dd1/images/1-008b.JPG)) the CDS View.<br><br>
+2. ***Save*** (CTRL+S or ![](/exercises/dd1/images/1-008a.JPG)) and ***Activate*** (CTRL+F3 or ![](/exercises/dd1/images/1-008b.jpeg)) the CDS View.<br><br>
 
 3. Verify the results in the ***Data Preview*** by pressing ***F8***. The ABAP CDS View should still provide the same data as before delta-enabling.<br><br>
 
@@ -290,7 +290,7 @@ In principal, you can leverage the following approach:
 ![](images/dd1-020b.JPG)<br><br>
 
 3.	A new Pipeline canvas opens and the design focus automatically changes to the ***Operators*** tab (see left side). Drag the ***ABAP CDS Reader*** icon from the Operator list and drop it onto the canvas. Then do one click on the ***ABAP CDS Reader*** node in the canvas and open the configuration panel by clicking on the related symbol.<br><br>
-![](images/dd1-021b.JPG)<br><br>
+![](images/dd1-021b.jpeg)<br><br>
 
 4.	In the configuration panel of the ***ABAP CDS Reader***, enter the following parameters:
     - ABAP Connection: **`S4_RFC_TechEd`**
