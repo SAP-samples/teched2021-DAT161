@@ -85,7 +85,7 @@ As a next step, you will persist the EPM Customer master data in a SAP HANA Clou
 
 After completing the following steps you will have extended the Data Intelligence Pipeline with an additional persistency for the S/4HANA EPM Business Partner data in HANA Cloud. Therefore, a pre-defined S/4HANA CDS View will be used as a data source and loaded into a table located in a SAP HANA Cloud database.
 
-1. If not already done, open the Pipeline from the previous section (**`teched.XXXX.EPM_Customer_Replication_to_HANA`**, where XXXX is your user name). Click on the Terminal operator and then the "waste bin" icon in order to delete the Terminal operator. Do the same for the Converter operator. Just keep the the ABAP CDS Reader operator in the Pipeline canvas.<br><br>
+1. If not already done, open the Pipeline from the previous section (**`teched.XXXX.EPM_Customer_Replication_to_HANA`**, where XXXX is your user name). Click on the Terminal operator and then the "waste bin" icon in order to delete the Terminal operator. Do the same for the To String Converter operator. Just keep the the ABAP CDS Reader operator in the Pipeline canvas.<br><br>
 ![](/exercises/ex1/images/ex1-019b.JPG)<br><br>
 
 2. Make sure that the ***Operators*** tab is in scope in the Modeler UI (see left side). From the list of operators, drag the ***HANA Cient*** operator and drop it into the Pipeline canvas. <br><br>
