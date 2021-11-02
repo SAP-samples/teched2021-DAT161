@@ -112,13 +112,13 @@ Daniel Ingenhaag and Bengt Mertens<br><br>
 *****************************************************
 <br> **Table of Contents / Navigation**
 
-- **[Overview and Getting Started](exercises/ex0/)**
-     - [Deep Dive demos vs. Exercises](exercises/ex0#deep-dive-vs-exercise-sections-in-this-document)
-     - [Short introduction to the Enterprise Procurement Model (EPM) in ABAP systems](exercises/ex0#short-introduction-to-the-enterprise-procurement-model-epm-in-sap-s4hana)
-     - [Access to the exercises' Data Intelligence environment](exercises/ex0#access-to-the-exercises-data-intelligence-environment)
+- **[Overview and Getting Started](https://github.com/SAP-samples/teched2021-DAT161/edit/main/exercises/ex0/)**
+     - [Deep Dive demos vs. Exercises](https://github.com/SAP-samples/teched2021-DAT161/edit/main/exercises/ex0#deep-dive-vs-exercise-sections-in-this-document)
+     - [Short introduction to the Enterprise Procurement Model (EPM) in ABAP systems](https://github.com/SAP-samples/teched2021-DAT161/edit/main/exercises/ex0#short-introduction-to-the-enterprise-procurement-model-epm-in-sap-s4hana)
+     - [Access to the exercises' Data Intelligence environment](https://github.com/SAP-samples/teched2021-DAT161/edit/main/exercises/ex0#access-to-the-exercises-data-intelligence-environment)
 
-- **[Deep Dive 1 - ABAP CDS View based data extraction in SAP Data Intelligence](exercises/dd1/)**
-    - [Deep Dive 1.1 - Create a simple ABAP CDS View in ABAP Develoment Tools (ADT)](exercises/dd1#deep-dive-11---create-a-simple-abap-cds-view-in-adt)
+- **[Deep Dive 1 - ABAP CDS View based data extraction in SAP Data Intelligence](https://github.com/SAP-samples/teched2021-DAT161/edit/main/exercises/dd1/)**
+    - [Deep Dive 1.1 - Create a simple ABAP CDS View in ABAP Develoment Tools (ADT)](https://github.com/SAP-samples/teched2021-DAT161/edit/main/exercises/dd1#deep-dive-11---create-a-simple-abap-cds-view-in-adt)
     - [Deep Dive 1.2 - Delta-enablement for simple ABAP CDS Views](exercises/dd1#deep-dive-12---delta-enablement-for-simple-abap-cds-views)
     - [Deep Dive 1.3 - Create a more complex ABAP CDS View in ADT (joining multiple tables)](exercises/dd1#deep-dive-13---create-a-more-complex-abap-cds-view-in-adt-joining-multiple-tables)
     - [Deep Dive 1.4 - Delta-enablement for complex ABAP CDS Views (joining multiple tables)](exercises/dd1#deep-dive-14---delta-enablement-for-complex-abap-cds-views-joining-multiple-tables)
