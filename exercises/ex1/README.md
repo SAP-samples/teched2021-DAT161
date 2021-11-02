@@ -247,7 +247,7 @@ In the next section, we'll also take care for the Sales Order transaction data f
 18. In the ***Metadata Explorer*** application main menue, click on ***Browse Connections***.<br><br>
 ![](/exercises/ex1/images/ex1-050b.JPG)<br><br>
 
-19. In order to easily find our connection to the target S3 Object Store, you may leverage the search functionality. Enter `TechEd_s` into the search field and click on the spyclass icon. Click on the **`TechEd2020_S3`** tile.<br><br>
+19. In order to easily find our connection to the target S3 Object Store, you may leverage the search functionality. Enter `TechEd_s` into the search field and click on the spyclass icon. Click on the **`TechEd_S3`** tile.<br><br>
 ![](/exercises/ex1/images/ex1-051b.JPG)<br><br>
 
 20. On the next drill-down view, click on the **`DAT161`** directory that you had specified in the ***Write File*** operator, and then drill down to your specific User directory, for example **`TA99`**.<br><br>
@@ -342,7 +342,7 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 
 	In case the ***To File Operator*** has been added in a similar way as above, you can easily move it to another position within your pipeline depending on your needs. <br><br>
 
-15. On this new operator, open the configuration panel and click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT262** and select the file **`Customer_Master.csv`**. Then click ***OK***..<br><br>
+15. On this new operator, open the configuration panel and click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT161** and select the file **`Customer_Master.csv`**. Then click ***OK***..<br><br>
 ![](/exercises/ex1/images/ex1-075b.JPG)<br><br>
 
 	Select the service to “HANA_DB” and choose “TechEd_HANA” as Connection ID, which has been used as target for storing the Customer Master Data in our previous exercise. <br><br>
