@@ -141,10 +141,22 @@ Then overwrite the existing `step( )` method with the following code:<br>
 <br> If `has_data( )` returns true, i.e. if the ABAP Operator receives a signal from the corresponding Data Intelligence Pipeline operator, we call the `on_data( )` method, which contains the wanted functionality (receive the record count based on a given table or CDS View). Include the following lines after the `step( )` method:
 ```abap
   METHOD on_data.
-    DATA lv_data TYPE string.
+    DATA:
+      lv_data TYPE TABNAME,
+      lv_result TYPE SY-DBCNT .
+
     mo_in->read_copy( IMPORTING ea_data = lv_data ).
-    lv_data = reverse( lv_data ).
-    mo_out->write_copy( lv_data ).
+
+    "lv_data = reverse( lv_data ).
+    CALL FUNCTION 'DMC_COUNT_TABLE_ENTRIES' "count table entries (exact count or just existence check)
+      EXPORTING
+        im_tabname =       lv_data       " table name
+        im_exact_count =   'X'           " sy-debug      indicator for exact counting
+      IMPORTING
+        ex_count =         lv_result     " sy-dbcnt      number of records in table
+    .  "  DMC_COUNT_TABLE_ENTRIES
+
+    mo_out->write_copy( lv_result ).
   ENDMETHOD.
 ```
 <br> Now click the ***Save*** button.<br><br>
@@ -206,10 +218,22 @@ CLASS lcl_process IMPLEMENTATION.
     ENDIF.
   ENDMETHOD.
   METHOD on_data.
-    DATA lv_data TYPE string.
+    DATA:
+      lv_data TYPE TABNAME,
+      lv_result TYPE SY-DBCNT .
+
     mo_in->read_copy( IMPORTING ea_data = lv_data ).
-    lv_data = reverse( lv_data ).
-    mo_out->write_copy( lv_data ).
+
+    "lv_data = reverse( lv_data ).
+    CALL FUNCTION 'DMC_COUNT_TABLE_ENTRIES' "count table entries (exact count or just existence check)
+      EXPORTING
+        im_tabname =       lv_data       " table name
+        im_exact_count =   'X'           " sy-debug      indicator for exact counting
+      IMPORTING
+        ex_count =         lv_result     " sy-dbcnt      number of records in table
+    .  "  DMC_COUNT_TABLE_ENTRIES
+
+    mo_out->write_copy( lv_result ).
   ENDMETHOD.
 ENDCLASS.
 ```
