@@ -73,7 +73,7 @@ You can now test the delta processing capabilities of the ABAP CDS View based da
 ![](/exercises/ex2/images/ex2-012b.JPG)<br><br>
 2. The Pipeline is opened in the canvas area of the Modeler UI.<br><br>
 3. Make sure a Wiretap operator exists between the ***Get Header*** and ***To File*** Operator and the Sales Order to S3 Write File Operator:<br><br>
-   ***Note:*** In case you have kept the Wiretap Operator between ***Get Header*** and ***Write File*** before as described in Exercise 1.4 Step 4. you can ignore this step. In case you have removed it, please add the Wiretap operator inside your pipeline and add it between the ***Get Header*** and ***Write File*** Operator.
+   ***Note:*** In case you have kept the Wiretap Operator between ***Get Header*** and ***Write File*** before as described in Exercise 1.4 Step 4. you can ignore this step. In case you have removed it, please add the Wiretap operator inside your pipeline and add it between the ***Get Header*** and ***Write File*** Operator.<br><br>
 ![](/exercises/ex2/images/ex2-013b.JPG)<br><br>
 4. ***Save*** the graph and now ***Run*** it <br><br>
 ![](/exercises/ex2/images/ex2-028b.JPG)<br><br>
