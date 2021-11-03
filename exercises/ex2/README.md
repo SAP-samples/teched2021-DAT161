@@ -94,7 +94,7 @@ You can now test the delta processing capabilities of the ABAP CDS View based da
 12. Click on the Connection **"TechEd_S3"** and drill further down to the folders **"DAT161"** and that of **your user** (e.g. "TA99").<br><br>
 ![](/exercises/ex2/images/ex2-021b.JPG)<br><br>
 ![](/exercises/ex2/images/ex2-022b.JPG)<br><br>
-13. Click on the ***More Actions*** menue (the three dots) of the file ***Enriched_Sales_Orders*** - that contains the delta records - and click on ***View Fact Sheet***.<br> (Remark: this file get overwritten with each data update as S3 does not provide *append* capabilities. If you would like to preserve the complete history, you can still add a *File Reader* and then a *File Writer* operator the to Pipeline behind the *Structured File Writer*. The latter does appends in memory and writes back the completed full recordset to S3.)<br><br>
+13. Click on the ***More Actions*** menu (the three dots) of the file ***Enriched_Sales_Orders*** - that contains the delta records - and click on ***View Fact Sheet***.<br> (Remark: this file get overwritten with each data update as S3 does not provide *append* capabilities. If you would like to preserve the complete history, you can still add a *File Reader* and then a *File Writer* operator the to Pipeline behind the *Structured File Writer*. The latter does appends in memory and writes back the completed full recordset to S3.)<br><br>
 ![](/exercises/ex2/images/ex2-023b.JPG)<br><br>
 ![](/exercises/ex2/images/ex2-025b.JPG)<br><br>
 14. You can now see that also the processing of the delta data within the Pipeline to S3 worked seamlessly. The delta records contain the enrichments and the "U" indicator that with which updates are flagged by the ABAP CDS View CDC framework.<br><br>
