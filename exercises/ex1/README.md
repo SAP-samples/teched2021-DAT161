@@ -288,6 +288,8 @@ In this last part of the S/4HANA ABAP CDS View intergration exercise, you will e
 ![](/exercises/ex1/images/ex1-059b.JPG)<br><br>
 
 4. A new Pipeline has been created as a copy of your original Sales Order replication Pipeline. You will be using the File Operator outputs (i.e. the file path and name) as a trigger for the join processes with the Customer master data.<br><br>
+   
+   Optinally you can either keep the Wiretap operator in the pipeline or remove it and directly connect the Get Header Operator with the Write File Operator as it is being done in the following steps. 
 
 5. Open the configuration of the File Writer operator and enter the new target path/file name **`/DAT161/TA99/Sales_Order_Staging.csv`**. Change Mode to **`Overwrite`**. Then save the Pipeline.<br><br>
 ![](/exercises/ex1/images/ex1-060b.JPG)<br><br>
