@@ -119,7 +119,7 @@ That's it! In this simple case, the framework can derive the relation between th
 
 In this part of the Deep Dive you can learn how to create a more complex ABAP CDS View, again using the ABAP Development Tools (ADT). We will go through the implementation of an ABAP CDS View which will join the EPM tables `SNWD_SO`, `SNWD_SO_I`, `SNWD_PD`, and `SNWD_TEXTS` in order to fetch all Sales Order relevant data, including its positions, products, and product names.<br>
 
-(As a reminder: The entity relationsships of the tables can be found [here](../ex0#short-introduction-to-the-enterprise-procurement-model-epm-in-sap-s4hana).)<br><br>
+(As a reminder: The entity relationships of the tables can be found [here](../ex0#short-introduction-to-the-enterprise-procurement-model-epm-in-sap-s4hana).)<br><br>
 
 In a later step, also this ABAP CDS View will be enabled for Change Data Capturing (CDC) for an event based processing of Sales Order related deltas to the target storage in S3.<br><br>
 
@@ -273,8 +273,8 @@ For mapping the key fields of all underlying tables to the fields of the CDS vie
 3. Verify the results in the ***Data Preview*** by pressing ***F8***. The ABAP CDS View should still provide the same data as before delta-enabling.<br><br>
 
 We have now enabled our Sales Order object CDS View for Change Data Capture and are able to obtain any delta from one of the involved tables.<br>
-
-In the next session, we test the Initial Load and Delta Load capabilities with a small, exemplary Data Intelligence Pipeline implementation.
+SAP
+In the next session, we test the Initial Load and Delta Load capabilities with a small, exemplary SAP Data Intelligence Pipeline implementation.
 
 
 ## Deep Dive 1.5 - Integrate ABAP CDS Views in SAP Data Intelligence Pipelines
