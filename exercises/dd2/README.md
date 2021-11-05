@@ -89,7 +89,7 @@ Here is a step-by-step guideline for creating a custom ABAP Operator. In the spe
 8. On the next screen (Enhancement Implementation), click on ***Implementing Class*** on the left side, then double click on the name of your Implementing Class, in this case `ZCL_DHAPE_GET_RECORD_COUNT`.<br><br>
 ![](images/dd2-009b.JPG)<br>
 
-9. This opens the Class Builder (`SE24`). Double click on the `GET_INFO` method in oder to assign the input and output ports of the ABAP Operator. Parameters are not needed in our use case.<br><br>
+9. This opens the Class Builder (`SE24`). Double click on the `GET_INFO` method in order to assign the input and output ports of the ABAP Operator. Parameters are not needed in our use case.<br><br>
 ![](images/dd2-010b.JPG)<br>
 
 10. In the method `GET_INFO`, outcomment the three lines which specify the parameters (parameters are not needed in this scenario). The rest can be left as is. Click the ***Save*** button.<br><br>
