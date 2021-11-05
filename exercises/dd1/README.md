@@ -121,7 +121,7 @@ In this part of the Deep Dive you can learn how to create a more complex ABAP CD
 
 (As a reminder: The entity relationships of the tables can be found [here](../ex0#short-introduction-to-the-enterprise-procurement-model-epm-in-sap-s4hana).)<br><br>
 
-In a later step, also this ABAP CDS View will be enabled for Change Data Capturing (CDC) for an event based processing of Sales Order related deltas to the target storage in S3.<br><br>
+In a later step, also this ABAP CDS View will be enabled for Change Data Capturing (CDC) for an tigger-based processing of Sales Order related deltas to the target storage in S3.<br><br>
 
 1. Create a CDS View
 In the context menu of your package choose ***New*** and then choose ***Other ABAP Repository Object***.<br><br>
@@ -217,7 +217,7 @@ If you haven't provided that value before, you can easily search for and add you
 
 The main task for exposing a CDS view with CDC delta method is to provide the mapping information between the fields of a CDS view and the key fields of the underlying tables. The mapping is necessary to enable a comprehensive logging for each of the underlying tables and subsequently a consistent selection/(re-)construction of records to be provided for extraction. This means the framework needs to know which tables to log, i.e. monitor for record changes.
 
-Given one record changes in possibly only one of the underlying tables, the framework needs to determine which record/s are affected by this change in all other underlying tables and need to provide a consistent set of delta records to the ODQ.
+Given one record changes in possibly only one of the underlying tables, the framework needs to determine which record/s are affected by this change in all other underlying tables and need to provide a consistent set of delta records to the Operational Data Queue (ODQ).
 
 All key fields of the main table and all foreign key fields used by all on-conditions of the involved join(s) need to be exposed as elements in the CDS views.
 
