@@ -312,7 +312,7 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
    Then click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT161** and select the file **`Sales_Order_Staging`**. Then click ***OK***.<br><br>
    ![](/exercises/ex1/images/ex1-064b.JPG)<br><br>
      
-10. Select Service to S3 and select the previously used Connection ID Teched_S3: <br><br> 
+10. Select Service to S3 and select the previously used Connection ID TechEd_S3: <br><br> 
 ![](/exercises/ex1/images/ex1-065b.JPG)<br><br>
 
 11. Then click the ***S3 Source File*** folder icon to browse through the S3 bucket. Drill down to your individual folder under ***DAT161*** and select the file Sales_Order_Staging. Then click ***OK***. <br><br>
