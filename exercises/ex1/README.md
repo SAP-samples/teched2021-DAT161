@@ -35,7 +35,7 @@ After completing these steps you will have created a Pipeline that reads EPM Cus
 ![](/exercises/ex1/images/ex1-008b.JPG)<br><br>
 
 6.	The ABAP CDS Reader operator shell has received the operator's metadata from S/4HANA and has configured the Pipeline node (for example, the operator now has an output port). Now fill in the configuration parameters in the panel:
-      - Label: `Buyer - S/4 ABAP CDS`
+      - Label: `Buyer - S/4 ABAP CDS` (Optionally)
       - Subscription Type: `New`
       - Subscription Name: `BP001_XXXX`, where XXXX is your user name, for example "BP001_TA99"
       - ABAP CDS Name: `Z_CDS_BUYER_Delta`, which is the "simple" CDS View that got created in the Deep Dive 1 demo
@@ -188,7 +188,7 @@ In the next section, we'll also take care for the Sales Order transaction data f
 ![](/exercises/ex1/images/ex1-008b.JPG)<br><br>
 
 6.	The ABAP CDS Reader operator shell has received the operator's metadata from S/4HANA and has configured the Pipeline node (for example, the operator now has an output port). Now fill in the configuration parameters in the panel:
-      - Label: `Sales Order - S/4 ABAP CDS`
+      - Label: `Sales Order - S/4 ABAP CDS` (Optionally)
       - Subscription Type: `New`
       - Subscription Name: `SO001_XXXX`, where XXXX is your user name, for example "SO001_TA99"
       - ABAP CDS Name: `Z_CDS_SO_SOI_Delta`, which is the "more complex" CDS View that got created in the Deep Dive 1 demo
@@ -212,7 +212,7 @@ In the next section, we'll also take care for the Sales Order transaction data f
 ![](/exercises/ex1/images/ex1-044b.JPG)<br><br>
 
 12. Enter the needed configuration parameters for the ***Write File*** operator. These are:
-   - Label: **`Sales Order to S3`**
+   - Label: **`Sales Order to S3`** (Optionally)
    - Connection: Choose type ***Connection Management*** and then the connection ID **`TechEd_S3`**
    - Path mode: **`Static (from configuration)`**
    - Path: **`/DAT161/XXXX/Sales_Order_0001.csv`**, where XXXX is your User name, for example "/DAT161/TA99/Sales_Order_0001.csv"
@@ -274,7 +274,7 @@ As a next step, you will enrich the Sales Order data with some Customer Details 
 
 In this last part of the S/4HANA ABAP CDS View intergration exercise, you will establish a Pipeline that replicated the Sales Order data from the delta-enabled ABA CDS View in S/4HANA and joins it with some of the details that you have replicated from the Customer master data, i.e. company name and legal form.
 
-1. In SAP Data Intelligence, open the ***Modeler*** application. Make sure the scope of the Modeler UI is on tab ***Graphs*** (see left side). If not still open from the previous exercise part, search for your Sales Order Pipeline by entering your user name into the search field on top of the list of Pipelines. Click on Pipeline with the label `XXXX - Replicate S/4HANA EPM Sales  Order Data to S3`, where XXXX is your user name, for example "TA99 - Replicate S/4HANA EPM Sales  Order Data to S3". The Pipeline will get opened then or will get the focus on the UI if it was alraedy opened. If you cannot see the complete label of the Pipeline, just hover with your mouse over the pipeline item in the list.<br><br>
+1. In SAP Data Intelligence, open the ***Modeler*** application. Make sure the scope of the Modeler UI is on tab ***Graphs*** (see left side). If not still open from the previous exercise part, search for your Sales Order Pipeline by entering your user name into the search field on top of the list of Pipelines. Click on Pipeline with the label `XXXX - Replicate S/4HANA EPM Sales  Order Data to S3`, where XXXX is your user name, for example "TA99 - Replicate S/4HANA EPM Sales  Order Data to S3". The Pipeline will get opened then or will get the focus on the UI if it was already opened. If you cannot see the complete label of the Pipeline, just hover with your mouse over the pipeline item in the list.<br><br>
 ![](/exercises/ex1/images/ex1-057b.JPG)<br><br>
 
 2. Click on the pull-down menue of the ***Save*** icon (disk symbol) and choose ***Save As***.<br><br>
