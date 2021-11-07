@@ -158,13 +158,13 @@ Now connect the ***output port of the HANA Client*** with the ***input port of t
 13. On the next screen search for your user schema that you selected in your Pipeline, e.g. XXXX_EPM_TARGET, where XXXX stands for your user ID.<br><br>
 ![](/exercises/ex1/images/ex1-035b.JPG)<br><br>
 
-14. Select your HANA table that you previously selected in the HANA Client operator and open the factsheet by clicking on the glasses “View Fact Sheet” option on the right-hand side of your table:<br><br>
+14. Select your HANA table that you previously selected in the HANA Client operator and open the factsheet by clicking on the glasses ***View Fact Sheet*** option on the right-hand side of your table:<br><br>
 ![](/exercises/ex1/images/ex1-036b.JPG)<br><br>
 
 15. If your Pipeline ran successfully, you'll see data in your table once you switch to the tab ***Data Preview***<br><br>
 ![](/exercises/ex1/images/ex1-037b.JPG)<br><br>
 
-Now you can see that the EPM Customer data got loaded into a target table in HANA Cloud. Success!
+    Now you can see that the EPM Customer data got loaded into a target table in HANA Cloud. Success!
 
 16. In the Overview section you can find additional metadata of the HANA table such as the column names + data types of our Business Partner table:. Success!<br><br>
 ![](/exercises/ex1/images/ex1-038b.JPG)<br><br>
