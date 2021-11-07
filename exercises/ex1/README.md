@@ -267,7 +267,7 @@ In the next section, we'll also take care for the Sales Order transaction data f
 
 **Congratulations!** You have created the Sales Order extraction from a delta-enabled, more complex ABAP CDS View into the S3 Object Store. Because you have chosen the transfer mode ***"Replication"*** in the CDS Reader operator configuration, the Pipeline has conducted the Initial Load and would now wait for any changes (inserts, updates, deletions) in the S/HANA EPM Sales Order object as long as it is running.
 
-As a next step, you will enrich the Sales Order data with some Customer Details (Name and Legal Form) during the Replication process.
+As a next step, you will enrich the Sales Order data with some Customer Details (e.g. Name and Legal Form) during the Replication process.
 
 
 ## Exercise 1.4 - Extend the Pipeline for joining Sales Order with Customer data for each change in Sales Orders and persist results in S3
@@ -287,7 +287,7 @@ In this last part of the S/4HANA ABAP CDS View intergration exercise, you will e
     - Then click ***OK***.<br><br>
 ![](/exercises/ex1/images/ex1-059b.JPG)<br><br>
 
-4. A new Pipeline has been created as a copy of your original Sales Order replication Pipeline. You will be using the File Operator outputs (i.e. the file path and name) as a trigger for the join processes with the Customer master data.<br><br>
+4. A new Pipeline has been created as a copy of your original Sales Order replication Pipeline. You will be using the Write File Operator outputs (i.e. the file path and name) as a trigger for the join processes with the Customer master data.<br><br>
    
    Optinally you can either keep the Wiretap operator in the pipeline or remove it and directly connect the Get Header Operator with the Write File Operator as it is being done in the following steps. 
 
@@ -325,7 +325,7 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 	In the Source option you will now see that file path has been updated: <br><br>
 	![](/exercises/ex1/images/ex1-068b.JPG)<br><br>
 
-12. Set the parameter Fall on String Truncation  to false by switching it off: <br><br>
+12. Set the parameter Fall ***on String Truncation*** to false by switching it off: <br><br>
 ![](/exercises/ex1/images/ex1-069b.JPG)<br><br>
 
 	You are now able to open the ***Data Preview*** of the connected file in S3. Give it a try, if you want!<br><br>
@@ -373,7 +373,7 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 20. Double-click on the ***Join*** operation.<br><br>
 ![](/exercises/ex1/images/ex1-083b.JPG)<br><br>
 
-21. Re-arrange the position of input tables on the canvas as per your convenience and then connect the **"C5" field of Join_Input1** (Sales Order) with the **"C0" field of Join_Input2** (Customer). This will map the Customer GUID fields of the two tables. We're using an INNER JOIN.<br><br>
+21. Re-arrange the position of input tables on the canvas as per your convenience.<br><br>
 ![](/exercises/ex1/images/ex1-084b.JPG)<br><br>
 
 22. Connect ***"BUYERGUID" field of Join_Input1*** (Sales Order) with the ***"NODEKEY" field of Join_Input2*** (Customer). This will map the Customer GUID fields of the two tables. We're using an INNER JOIN..<br><br>
@@ -404,7 +404,7 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
     ![](/exercises/ex1/images/ex1-107b.JPG)<br><br>
 	
 	Select S3 as ***Service*** and use Connection ID ***TechEd_S3***. <br><br>
-	![](/exercises/ex1/images/ex1-108b.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-111b.JPG)<br><br>
 	
 	Click on the ***Browse*** Button of ***Target*** parameter: <br><br>
 	![](/exercises/ex1/images/ex1-109b.JPG)<br><br>
@@ -445,7 +445,7 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 32. As you can see, the two columns with the company name and the legal form of the Customer master data table have been added to the Sales Order data.<br><br>
 ![](/exercises/ex1/images/ex1-097b.JPG)<br><br>
 
-33. As long as the Pipeline is running, you would now receive any updates in S/4HANA on the EPM Sales Order data, enriched with the lookups of the EPM Customer master data. The file in S3 would look as displayed below. In column "/1DH/OPERATION", you get the ***update*** indicator "U". Columns "C21" and "C22" contain the enriched field contents.<br><br>
+33. As long as the Pipeline is running, you would now receive any updates in S/4HANA on the EPM Sales Order data, enriched with the lookups of the EPM Customer master data. The file in S3 would look as displayed below. In column "/1DH/OPERATION", you get the ***update*** indicator "U".<br><br>
 ![](/exercises/ex1/images/ex1-098b.JPG)<br><br>
 
 ## Summary
