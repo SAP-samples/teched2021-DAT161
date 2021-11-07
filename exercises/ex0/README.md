@@ -44,11 +44,6 @@ The relevant tables for our scenario are
 Here is how these tables relate to each other:<br>
 ![](images/epm-001b.JPG)<br><br>
 
-## Access to the exercises' Data Intelligence environment
-TBD
-
-<br>
-
 *****************************************************
 <br> **Table of Contents / Navigation**
 
