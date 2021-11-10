@@ -14,7 +14,7 @@ The use case is
 After completing these steps you will have created a Pipeline that reads EPM Customer data from an ABAP CDS View in S/4HANA and displays it in a Terminal UI.
 
 1. Log on to SAP Data Intelligence and enter the Launchpad application. Then start the ***Modeler*** application.
-   - Follow the link to your assigned Data Intelligence instance, i.e. https://vsystem.ingress.dh-pmydlxeu.dhaas-live.shoot.live.k8s-hana.ondemand.com/login/.
+   - Follow the link to your assigned Data Intelligence instance, i.e. https://vsystem.ingress.dh-93awrk8fy.dh-canary.shoot.live.k8s-hana.ondemand.com/app/datahub-app-launchpad/.
    - The tenant name should be ***"dat161"***.
    - In the next pop-up window, enter your assigned user name (e.g. ***"TA99"***) and your individual password received from the user registration.<br><br>
    ![](/exercises/ex1/images/ex1-002c.JPG)<br><br>
