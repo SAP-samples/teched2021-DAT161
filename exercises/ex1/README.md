@@ -412,24 +412,27 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 	Browse to the path in S3 with /DAT161/XXXX, where XXXX stands for your user ID e.g. /DAT161/TA99 and click on + icon: <br><br>
 	![](/exercises/ex1/images/ex1-110b.JPG)<br><br>
 	
-	Enter a name of the target name of the CSV file, e.g. ***Enriched_Sales_Order.csv*** and click on ***Add*** <br><br>
-	![](/exercises/ex1/images/ex1-102b.JPG)<br><br>
+	Enter a name of the target folder, which we will sue to store our files, e.g. ***Enriched_Sales_Order*** and click on ***Add*** <br><br>
+	![](/exercises/ex1/images/ex1-120b.JPG)<br><br>
 	
-	You will now see the file is being added in the S3 Object store. Select it and click on ***OK***.<br><br>
-	![](/exercises/ex1/images/ex1-103b.JPG)<br><br>
+	You will now see the folder is being added in the S3 Object store. Select it and click on ***OK***.<br><br>
 	
-	The Target is now being updated to the file you specified. In addition please check the following configurations: <br><br>
+	The Target is now being updated to the folder you specified, which we will use to store our enriched sales orders in form of part-files.<br><br>
+	![](/exercises/ex1/images/ex1-121b.JPG)<br><br>
+	
+	In addition please check the following configurations: <br><br>
 
     - **Format:** `CSV`
     - Leave the **CSV Properties** as-is
     - **Header:** ON
-    - **Write Part Files** should be `False`<br><br>
+    - **Write Part Files** should be `True`
+    - **Mode** should be `Append` <br><br>
 	
-	![](/exercises/ex1/images/ex1-104b.JPG)<br><br>
+	![](/exercises/ex1/images/ex1-112b.JPG)<br><br>
 	
     ***Save*** the Pipeline <br><br>
 	
-	In case the following message appears, check the Save layout changes box and click on OK.<br><br>
+	In case the following warning message appears, check the Save layout changes box and click on OK.<br><br>
 	![](/exercises/ex1/images/ex1-093b.JPG)<br><br>
 	
 	When selecting the Structured File Producer Operator, you will now see that the Target status has been updated to Configured.<br><br>
@@ -438,15 +441,18 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 30. ***Run*** the Pipeline: <br><br>
 ![](/exercises/ex1/images/ex1-095b.JPG)<br><br>
 
-31. When the Pipeline is in status ***running***, you can take a look into your folder in the S3 bucket, again using the ***Data Intelligence Metadata Explorer*** application. You should see the file that was specified in the *Structured File Producer* operator ("Enriched_Sales_Order.csv"). Click the ***Glasses*** icon on that tile in order to see the ***Data Preview*** of the ***Fact Sheet***.<br><br>
-![](/exercises/ex1/images/ex1-106b.JPG)<br><br>
-![](/exercises/ex1/images/ex1-096b.JPG)<br><br>
+31. When the Pipeline is in status ***running***, you can take a look into your folder in the S3 bucket, again using the ***Data Intelligence Metadata Explorer*** application.     After drilling to your specifiec folder DAT161/XXXX, where XXXX stand for your user ID e.g. TA99, you should see the folder that was specified in the *Structured File Producer*  operator (= "Enriched_Sales_Order").<br><br>
+    ![](/exercises/ex1/images/ex1-122b.JPG)<br><br>
+    
+    Inside the directory you will see that one part file has been generated where our enriched sales orders are stored. Click the ***Glasses*** icon on that tile in order to see the ***Data Preview*** of the ***Fact Sheet***.<br><br>
+    ![](/exercises/ex1/images/ex1-106b.JPG)<br><br>
+    ![](/exercises/ex1/images/ex1-114b.JPG)<br><br>
 
-32. As you can see, the two columns with the company name and the legal form of the Customer master data table have been added to the Sales Order data.<br><br>
-![](/exercises/ex1/images/ex1-097b.JPG)<br><br>
+32. As you can see in the Data Preview tab, the two columns with the company name and the legal form of the Customer Master Data table have been added to the Sales Order data.<br><br>
+![](/exercises/ex1/images/ex1-116b.JPG)<br><br>
 
-33. As long as the Pipeline is running, you would now receive any updates in S/4HANA on the EPM Sales Order data, enriched with the lookups of the EPM Customer master data. The file in S3 would look as displayed below. In column "/1DH/OPERATION", you get the ***update*** indicator "U".<br><br>
-![](/exercises/ex1/images/ex1-098b.JPG)<br><br>
+33. As long as the Pipeline is running, you would now receive any updates in S/4HANA on the EPM Sales Order data, enriched with the lookups of the EPM Customer master data. In this particular example every update in the source S/4 HANA system would trigger a new file being generated in the specified S3 folder. The approach is a simple example for our hands-on session and can be further extended in a real project, e.g. by merging smaller delta files into bigger ones based on a defined file size threshold. The file in S3 would look as displayed below. In case an update happened int he source S/4 HANA system you get the ***update*** indicator "U" in the column "/1DH/OPERATION".<br><br>
+![](/exercises/ex1/images/ex1-118b.JPG)<br><br>
 
 ## Summary
 
