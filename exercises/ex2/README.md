@@ -94,12 +94,15 @@ You can now test the delta processing capabilities of the ABAP CDS View based da
 12. Click on the Connection **"TechEd_S3"** and drill further down to the folders **"DAT161"** and that of **your user** (e.g. "TA99").<br><br>
 ![](/exercises/ex2/images/ex2-021b.JPG)<br><br>
 ![](/exercises/ex2/images/ex2-022b.JPG)<br><br>
-13. Click on the ***More Actions*** menu (the three dots) of the file ***Enriched_Sales_Orders*** - that contains the delta records - and click on ***View Fact Sheet***.<br> (Remark: this file get overwritten with each data update as S3 does not provide *append* capabilities. If you would like to preserve the complete history, you can still add a *File Reader* and then a *File Writer* operator the to Pipeline behind the *Structured File Writer*. The latter does appends in memory and writes back the completed full recordset to S3.)<br><br>
-![](/exercises/ex2/images/ex2-023b.JPG)<br><br>
-![](/exercises/ex2/images/ex2-025b.JPG)<br><br>
-14. You can now see that also the processing of the delta data within the Pipeline to S3 worked seamlessly. The delta records contain the enrichments and the "U" indicator that with which updates are flagged by the ABAP CDS View CDC framework.<br><br>
-![](/exercises/ex2/images/ex2-024b.JPG)<br><br>
-15. After checking the data that has been replicated to S3 in the Metadata Explorer, please stop your running pipeline.<br><br>
+13. Browse into the specified folder inside your user folder **Enriched Sales Order**. <br><br>
+    ![](/exercises/ex2/images/ex1-122b.JPG)<br><br>
+    
+15. Inside the folder, you will now see that a new CSV file has been generated for the changes that were triggered via the custom operator. Click on the ***More Actions*** menu (the three dots) of the newly created file - that contains the delta records - and click on ***View Fact Sheet***. <br><br>
+    ![](/exercises/ex2/images/ex1-117b.JPG)<br><br>
+
+16. You can now see that also the processing of the delta data within the Pipeline to S3 worked seamlessly. The delta records contain the enrichments and the "U" indicator that with which updates are flagged by the ABAP CDS View CDC framework.<br><br>
+![](/exercises/ex2/images/ex2-118b.JPG)<br><br>
+17. After checking the data that has been replicated to S3 in the Metadata Explorer, please stop your running pipeline.<br><br>
 ![](/exercises/ex2/images/ex2-029b.JPG)<br><br>
 
 **Very well done!** You successfully followed the integration approach for data processing and functional execution between S/4HANA and SAP Data Intelligence and know how to realize such implementations.
