@@ -102,7 +102,7 @@ Here is a step-by-step guideline for creating a custom ABAP Operator. In the spe
 ![](images/dd2-013b.JPG)<br>
 
 13. As we are going to implement a new method `on_data`, we have to declare the method in the class definition.<br><br>
-Change to the `Display`view and add the following code snippet:<br>
+Change to the `Display`view (Ctrl + F1) and add the following code snippet:<br>
 ```abap
   PRIVATE SECTION.
   METHODS: on_data.
