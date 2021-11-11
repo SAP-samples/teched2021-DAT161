@@ -92,7 +92,7 @@ Here is a step-by-step guideline for creating a custom ABAP Operator. In the spe
 9. This opens the Class Builder (`SE24`). Double click on the `GET_INFO` method in order to assign the input and output ports of the ABAP Operator. Parameters are not needed in our use case.<br><br>
 ![](images/dd2-010b.JPG)<br>
 
-10. In the method `GET_INFO`, change to the `display`view and outcomment the three lines which specify the parameters (parameters are not needed in this scenario). The rest can be left as is. Click the ***Save*** button.<br><br>
+10. In the method `GET_INFO`, open to the `Change`view ***(Ctrl+F1)*** and outcomment the three lines which specify the parameters (parameters are not needed in this scenario). The rest can be left as is. Click the ***Save*** button.<br><br>
 ![](images/dd2-011b.JPG)<br>
 
 11. Go back and double click on the `NEW_PROCESS` method in order to implement the wanted functionality for our ABAP Operator.<br><br>
@@ -102,7 +102,7 @@ Here is a step-by-step guideline for creating a custom ABAP Operator. In the spe
 ![](images/dd2-013b.JPG)<br>
 
 13. As we are going to implement a new method `on_data`, we have to declare the method in the class definition.<br><br>
-Change to the `Display`view ***(Ctrl+F1)*** and add the following code snippet:<br>
+Open the `Change`view ***(Ctrl+F1)*** and add the following code snippet:<br>
 ```abap
   PRIVATE SECTION.
   METHODS: on_data.
