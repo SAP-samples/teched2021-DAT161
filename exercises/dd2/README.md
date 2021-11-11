@@ -143,18 +143,19 @@ Then overwrite the existing `step( )` method with the following code:<br>
   METHOD on_data.
     DATA:
       lv_data TYPE TABNAME,
+      lv_error TYPE string,
       lv_result TYPE SY-DBCNT .
 
     mo_in->read_copy( IMPORTING ea_data = lv_data ).
 
-    "lv_data = reverse( lv_data ).
-    CALL FUNCTION 'DMC_COUNT_TABLE_ENTRIES' "count table entries (exact count or just existence check)
-      EXPORTING
-        im_tabname =       lv_data       " table name
-        im_exact_count =   'X'           " sy-debug      indicator for exact counting
-      IMPORTING
-        ex_count =         lv_result     " sy-dbcnt      number of records in table
-    .  "  DMC_COUNT_TABLE_ENTRIES
+    lv_result = 0.
+
+    TRY.
+        SELECT COUNT( * ) FROM (lv_data).
+        lv_result = sy-dbcnt.
+      CATCH cx_sy_dynamic_osql_semantics.
+        lv_error = 'SQL error'.
+    ENDTRY.
 
     mo_out->write_copy( lv_result ).
   ENDMETHOD.
