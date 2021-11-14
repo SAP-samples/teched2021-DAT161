@@ -269,8 +269,8 @@ The integration of ABAP Operators is done via Pipelines in the SAP Data Intelige
 1.	Logon to SAP Data Intelligence to access the Launchpad application and click on the ***Modeler*** tile.<br><br>
 ![](images/dd2-016b.JPG)<br><br>
 
-2.	In the DI Modeler, make sure you are in the ***Graphs*** tab (see left side) and click the ***+*** symbol in order to create a new Pipeline.<br><br>
-![](images/dd2-017b.JPG)<br><br>
+2.	In the DI Modeler, make sure you are in the ***Graphs*** tab (see left side) and click the ***+*** symbol and select **Use Generation 1 Operators** in order to create a new Pipeline.<br><br>
+![](images/dd2-029b.JPG)<br><br>
 
 3.	A new Pipeline canvas opens and the design focus automatically changes to the ***Operators*** tab (see left side). Drag the ***Custom ABAP Operator*** icon from the Operator list and drop it onto the canvas. Then do one click on the ***Custom ABAP Operator*** node in the canvas and open the configuration panel by clicking on the related symbol.<br><br>
 ![](images/dd2-018b.JPG)<br><br>
