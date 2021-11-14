@@ -223,7 +223,7 @@ Open the configuration of the ***Get Header*** operator and select ***only once*
    - Mode: **`Append`**
    - Join batches: **`True`**<br><br>
    
-   Please note that not all cloud storages do natively support **Append** functionality and you should check the write file approach in your project based on your requirements as well as supported functionality of your favorit cloud storage. In this case we choose **Append** mode for simplification reasons of this excercise.<br><br>
+   Please note that not all cloud storages do natively support **Append** functionality and you should check the write file approach in your project based on your requirements as well as supported functionality of your favorit cloud storage. In this case we choose **Append** mode for simplification reasons of this exercise.<br><br>
 ![](/exercises/ex1/images/ex1-045b.JPG)<br><br>
 
 13.	***Save*** your Pipeline.
