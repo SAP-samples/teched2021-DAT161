@@ -35,7 +35,7 @@ After completing these steps you will have created a Pipeline that reads EPM Cus
 ![](/exercises/ex1/images/ex1-008b.JPG)<br><br>
 
 6.	The ABAP CDS Reader operator shell has received the operator's metadata from S/4HANA and has configured the Pipeline node (for example, the operator now has an output port). Now fill in the configuration parameters in the panel:
-      - Label: `Buyer - S/4 ABAP CDS` (Optionally)
+      - Label: `Buyer - S/4 ABAP CDS` (Optional)
       - Subscription Type: `New`
       - Subscription Name: `BP001_XXXX`, where XXXX is your user name, for example "BP001_TA99"
       - ABAP CDS Name: `Z_CDS_BUYER_Delta`, which is the "simple" CDS View that got created in the Deep Dive 1 demo
@@ -45,6 +45,8 @@ After completing these steps you will have created a Pipeline that reads EPM Cus
 
 7.	From the operator list on the left side, drag the ***Get Header*** operator and drop it into the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Get Header operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed. The Get Header Operator is taking care of adding column names of the CDS View as header line into the output CSV data stream. <br><br>
 ![](/exercises/ex1/images/ex1-010b.JPG)<br><br>
+Open the configuration of the ***Get Header*** operator and select ***only once*** for the Add column names configuration parameter. The ***only once*** selection will make sure that the column names of the CDS View will only be added once for all data packages being received from S/4 HANA. <br><br>
+![](/exercises/ex1/images/ex1-124b.JPG)<br><br>
 
 8.  From the operator list on the left side, drag the ***Terminal*** operator and drop it into the Pipeline canvas. Then connect the upper output port of the Get Header with the input port of the Terminal operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-010c.JPG)<br><br>
@@ -188,7 +190,7 @@ In the next section, we'll also take care for the Sales Order transaction data f
 ![](/exercises/ex1/images/ex1-008b.JPG)<br><br>
 
 6.	The ABAP CDS Reader operator shell has received the operator's metadata from S/4HANA and has configured the Pipeline node (for example, the operator now has an output port). Now fill in the configuration parameters in the panel:
-      - Label: `Sales Order - S/4 ABAP CDS` (Optionally)
+      - Label: `Sales Order - S/4 ABAP CDS` (Optional)
       - Subscription Type: `New`
       - Subscription Name: `SO001_XXXX`, where XXXX is your user name, for example "SO001_TA99"
       - ABAP CDS Name: `Z_CDS_SO_SOI_Delta`, which is the "more complex" CDS View that got created in the Deep Dive 1 demo
@@ -198,6 +200,8 @@ In the next section, we'll also take care for the Sales Order transaction data f
    
 7. From the operator list on the left side, drag and drop the ***Get Header*** operator into the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Get Header operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-040b.JPG)<br><br>
+Open the configuration of the ***Get Header*** operator and select ***only once*** for the Add column names configuration parameter. The ***only once*** selection will make sure that the column names of the CDS View will only be added once for all data packages being received from S/4 HANA. This is required as we want to Append the data using the Write File operator. <br><br>
+![](/exercises/ex1/images/ex1-126b.JPG)<br><br>
 
 8.	From the operator list on the left side, drag the ***Wiretab*** operator and drop it into the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Wiretab operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-041b.JPG)<br><br>
@@ -218,6 +222,8 @@ In the next section, we'll also take care for the Sales Order transaction data f
    - Path: **`/DAT161/XXXX/Sales_Order_0001.csv`**, where XXXX is your User name, for example "/DAT161/TA99/Sales_Order_0001.csv"
    - Mode: **`Append`**
    - Join batches: **`True`**<br><br>
+   
+   Please note that not all cloud storages do natively support **Append** functionality and you should check the write file approach in your project based on your requirements as well as supported functionality of your favorit cloud storage. In this case we choose **Append** mode for simplification reasons of this excercise.<br><br>
 ![](/exercises/ex1/images/ex1-045b.JPG)<br><br>
 
 13.	***Save*** your Pipeline.
@@ -294,17 +300,20 @@ In this last part of the S/4HANA ABAP CDS View intergration exercise, you will e
 5. Open the configuration of the File Writer operator and enter the new target path/file name **`/DAT161/TA99/Sales_Order_Staging.csv`**. Change Mode to **`Overwrite`**. Then save the Pipeline.<br><br>
 ![](/exercises/ex1/images/ex1-060b.JPG)<br><br>
 
-6. Click on the ***Operators*** tab on the left side in order to get the list of operators. Find the ***Graph Terminator*** operator and drag it from the operator list into the canvas. Then connect the upper output port ("file") of the File Writer with the input port of the Graph Terminator operator.<br><br>
+6. Open the configuration of the ***Get Header*** operator and change the Add column names configuration parameter to ***for each batch***. The ***for each batch*** selection will make sure that the column names of the CDS View will only be added once for all data packages being received from S/4 HANA. This is required as we want to overwrite the staging file, which will then be joined with additional metadata from the customer master data for each processed file.<br><br>
+![](/exercises/ex1/images/ex1-125b.JPG)<br><br>
+
+7. Click on the ***Operators*** tab on the left side in order to get the list of operators. Find the ***Graph Terminator*** operator and drag it from the operator list into the canvas. Then connect the upper output port ("file") of the File Writer with the input port of the Graph Terminator operator.<br><br>
 The Graph Terminanor allows us to run the Pipeline once, and when the new file got generated, the File Writer will send a termination signal to the Graph Terminator, which then stops the Pipeline. We do this just for the purpose of generating the new output file as a reference / import sample for the next steps.<br><br>
 ![](/exercises/ex1/images/ex1-061b.JPG)<br><br>
 
-7. ***Save*** and ***Run*** the Pipeline. Wait until the Pipeline status turns from ***pending*** to ***processing*** and finally to ***completed***.<br><br>
+8. ***Save*** and ***Run*** the Pipeline. Wait until the Pipeline status turns from ***pending*** to ***processing*** and finally to ***completed***.<br><br>
 ![](/exercises/ex1/images/ex1-062b.JPG)<br><br>
 
-8. After the completion of the Pipeline execution, **remove the Graph Terminator** operator from the Pipeline again.<br><br>
+9. After the completion of the Pipeline execution, **remove the Graph Terminator** operator from the Pipeline again.<br><br>
 ![](/exercises/ex1/images/ex1-063b.JPG)<br><br>
 
-9. From the list of operators on the left side, drag the ***Structured File Consumer*** operator and drop it into the Pipeline canvas. Then open the configuration panel and do the following entries:
+10. From the list of operators on the left side, drag the ***Structured File Consumer*** operator and drop it into the Pipeline canvas. Then open the configuration panel and do the following entries:
    - **Storage Type**: `S3`
    - **S3 Configuration**: After clicking on the pencil icon, select `Configuration Manager`and as connection ID `TechEd_S3`
    - Increase the **Fetch size** to `10000`
@@ -312,10 +321,10 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
    Then click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT161** and select the file **`Sales_Order_Staging`**. Then click ***OK***.<br><br>
    ![](/exercises/ex1/images/ex1-064b.JPG)<br><br>
      
-10. Select Service to S3 and select the previously used Connection ID TechEd_S3: <br><br> 
+11. Select Service to S3 and select the previously used Connection ID TechEd_S3: <br><br> 
 ![](/exercises/ex1/images/ex1-065b.JPG)<br><br>
 
-11. Then click the ***S3 Source File*** folder icon to browse through the S3 bucket. Drill down to your individual folder under ***DAT161*** and select the file Sales_Order_Staging. Then click ***OK***. <br><br>
+12. Then click the ***S3 Source File*** folder icon to browse through the S3 bucket. Drill down to your individual folder under ***DAT161*** and select the file Sales_Order_Staging. Then click ***OK***. <br><br>
 ![](/exercises/ex1/images/ex1-066b.JPG)<br><br>
 
 
@@ -325,7 +334,7 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 	In the Source option you will now see that file path has been updated: <br><br>
 	![](/exercises/ex1/images/ex1-068b.JPG)<br><br>
 
-12. Set the parameter Fall ***on String Truncation*** to false by switching it off: <br><br>
+13. Set the parameter Fall ***on String Truncation*** to false by switching it off: <br><br>
 ![](/exercises/ex1/images/ex1-069b.JPG)<br><br>
 
 	You are now able to open the ***Data Preview*** of the connected file in S3. Give it a try, if you want!<br><br>
@@ -334,17 +343,17 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 	![](/exercises/ex1/images/ex1-071b.JPG)<br><br>
 
 
-13. Now connect the **upper output port ("file") of the File Writer** operator with the **input port of the Structured File Consumer** operator. The ***Structured File Consumer*** operator takes the signal on the input port just as a trigger for commencing its logic. It's an optional input but our approach ensures that the operator is only executed after the file from the previous node has been successfully written on S3. (If the input port of a Structured File Consumer is not connected, the operator will start with the Pipeline execution.)<br><br>
+14. Now connect the **upper output port ("file") of the File Writer** operator with the **input port of the Structured File Consumer** operator. The ***Structured File Consumer*** operator takes the signal on the input port just as a trigger for commencing its logic. It's an optional input but our approach ensures that the operator is only executed after the file from the previous node has been successfully written on S3. (If the input port of a Structured File Consumer is not connected, the operator will start with the Pipeline execution.)<br><br>
 	When you create the link between the operators, a conversion of the data type is required from type `message.file` to type `message`. The ***Converter*** is automatically proposed when the link between the ports is established. Choose the option for ***Path extraction*** (which reflects the minimum transfer payload, as we use the input just as a trigger signal).<br><br>
 	![](/exercises/ex1/images/ex1-072b.JPG)<br><br>
 	![](/exercises/ex1/images/ex1-073b.JPG)<br><br>
 
-14.	Now we need to a ***Table Consumer*** operator for the Customer master data extraction from HANA Cloud. Go to the operator tab on the left-hand panel to drag and drop the Table Consumer operator in your graph.<br><br>
+15.	Now we need to a ***Table Consumer*** operator for the Customer master data extraction from HANA Cloud. Go to the operator tab on the left-hand panel to drag and drop the Table Consumer operator in your graph.<br><br>
 ![](/exercises/ex1/images/ex1-074b.JPG)<br><br>
 
 	In case the ***To File Operator*** has been added in a similar way as above, you can easily move it to another position within your pipeline depending on your needs. <br><br>
 
-15. On this new operator, open the configuration panel and click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT161** and select the file **`Customer_Master.csv`**. Then click ***OK***..<br><br>
+16. On this new operator, open the configuration panel and click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT161** and select the file **`Customer_Master.csv`**. Then click ***OK***..<br><br>
 ![](/exercises/ex1/images/ex1-075b.JPG)<br><br>
 
 	Select the service to “HANA_DB” and choose “TechEd_HANA” as Connection ID, which has been used as target for storing the Customer Master Data in our previous exercise. <br><br>
@@ -358,49 +367,49 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 
 	![](/exercises/ex1/images/ex1-078b.JPG)<br><br>
 
-16. Once you selected the Customer data in HANA, the dialog will automatically fetch the metadata of the table and show on the bottom of the screen: <br><br> 
+17. Once you selected the Customer data in HANA, the dialog will automatically fetch the metadata of the table and show on the bottom of the screen: <br><br> 
 ![](/exercises/ex1/images/ex1-079b.JPG)<br><br>
 
-17. From the list of operators on the left side, drag the ***Data Transform*** operator and drop it into the Pipeline canvas. Then connect the ***output port of the Structured File Consumer*** and the output port of the ***Table Consumer *** with the ***Data Transform box***. This will create the needed input ports of the Data Transform operator.<br><br>
+18. From the list of operators on the left side, drag the ***Data Transform*** operator and drop it into the Pipeline canvas. Then connect the ***output port of the Structured File Consumer*** and the output port of the ***Table Consumer *** with the ***Data Transform box***. This will create the needed input ports of the Data Transform operator.<br><br>
 ![](/exercises/ex1/images/ex1-080b.JPG)<br><br>
 
-18. Double-click on the ***Data Transform*** operator.<br><br>
+19. Double-click on the ***Data Transform*** operator.<br><br>
 ![](/exercises/ex1/images/ex1-081b.JPG)<br><br>
 
-19. In the details view, from the list of Data Operations on the left side, drag the ***Join*** operation into the canvas with the existing two ***input nodes*** and connect these with the ***Join*** operation.<br><br>
+20. In the details view, from the list of Data Operations on the left side, drag the ***Join*** operation into the canvas with the existing two ***input nodes*** and connect these with the ***Join*** operation.<br><br>
 ![](/exercises/ex1/images/ex1-082b.JPG)<br><br>
 
-20. Double-click on the ***Join*** operation.<br><br>
+21. Double-click on the ***Join*** operation.<br><br>
 ![](/exercises/ex1/images/ex1-083b.JPG)<br><br>
 
-21. Re-arrange the position of input tables on the canvas as per your convenience.<br><br>
+22. Re-arrange the position of input tables on the canvas as per your convenience.<br><br>
 ![](/exercises/ex1/images/ex1-084b.JPG)<br><br>
 
-22. Connect ***"BUYERGUID" field of Join_Input1*** (Sales Order) with the ***"NODEKEY" field of Join_Input2*** (Customer). This will map the Customer GUID fields of the two tables. We're using an INNER JOIN..<br><br>
+23. Connect ***"BUYERGUID" field of Join_Input1*** (Sales Order) with the ***"NODEKEY" field of Join_Input2*** (Customer). This will map the Customer GUID fields of the two tables. We're using an INNER JOIN..<br><br>
 ![](/exercises/ex1/images/ex1-085b.JPG)<br><br>
 
 	You can leave the default settings displayed in the Join Definition screen: <br><br>
 	![](/exercises/ex1/images/ex1-086b.JPG)<br><br>
 
-23. Proceed to tab ***Columns*** in order to select the output fields. Click on the ***Auto map by name*** icon (see red box), which enter all fields of the two input nodes to the list of output fields.<br><br> 
+24. Proceed to tab ***Columns*** in order to select the output fields. Click on the ***Auto map by name*** icon (see red box), which enter all fields of the two input nodes to the list of output fields.<br><br> 
 ![](/exercises/ex1/images/ex1-087b.JPG)<br><br>
 
-24. Now you can choose if you want to remove some columns in the target data set, e.g. in this case we are selecting & removing the following two columns as an example:<br><br>
+25. Now you can choose if you want to remove some columns in the target data set, e.g. in this case we are selecting & removing the following two columns as an example:<br><br>
 ![](/exercises/ex1/images/ex1-088b.JPG)<br><br>
 
-25. Navigate back.<br><br>
+26. Navigate back.<br><br>
 ![](/exercises/ex1/images/ex1-089b.JPG)<br><br>
 
-26. Click with the right mouse button on the output port of the ***Join*** operation. Then click on ***Create Data target***.<br><br>
+27. Click with the right mouse button on the output port of the ***Join*** operation. Then click on ***Create Data target***.<br><br>
 ![](/exercises/ex1/images/ex1-090b.JPG)<br><br>
 
-27. A new output node has been created, which will now be available on the Data Transfer operator. Navigate further back.<br><br>
+28. A new output node has been created, which will now be available on the Data Transfer operator. Navigate further back.<br><br>
 ![](/exercises/ex1/images/ex1-091b.JPG)<br><br>
 
-28. Back on the Pipeline canvas, drag the ***Structured File Producer*** operator from the list of operators into the Pipeline canvas. Then connect the ***output port of the Data Transform*** with the ***input port of the Structured File Producer***.<br><br>
+29. Back on the Pipeline canvas, drag the ***Structured File Producer*** operator from the list of operators into the Pipeline canvas. Then connect the ***output port of the Data Transform*** with the ***input port of the Structured File Producer***.<br><br>
 ![](/exercises/ex1/images/ex1-092b.JPG)<br><br>
 
-29. Open the configuration panel of the ***Structured File Producer*** operator aby clicking on the Edit / Pencil icon of the Target Configuration to start the configuration of your target S3 scenario:<br>
+30. Open the configuration panel of the ***Structured File Producer*** operator aby clicking on the Edit / Pencil icon of the Target Configuration to start the configuration of your target S3 scenario:<br>
     ![](/exercises/ex1/images/ex1-107b.JPG)<br><br>
 	
 	Select S3 as ***Service*** and use Connection ID ***TechEd_S3***. <br><br>
@@ -438,20 +447,20 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 	When selecting the Structured File Producer Operator, you will now see that the Target status has been updated to Configured.<br><br>
 	![](/exercises/ex1/images/ex1-105b.JPG)<br><br>
 
-30. ***Run*** the Pipeline: <br><br>
+31. ***Run*** the Pipeline: <br><br>
 ![](/exercises/ex1/images/ex1-095b.JPG)<br><br>
 
-31. When the Pipeline is in status ***running***, you can take a look into your folder in the S3 bucket, again using the ***Data Intelligence Metadata Explorer*** application.     After drilling to your specifiec folder DAT161/XXXX, where XXXX stand for your user ID e.g. TA99, you should see the folder that was specified in the *Structured File Producer*  operator (= "Enriched_Sales_Order").<br><br>
+32. When the Pipeline is in status ***running***, you can take a look into your folder in the S3 bucket, again using the ***Data Intelligence Metadata Explorer*** application.     After drilling to your specifiec folder DAT161/XXXX, where XXXX stand for your user ID e.g. TA99, you should see the folder that was specified in the *Structured File Producer*  operator (= "Enriched_Sales_Order").<br><br>
     ![](/exercises/ex1/images/ex1-122b.JPG)<br><br>
     
     Inside the directory you will see that one part file has been generated where our enriched sales orders are stored. Click the ***Glasses*** icon on that tile in order to see the ***Data Preview*** of the ***Fact Sheet***.<br><br>
     ![](/exercises/ex1/images/ex1-106b.JPG)<br><br>
     ![](/exercises/ex1/images/ex1-114b.JPG)<br><br>
 
-32. As you can see in the Data Preview tab, the two columns with the company name and the legal form of the Customer Master Data table have been added to the Sales Order data.<br><br>
+33. As you can see in the Data Preview tab, the two columns with the company name and the legal form of the Customer Master Data table have been added to the Sales Order data.<br><br>
 ![](/exercises/ex1/images/ex1-116b.JPG)<br><br>
 
-33. As long as the Pipeline is running, you would now receive any updates in S/4HANA on the EPM Sales Order data, enriched with the lookups of the EPM Customer master data. In this particular example every update in the source S/4 HANA system would trigger a new file being generated in the specified S3 folder. The approach is a simple example for our hands-on session and can be further extended in a real project, e.g. by merging smaller delta files into bigger ones based on a defined file size threshold. The file in S3 would look as displayed below. In case an update happened int he source S/4 HANA system you get the ***update*** indicator "U" in the column "/1DH/OPERATION".<br><br>
+34. As long as the Pipeline is running, you would now receive any updates in S/4HANA on the EPM Sales Order data, enriched with the lookups of the EPM Customer master data. In this particular example every update in the source S/4 HANA system would trigger a new file being generated in the specified S3 folder. The approach is a simple example for our hands-on session and can be further extended in a real project, e.g. by merging smaller delta files into bigger ones based on a defined file size threshold. The file in S3 would look as displayed below. In case an update happened int he source S/4 HANA system you get the ***update*** indicator "U" in the column "/1DH/OPERATION".<br><br>
 ![](/exercises/ex1/images/ex1-118b.JPG)<br><br>
 
 ## Summary
