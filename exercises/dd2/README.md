@@ -107,9 +107,9 @@ Open the `Change`view ***(Ctrl+F1)*** and add the following code snippet:<br>
   PRIVATE SECTION.
   METHODS: on_data.
 ```
-![](images/dd2-014b.JPG)<br>
+![](images/dd2-014b.JPG)<br><br>
 
-14.  Overwrite the existing `step( )` method with the following code:<br><br>
+14.  Overwrite the existing `step( )` method with the following code:<br>
 
 ```abap
   METHOD if_dhape_graph_process~step.
@@ -160,7 +160,7 @@ Open the `Change`view ***(Ctrl+F1)*** and add the following code snippet:<br>
     mo_out->write_copy( lv_result ).
   ENDMETHOD.
 ```
-<br><br> We can outcomment the parameter value retrieval (see line 30 in screenshot below)<br><br>
+<br> We can outcomment the parameter value retrieval (see line 30 in screenshot below)<br><br>
 ![](images/dd2-014c.JPG)<br><br>
 
 Now click the ***Save*** button.<br><br>
