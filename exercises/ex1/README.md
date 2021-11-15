@@ -217,9 +217,9 @@ Open the configuration of the ***Get Header*** operator and select ***only once*
 9. From the list of operators, drag the ***Write File*** operator and drop it in the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Wiretap operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-042b.JPG)<br><br>
 
-10. The message format from the Wiretap operator output must be transformed to a file format. For this reason you are prompted to choose an appropriate converter operator. On the pop-up window, select the first option (transfer the content). Click ***OK***.<br><br>
+10. The message format from the Wiretap operator output must be transformed to a file format. For this reason you are prompted to choose an appropriate converter operator. On the pop-up window, select the first option (transfer the content). Click ***OK***. Afterwards you can again use the ***Auto Layout*** button to re-arrange the operators.<br><br>
 ![](/exercises/ex1/images/ex1-043b.JPG)<br><br>
-
+  
 11. Click on the ***Write File*** operator and click its ***configuration*** icon.<br><br>
 ![](/exercises/ex1/images/ex1-044b.JPG)<br><br>
 
