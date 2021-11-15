@@ -100,7 +100,7 @@ When searching for your pipeline, make sure you have selected the category ***da
     ![](/exercises/ex2/images/ex1-122b.JPG)<br><br>
     
 15. Inside the folder, you will now see that a new CSV file has been generated for the changes that were triggered via the custom operator. Click on the ***More Actions*** menu (the three dots) of the newly created file - that contains the delta records - and click on ***View Fact Sheet***. <br><br>
-    ![](/exercises/ex2/images/ex1-117b.JPG)<br><br>
+    ![](/exercises/ex2/images/ex2-035b.JPG)<br><br>
     ***Please Note***: In case you have stopped the pipeline after exercise 1.4 and restarted it in this exercise as defined in chapter 2.2 step 4, you will see an additional file in the S3 storage that represent a second initial load of our enriched Sales Order Data. The reason for this is that the second start of the pipeline using the ***Replication*** mode has triggered an additional initial load after starting the pipeline for the second time.<br><br>
     ![](/exercises/ex2/images/ex2-34b.JPG)<br><br> 
 16. You can now see that also the processing of the delta data within the Pipeline to S3 worked seamlessly. The delta records contain the enrichments and the "U" indicator that with which updates are flagged by the ABAP CDS View CDC framework.<br><br>
