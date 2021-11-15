@@ -6,10 +6,10 @@ As already stated earlier, ***this Deep Dive section is presented by the trainer
 >The following ***Deep Dive 1 documentation*** is intended as a later guidance for you to reproduce the described steps in your own environments.
 >Even though it contains step by step instructions, ***this part does not belong to the hands-on exercises!***
 <br>
-ABAP Development Tools (ADT), formerly known as "ABAP in Eclipse", is the integrated ABAP development environment built on top of the Eclipse platform. Its main objective is to support developers in today’s increasingly complex development environments by offering state-of the art ABAP development tools. You can find more information about ADT **[here](https://tools.hana.ondemand.com/#abap)**.<br>
+ABAP Development Tools (ADT), formerly known as "ABAP in Eclipse", is the integrated ABAP development environment built on top of the Eclipse platform. Its main objective is to support developers in today’s increasingly complex development environments by offering state-of the art ABAP development tools. You can find more information about ADT here: https://tools.hana.ondemand.com/#abap.<br>
 <br>
 CDS (Core Data Services) is an extension of the ABAP Dictionary that allows you to define semantically rich data models in the database and to use these data models in your ABAP programs. CDS is a central part of enabling code push-down in ABAP applications.<br>
-You can find more information about CDS in the **[ABAP keyword documentation](https://help.sap.com/doc/abapdocu_751_index_htm/7.51/en-US/abencds.htm)** and the **[SAP Community](https://community.sap.com/topics/abap).**<br><br>
+You can find more information about CDS in the ABAP keyword documentation : https://help.sap.com/doc/abapdocu_751_index_htm/7.51/en-US/abencds.htm and the SAP Community: https://community.sap.com/topics/abap<br><br>
 Starting with SAP S/4HANA Cloud 1905 and SAP S/4HANA 1909 FPS01 (on-premise), Change Data Capture (CDC) is supported for ABAP CDS Views. After an ABAP CDS View is enabled for this delta method, changes in tables belonging to this view are recorded by the CDC mechanism. From a technology perspective, this delta method makes use of real-time database triggers on table level based on SLT technology.<br> INSERT, UPDATE and DELETE operations can be recorded by the framework.<br>
 
 Those who are interested in more information about Change Data Capture for ABAP CDS Views may like to read the related part of the **[Data Intelligence - ABAP Integration Guide](https://help.sap.com/viewer/3a65df0ce7cd40d3a61225b7d3c86703/Cloud/en-US/55b2a17f987744cba62903e97dd99aae.html)** or the blog **[CDS based data extraction – Part II Delta Handling](https://blogs.sap.com/2019/12/16/cds-based-data-extraction-part-ii-delta-handling/)**.<br><br>
@@ -273,7 +273,6 @@ For mapping the key fields of all underlying tables to the fields of the CDS vie
 3. Verify the results in the ***Data Preview*** by pressing ***F8***. The ABAP CDS View should still provide the same data as before delta-enabling.<br><br>
 
 We have now enabled our Sales Order object CDS View for Change Data Capture and are able to obtain any delta from one of the involved tables.<br>
-SAP
 In the next session, we test the Initial Load and Delta Load capabilities with a small, exemplary SAP Data Intelligence Pipeline implementation.
 
 
