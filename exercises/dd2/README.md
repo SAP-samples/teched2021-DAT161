@@ -109,8 +109,8 @@ Open the `Change`view ***(Ctrl+F1)*** and add the following code snippet:<br>
 ```
 ![](images/dd2-014b.JPG)<br>
 
-14. We can outcomment the parameter value retrieval (see line 30 in screenshot below).<br><br>
-Then overwrite the existing `step( )` method with the following code:<br>
+14.  Overwrite the existing `step( )` method with the following code:<br><br>
+
 ```abap
   METHOD if_dhape_graph_process~step.
     rv_progress = abap_false.
@@ -160,8 +160,10 @@ Then overwrite the existing `step( )` method with the following code:<br>
     mo_out->write_copy( lv_result ).
   ENDMETHOD.
 ```
-<br> Now click the ***Save*** button.<br><br>
+<br><br> We can outcomment the parameter value retrieval (see line 30 in screenshot below)<br><br>
 ![](images/dd2-014c.JPG)<br><br>
+
+Now click the ***Save*** button.<br><br>
 
 The complete code of the local class `lcl_process` should now look as follows:
 
