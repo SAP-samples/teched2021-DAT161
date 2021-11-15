@@ -184,10 +184,10 @@ Now connect the ***output port of the HANA Client*** with the ***input port of t
 In the next section, we'll also take care for the Sales Order transaction data from EPM and will right away establish a replication (initial load plus following delta processing) transfer mode.
 
 1. In SAP Data Intelligence, open the ***Modeler*** application. Make sure the scope of the Modeler UI is on tab ***Graphs*** (see left side). Then click the ***+*** button and select **Use Generation 1 Operators** to create a new Pipeline.<br><br>
-![](/exercises/ex1/images/ex1-004b.JPG)<br><br>
+![](/exercises/ex1/images/ex1-123b.JPG)<br><br>
 
 2. Now a new Pipeline canvas is opened on the right side and the Modeler UI automatically switches the scope to the ***Operators*** tab (see left side). In the list of operators, drag the ABAP CDS Reader and drop it into the Pipeline canvas. Click the ABAP CDS Reader node in the canvas one time and then click the ***configuration*** icon.<br><br>
-![](/exercises/ex1/images/ex1-123b.JPG)<br><br>
+![](/exercises/ex1/images/ex1-006b.JPG)<br><br>
 
 3.	In the configuration panel for the ABAP CDS Reader, specify the S/4HANA Connection: Select `S4_RFC_TechEd`. Then click on the ***Version*** selection icon.<br><br>
 ![](/exercises/ex1/images/ex1-007b.JPG)<br><br>
