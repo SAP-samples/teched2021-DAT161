@@ -347,6 +347,9 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 	For the Preview you can choose between the preview of data how is stored in the source or the adapted data in case you have performed any changes:<br><br>
 	![](/exercises/ex1/images/ex1-070b.JPG)<br><br>
 	![](/exercises/ex1/images/ex1-071b.JPG)<br><br>
+	
+    Navigate back to your pipeline using the ***Back*** button:<br><br>
+    ![](/exercises/ex1/images/ex1-133b.JPG)<br><br>
 
 14. Now connect the **upper output port ("file") of the File Writer** operator with the **input port of the Structured File Consumer** operator. The ***Structured File Consumer*** operator takes the signal on the input port just as a trigger for commencing its logic. It's an optional input but our approach ensures that the operator is only executed after the file from the previous node has been successfully written on S3. (If the input port of a Structured File Consumer is not connected, the operator will start with the Pipeline execution.)<br><br>
 	When you create the link between the operators, a conversion of the data type is required from type `message.file` to type `message`. The ***Converter*** is automatically proposed when the link between the ports is established. Choose the option for ***Path extraction*** (which reflects the minimum transfer payload, as we use the input just as a trigger signal).<br><br>
