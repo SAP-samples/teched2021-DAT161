@@ -69,7 +69,9 @@ With this Pipeline setup, we can - from the Terminal UI - trigger the ABAP Opera
 In the next section, you can leverage this remote data generation option to verify the delta capabilities of our previously built Pipelines for ABAP CDS View based data replication.<br><br>
 ## Exercise 2.2 - Using a custom ABAP Operator to verify your Delta Replication of EPM Sales Orders
 You can now test the delta processing capabilities of the ABAP CDS View based data extraction. A nice task would be to check if Pipeline for Sales Orders replications and enrichment that you have built in [Exercise 1.4 - Extend the Pipeline for joining Sales Order with Customer data for each change in Sales Orders and persist results in S3](../ex1#exercise-13---implement-a-pipeline-for-delta-transfer-of-enhanced-epm-sales-order-data-from-s4hana-to-an-s3-object-store) is really processing the delta records from EPM in S/4HANA.<br><br>
-1. For so doing, change to the ***Graphs*** tab of the Modeler UI (see left side). Then enter your user name in the search field (if you made your user name a part of the Pipeline names or descriptions) and start the search. You will now get a list of the Pipelines that you have implemented. Click on your 'Sales Order Replication and Enrichment' Pipeline icon. If the displayed name is too short to recognize a unique name, just hover with your mouse over the Pipeline icons (see below).<br><br>
+1. In case your pipeline ***EPM_SalesOrder_Replication_Enrich_to_S3*** from exercise 1.4 is still running, you can directly go to step 5. In case you have stopped the pipeline, click on the ***Graphs*** tab of the Modeler UI (see left side). Then enter your user name in the search field (if you made your user name a part of the Pipeline names or descriptions) and start the search. You will now get a list of the pipelines that you have implemented. Click on your 'EPM_SalesOrder_Replication_Enrich_to_S3' Pipeline icon. If the displayed name is too short to recognize a unique name, just hover with your mouse over the Pipeline icons (see below).<br><br>
+When searching for your pipeline, make sure you have selected the category ***dat161*** in the available categories.<br><br>
+![](/exercises/ex2/images/ex2-033b.JPG)<br><br>
 ![](/exercises/ex2/images/ex2-012b.JPG)<br><br>
 2. The Pipeline is opened in the canvas area of the Modeler UI.<br><br>
 3. Make sure a Wiretap operator exists between the ***Get Header*** and ***To File*** Operator and the Sales Order to S3 Write File Operator:<br><br>
@@ -99,7 +101,8 @@ You can now test the delta processing capabilities of the ABAP CDS View based da
     
 15. Inside the folder, you will now see that a new CSV file has been generated for the changes that were triggered via the custom operator. Click on the ***More Actions*** menu (the three dots) of the newly created file - that contains the delta records - and click on ***View Fact Sheet***. <br><br>
     ![](/exercises/ex2/images/ex1-117b.JPG)<br><br>
-
+    ***Please Note***: In case you have stopped the pipeline after exercise 1.4 and restarted it in this exercise as defined in chapter 2.2 step 4, you will see an additional file in the S3 storage that represent a second initial load of our enriched Sales Order Data. The reason for this is that the second start of the pipeline using the ***Replication*** mode has triggered an additional initial load after starting the pipeline for the second time.<br><br>
+    ![](/exercises/ex2/images/ex2-34b.JPG)<br><br> 
 16. You can now see that also the processing of the delta data within the Pipeline to S3 worked seamlessly. The delta records contain the enrichments and the "U" indicator that with which updates are flagged by the ABAP CDS View CDC framework.<br><br>
 ![](/exercises/ex2/images/ex2-118b.JPG)<br><br>
 17. After checking the data that has been replicated to S3 in the Metadata Explorer, please stop your running pipeline.<br><br>
