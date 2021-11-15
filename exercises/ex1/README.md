@@ -209,7 +209,7 @@ In the next section, we'll also take care for the Sales Order transaction data f
 	Then connect the output port of the ABAP CDS Reader with the input port of the Get Header operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-040b.JPG)<br><br>
 Open the configuration of the ***Get Header*** operator and select ***only once*** for the Add column names configuration parameter. The ***only once*** selection will make sure that the column names of the CDS View will only be added once for all data packages being received from S/4 HANA. This is required as we want to Append the data using the Write File operator. <br><br>
-![](/exercises/ex1/images/ex1-126b.JPG)<br><br>
+![](/exercises/ex1/images/ex1-130b.JPG)<br><br>
 
 8.	From the operator list on the left side, drag the ***Wiretab*** operator and drop it into the Pipeline canvas. Then connect the output port of the ABAP CDS Reader with the input port of the Wiretab operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-041b.JPG)<br><br>
