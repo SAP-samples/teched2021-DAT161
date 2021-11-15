@@ -463,6 +463,8 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
     
     Inside the directory you will see that one part file has been generated where our enriched sales orders are stored. Click the ***Glasses*** icon on that tile in order to see the ***Data Preview*** of the ***Fact Sheet***.<br><br>
     ![](/exercises/ex1/images/ex1-106b.JPG)<br><br>
+    Optionally, you can switch the view in the Metadata Explorer using the ***List View*** button:
+    ![](/exercises/ex1/images/ex1-136b.JPG)<br><br>
     ![](/exercises/ex1/images/ex1-114b.JPG)<br><br>
 
 33. As you can see in the Data Preview tab, the two columns with the company name and the legal form of the Customer Master Data table have been added to the Sales Order data.<br><br>
