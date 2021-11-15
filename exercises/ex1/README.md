@@ -111,7 +111,10 @@ Now connect the ***output port of the HANA Client*** with the ***input port of t
    - Connection: Choose type ***Connection Management*** and then the connection ID **`TechEd_HANA`**<br>
    - Output in Batches: **False**<br>
    - Table Name: <br>
-	 Click the browse button next to Table name and select your user schema “XXXX_EPM_TARGET”, where XXXX refers to your user name, e.g. “TA99_EPM_TARGET. <br><br>
+	 Click the browse button next to Table parameter: <br><br>
+	![](/exercises/ex1/images/ex1-129b.JPG)<br><br>
+	
+	Select your user schema “XXXX_EPM_TARGET”, where XXXX refers to your user name, e.g. “TA99_EPM_TARGET. <br><br>
 	![](/exercises/ex1/images/ex1-023b.JPG)<br><br>
 
 	Double click on your user schema and inside your user schema you will find a pre-defined table with your user id “XXXX_BUSINESS_PARTNER”, e.g. “TA99_BUSINESS_PARTNER” <br><br>
