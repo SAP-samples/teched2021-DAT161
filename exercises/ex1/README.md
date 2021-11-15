@@ -322,17 +322,15 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 ![](/exercises/ex1/images/ex1-063b.JPG)<br><br>
 
 10. From the list of operators on the left side, drag the ***Structured File Consumer*** operator and drop it into the Pipeline canvas. Then open the configuration panel and do the following entries:
-   - **Storage Type**: `S3`
-   - **S3 Configuration**: After clicking on the pencil icon, select `Configuration Manager`and as connection ID `TechEd_S3`
    - Increase the **Fetch size** to `10000`
    
-   Then click the **S3 Source File** folder icon to browse through the S3 bucket. Drill down to your individual folder under **DAT161** and select the file **`Sales_Order_Staging`**. Then click ***OK***.<br><br>
-   ![](/exercises/ex1/images/ex1-064b.JPG)<br><br>
+   Then click the pencil of the **Source Object** parameter to configure the source file located in the S3 connection. Drill down to your individual folder under **DAT161** and select the file **`Sales_Order_Staging`**. Then click ***OK***.<br><br>
+   ![](/exercises/ex1/images/ex1-131b.JPG)<br><br>
      
 11. Select Service to S3 and select the previously used Connection ID TechEd_S3: <br><br> 
 ![](/exercises/ex1/images/ex1-065b.JPG)<br><br>
 
-12. Then click the ***S3 Source File*** folder icon to browse through the S3 bucket. Drill down to your individual folder under ***DAT161*** and select the file Sales_Order_Staging. Then click ***OK***. <br><br>
+12. Then click the ***S3 Source File*** folder icon to browse through the S3 bucket. Drill down to your individual folder under ***DAT161*** and select the file ***Sales_Order_Staging.csv***. Then click ***OK***. <br><br>
 ![](/exercises/ex1/images/ex1-066b.JPG)<br><br>
 
 
@@ -349,7 +347,6 @@ The Graph Terminanor allows us to run the Pipeline once, and when the new file g
 	For the Preview you can choose between the preview of data how is stored in the source or the adapted data in case you have performed any changes:<br><br>
 	![](/exercises/ex1/images/ex1-070b.JPG)<br><br>
 	![](/exercises/ex1/images/ex1-071b.JPG)<br><br>
-
 
 14. Now connect the **upper output port ("file") of the File Writer** operator with the **input port of the Structured File Consumer** operator. The ***Structured File Consumer*** operator takes the signal on the input port just as a trigger for commencing its logic. It's an optional input but our approach ensures that the operator is only executed after the file from the previous node has been successfully written on S3. (If the input port of a Structured File Consumer is not connected, the operator will start with the Pipeline execution.)<br><br>
 	When you create the link between the operators, a conversion of the data type is required from type `message.file` to type `message`. The ***Converter*** is automatically proposed when the link between the ports is established. Choose the option for ***Path extraction*** (which reflects the minimum transfer payload, as we use the input just as a trigger signal).<br><br>
