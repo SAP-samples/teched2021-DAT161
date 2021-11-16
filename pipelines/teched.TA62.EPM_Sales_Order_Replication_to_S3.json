@@ -1,0 +1,154 @@
+{
+	"properties": {},
+	"description": "TA62- Replicate S/4HANA EPM Customer Data to S3",
+	"processes": {
+		"abapcdsreader1": {
+			"component": "com.sap.abap.cds.reader",
+			"metadata": {
+				"label": "Sales Order - S/4 ABAP CDS",
+				"x": 12,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"generation": 1,
+				"config": {
+					"connectionID": "S4_RFC_TechEd",
+					"operatorID": "com.sap.abap.cds.reader.v2",
+					"subscriptionType": "New",
+					"action": "Replication",
+					"chunkSize": 50000,
+					"subscriptionName": "SO001_TA62",
+					"cdsname": "Z_CDS_SO_SOI_Delta"
+				},
+				"additionaloutports": [
+					{
+						"name": "outMessageData",
+						"type": "message"
+					}
+				]
+			}
+		},
+		"wiretap1": {
+			"component": "com.sap.util.wiretap",
+			"metadata": {
+				"label": "Wiretap",
+				"x": 350,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"generation": 1,
+				"ui": "dynpath",
+				"config": {}
+			}
+		},
+		"writefile1": {
+			"component": "com.sap.file.write",
+			"metadata": {
+				"label": "Sales Order to S3",
+				"x": 633.9999990463257,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"generation": 1,
+				"config": {
+					"connection": {
+						"configurationType": "Connection Management",
+						"connectionID": "TechEd_S3"
+					},
+					"pathMode": "Static (from configuration)",
+					"path": "/DAT161/TA62/Sales_Order_0001.csv",
+					"mode": "Append"
+				}
+			}
+		},
+		"tofile1": {
+			"component": "com.sap.file.toFile",
+			"metadata": {
+				"label": "To File",
+				"x": 534.9999990463257,
+				"y": 27,
+				"height": 50,
+				"width": 50,
+				"generation": 1,
+				"config": {}
+			}
+		},
+		"getheader1": {
+			"component": "teched.GetHeader",
+			"metadata": {
+				"label": "Get Header",
+				"x": 187,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"filesRequired": [
+					"script.py"
+				],
+				"generation": 1,
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "474,52 501.99999952316284,52 501.99999952316284,61 529.9999990463257,61"
+			},
+			"src": {
+				"port": "out",
+				"process": "wiretap1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "tofile1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "588.9999990463257,52 628.9999990463257,52"
+			},
+			"src": {
+				"port": "file",
+				"process": "tofile1"
+			},
+			"tgt": {
+				"port": "file",
+				"process": "writefile1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "136,52 182,52"
+			},
+			"src": {
+				"port": "outMessageData",
+				"process": "abapcdsreader1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "getheader1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "311,52 345,52"
+			},
+			"src": {
+				"port": "data",
+				"process": "getheader1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "wiretap1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {},
+	"metadata": {
+		"generation": 1
+	}
+}

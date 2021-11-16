@@ -1,0 +1,2538 @@
+{
+	"properties": {},
+	"description": "TA62- Replicate and Enrich S/4HANA EPM Sales Order Data to S3",
+	"processes": {
+		"abapcdsreader1": {
+			"component": "com.sap.abap.cds.reader",
+			"metadata": {
+				"label": "Sales Order - S/4 ABAP CDS",
+				"x": 12,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"generation": 1,
+				"config": {
+					"connectionID": "S4_RFC_TechEd",
+					"operatorID": "com.sap.abap.cds.reader.v2",
+					"subscriptionType": "New",
+					"action": "Replication",
+					"chunkSize": 50000,
+					"subscriptionName": "SO001_TA62",
+					"cdsname": "Z_CDS_SO_SOI_Delta"
+				},
+				"additionaloutports": [
+					{
+						"name": "outMessageData",
+						"type": "message"
+					}
+				]
+			}
+		},
+		"wiretap1": {
+			"component": "com.sap.util.wiretap",
+			"metadata": {
+				"label": "Wiretap",
+				"x": 350,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"generation": 1,
+				"ui": "dynpath",
+				"config": {}
+			}
+		},
+		"writefile1": {
+			"component": "com.sap.file.write",
+			"metadata": {
+				"label": "Sales Order to S3",
+				"x": 633.9999990463257,
+				"y": 12,
+				"height": 80,
+				"width": 120,
+				"generation": 1,
+				"config": {
+					"connection": {
+						"configurationType": "Connection Management",
+						"connectionID": "TechEd_S3"
+					},
+					"pathMode": "Static (from configuration)",
+					"path": "/DAT161/TA62/Sales_Order_Staging.csv",
+					"mode": "Overwrite"
+				}
+			}
+		},
+		"tofile1": {
+			"component": "com.sap.file.toFile",
+			"metadata": {
+				"label": "To File",
+				"x": 534.9999990463257,
+				"y": 27,
+				"height": 50,
+				"width": 50,
+				"generation": 1,
+				"config": {}
+			}
+		},
+		"structuredfileconsumer1": {
+			"component": "com.sap.storage.consumer.v2",
+			"metadata": {
+				"label": "Structured File Consumer",
+				"x": 659,
+				"y": 136,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"generation": 1,
+				"config": {
+					"service": "S3",
+					"fetchSize": 10000,
+					"serviceConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "TechEd_S3"
+					},
+					"source": {
+						"remoteObjectReference": {
+							"connection": {
+								"id": "TechEd_S3",
+								"type": "S3"
+							},
+							"name": "Sales_Order_Staging.csv",
+							"remoteObjectType": "FILE.CSV",
+							"qualifiedName": "/DAT161/TA62/Sales_Order_Staging.csv",
+							"nativeQualifiedName": "/DAT161/TA62/Sales_Order_Staging.csv",
+							"owner": "flowagent",
+							"size": 464557,
+							"version": {
+								"dataLastModified": 1637009345000,
+								"metadataLastModified": 1637009345000,
+								"metadataVersionNumber": 1637009345000
+							}
+						},
+						"dataAccessConfiguration": {
+							"rowDelimiter": "\n",
+							"charset": "ISO-8859-1",
+							"textDelimiter": "\"",
+							"header": true,
+							"attributes": [
+								{
+									"name": "GROSSAMOUNT",
+									"format": "."
+								},
+								{
+									"name": "NETAMOUNT",
+									"format": "."
+								},
+								{
+									"name": "TAXAMOUNT",
+									"format": "."
+								},
+								{
+									"name": "ITEMGROSSAMOUNT",
+									"format": "."
+								},
+								{
+									"name": "ITEMNETAMOUNT",
+									"format": "."
+								},
+								{
+									"name": "ITEMTAXAMOUNT",
+									"format": "."
+								}
+							],
+							"escapeCharacter": "\"",
+							"colDelimiter": ","
+						},
+						"schema": {
+							"genericType": "TABLE",
+							"tableBasedRepresentation": {
+								"attributes": []
+							}
+						},
+						"capabilityProperties": [
+							{
+								"name": "isProfileable",
+								"value": "true"
+							}
+						]
+					},
+					"failOnStringTruncation": false
+				},
+				"outports": [
+					{
+						"name": "outTable",
+						"type": "table",
+						"vtype-ID": "$GRAPH.generated.structuredfileconsumer1_outTable"
+					}
+				]
+			}
+		},
+		"fromfile1": {
+			"component": "com.sap.file.fromFile",
+			"metadata": {
+				"label": "From File",
+				"x": 480.49999952316284,
+				"y": 136,
+				"height": 50,
+				"width": 50,
+				"generation": 1,
+				"config": {}
+			}
+		},
+		"tableconsumer1": {
+			"component": "com.sap.database.table.consumer.v2",
+			"metadata": {
+				"label": "Table Consumer",
+				"x": 659,
+				"y": 240,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"generation": 1,
+				"config": {
+					"service": "HANA_DB",
+					"partitionType": "None",
+					"serviceConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "TechEd_HANA"
+					},
+					"source": {
+						"remoteObjectReference": {
+							"connection": {
+								"id": "TechEd_HANA",
+								"type": "HANA_DB"
+							},
+							"name": "TA62_BUSINESS_PARTNER",
+							"remoteObjectType": "TABLE",
+							"qualifiedName": "/TA62_EPM_TARGET/TA62_BUSINESS_PARTNER",
+							"nativeQualifiedName": "\"TA62_EPM_TARGET\".\"TA62_BUSINESS_PARTNER\"",
+							"owner": "TA62_EPM_TARGET"
+						},
+						"schema": {
+							"genericType": "TABLE",
+							"tableBasedRepresentation": {
+								"attributes": [],
+								"uniqueKeys": [
+									{
+										"attributeReferences": [
+											"NODEKEY"
+										]
+									}
+								]
+							}
+						},
+						"capabilityProperties": [
+							{
+								"name": "isProfileable",
+								"value": "true"
+							}
+						]
+					}
+				},
+				"outports": [
+					{
+						"name": "outTable",
+						"type": "table",
+						"vtype-ID": "$GRAPH.generated.tableconsumer1_outTable"
+					}
+				]
+			}
+		},
+		"datatransform1": {
+			"component": "com.sap.datatransform",
+			"metadata": {
+				"label": "Data Transform",
+				"x": 876,
+				"y": 186,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"generation": 1,
+				"config": {
+					"definition": {
+						"nodeType": "ContainerNode",
+						"inputs": [
+							{
+								"id": "098c7440-9d3c-4990-bc8d-a6ca9ada862a",
+								"nodeType": "InPort",
+								"name": "input1",
+								"attributes": [
+									{
+										"id": "5c74c14e-9c06-40f5-966b-d11e2ac2d7a3",
+										"name": "ITEMGUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "3f5db7d4-53cd-4878-bf4d-ef6983037119",
+										"name": "SALESORDERGUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "009d969d-e432-431e-ab73-710a8391a363",
+										"name": "SALESORDERID",
+										"datatype": "int32",
+										"nullable": false
+									},
+									{
+										"id": "17e9c160-2b65-4456-9e68-b43e2f95b12a",
+										"name": "CREATEDAT",
+										"datatype": "string",
+										"nullable": false,
+										"length": 27
+									},
+									{
+										"id": "4da889d3-005b-4ba7-8e18-2ef8b48410c0",
+										"name": "CHANGEDAT",
+										"datatype": "string",
+										"nullable": false,
+										"length": 27
+									},
+									{
+										"id": "6ac966f3-8651-43b2-8069-2ae286276e92",
+										"name": "BUYERGUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "6f7a0117-fa9b-43fd-9cce-d94f11569273",
+										"name": "CURRENCYCODE",
+										"datatype": "string",
+										"nullable": false,
+										"length": 3
+									},
+									{
+										"id": "63b3a12c-d7b8-4190-8c01-be4f43cf9bd5",
+										"name": "GROSSAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 8,
+										"scale": 2
+									},
+									{
+										"id": "fdf63d0c-deaf-4254-ac60-b2529db8811a",
+										"name": "NETAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"id": "c13472e5-73a4-4f55-a939-204456bc4620",
+										"name": "TAXAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"id": "32264228-30e0-4c59-8b5b-ef38e6c88baa",
+										"name": "ITEMPOSITION",
+										"datatype": "int32",
+										"nullable": false
+									},
+									{
+										"id": "e241368d-be06-4d10-aef9-caee1f386365",
+										"name": "PRODUCTID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 7
+									},
+									{
+										"id": "cea4e0cd-49b7-4563-b725-5ba75ac304ce",
+										"name": "PRODUCTNAME",
+										"datatype": "string",
+										"nullable": false,
+										"length": 50
+									},
+									{
+										"id": "9bd87a4b-990c-4409-803d-8d9c8f3bc5a8",
+										"name": "PRODUCTCATEGORY",
+										"datatype": "string",
+										"nullable": false,
+										"length": 27
+									},
+									{
+										"id": "330c6fdf-afb8-45f6-a28d-97e07038f107",
+										"name": "ITEMGROSSAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"id": "fe58eb23-eb13-4273-82ec-0e892e5727d9",
+										"name": "ITEMNETAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"id": "4c56aafa-b298-4370-93b0-632098d19392",
+										"name": "ITEMTAXAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 6,
+										"scale": 2
+									},
+									{
+										"id": "abe1f7f8-afb5-4766-b813-b85164e841c5",
+										"name": "PRODUCTGUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "3708d7c1-4b7c-4efd-8594-79737875495e",
+										"name": "TEXTGUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "df6f7754-e865-4aad-b0e0-586428712795",
+										"name": "/1DH/CDS_VIEW",
+										"datatype": "string",
+										"nullable": false,
+										"length": 18
+									},
+									{
+										"id": "fb90ff75-e39e-4223-a758-3673a3cd141f",
+										"name": "/1DH/OPERATION",
+										"datatype": "string",
+										"nullable": false,
+										"length": 5000
+									}
+								],
+								"UILayout": {
+									"x": 12,
+									"y": 12,
+									"height": 80,
+									"width": 80
+								}
+							},
+							{
+								"id": "83654e73-eba5-4226-b395-a77bd750d9f6",
+								"nodeType": "InPort",
+								"name": "input2",
+								"attributes": [
+									{
+										"id": "16d5c759-d901-496b-906c-dd80f87eeb1f",
+										"name": "NODEKEY",
+										"datatype": "string",
+										"nullable": false,
+										"length": 64
+									},
+									{
+										"id": "2afdb046-571d-40d9-9575-b4953fd8ac22",
+										"name": "BP_ROLE",
+										"datatype": "string",
+										"nullable": false,
+										"length": 8
+									},
+									{
+										"id": "e7a07387-3e82-49d4-87b0-823252ad3072",
+										"name": "EMAILADDRESS",
+										"datatype": "string",
+										"nullable": false,
+										"length": 256
+									},
+									{
+										"id": "944754b4-ba26-4d28-855f-0928cb988829",
+										"name": "PHONE_NUMBER",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "2dd8f9eb-8537-463c-a9b8-4de9e9a476c8",
+										"name": "FAX_NUMBER",
+										"datatype": "string",
+										"nullable": false,
+										"length": 64
+									},
+									{
+										"id": "3d6cb84c-36fc-4d13-a4b6-4e28856b4230",
+										"name": "WEB_ADDRESS",
+										"datatype": "string",
+										"nullable": false,
+										"length": 512
+									},
+									{
+										"id": "3e11d493-3b01-4e9e-b2d2-13b57aacdeb5",
+										"name": "ADDRESS_GUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 64
+									},
+									{
+										"id": "622f04d8-ae42-40c9-a060-998075f8e36b",
+										"name": "BP_ID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 16
+									},
+									{
+										"id": "e3ae013d-05cd-4806-81cc-15e03b3e2d6e",
+										"name": "COMPANY_NAME",
+										"datatype": "string",
+										"nullable": false,
+										"length": 100
+									},
+									{
+										"id": "774ec953-a9d1-4848-8cce-53fe914b44b5",
+										"name": "LEGAL_FORM",
+										"datatype": "string",
+										"nullable": false,
+										"length": 16
+									},
+									{
+										"id": "606981f4-8df5-4bbb-ae82-1954dc0df9f6",
+										"name": "CREATED_BY",
+										"datatype": "string",
+										"nullable": false,
+										"length": 64
+									},
+									{
+										"id": "3e76bab2-bfca-4f8b-8f43-4a02f11a48e3",
+										"name": "CREATED_AT",
+										"datatype": "string",
+										"nullable": false,
+										"length": 32
+									},
+									{
+										"id": "f3f57152-ebb7-411e-9bd2-e3a9395e1028",
+										"name": "CHANGED_BY",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "197bd1d6-7623-4698-9469-f9a7836df941",
+										"name": "CHANGED_AT",
+										"datatype": "string",
+										"nullable": false,
+										"length": 32
+									},
+									{
+										"id": "15ff5481-fd09-45ee-99da-cf1011b7e0bd",
+										"name": "CURRENCY_CODE",
+										"datatype": "string",
+										"nullable": false,
+										"length": 5
+									},
+									{
+										"id": "d9a18e15-4d22-4478-92b1-37c8d962d60c",
+										"name": "DUMMY_FIELD_BPA",
+										"datatype": "string",
+										"nullable": false,
+										"length": 1
+									},
+									{
+										"id": "b6c479bf-2a20-44b3-98a6-c9bc4b296bb4",
+										"name": "APPROVAL_STATUS",
+										"datatype": "string",
+										"nullable": false,
+										"length": 1
+									},
+									{
+										"id": "3db9295b-c04c-460e-b6b7-8fd416b9b3bd",
+										"name": "DH_CDS_VIEW",
+										"datatype": "string",
+										"nullable": false,
+										"length": 40
+									},
+									{
+										"id": "7b01e119-a2b4-404e-b6a7-832c40cfd32d",
+										"name": "DH_OPERATION",
+										"datatype": "string",
+										"nullable": false,
+										"length": 2
+									}
+								],
+								"UILayout": {
+									"x": 12,
+									"y": 132,
+									"height": 80,
+									"width": 80
+								}
+							}
+						],
+						"outputs": [
+							{
+								"id": "00627f6f-fc5e-46c9-adda-67df02152eaa",
+								"nodeType": "OutPort",
+								"name": "output1",
+								"attributes": [
+									{
+										"id": "ccc82b8b-ba65-4fdc-9c9b-a10adb0502d1",
+										"name": "BUYERGUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "b137d643-7432-43fd-a5c6-25b657885539",
+										"name": "ITEMGUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "e2e82b6b-0583-48a4-a97f-83399ed06231",
+										"name": "SALESORDERGUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "779baa96-75bc-4a1e-bb44-c49c5dcfa8ff",
+										"name": "SALESORDERID",
+										"datatype": "int32",
+										"nullable": false
+									},
+									{
+										"id": "df5b9b87-d508-4d1b-bf91-41e214ca23cb",
+										"name": "CREATEDAT",
+										"datatype": "string",
+										"nullable": false,
+										"length": 27
+									},
+									{
+										"id": "6838c1cd-98c5-45f8-8d1f-8c6f886fb3db",
+										"name": "CHANGEDAT",
+										"datatype": "string",
+										"nullable": false,
+										"length": 27
+									},
+									{
+										"id": "5d1b76a1-8b50-4441-be68-478072628590",
+										"name": "CURRENCYCODE",
+										"datatype": "string",
+										"nullable": false,
+										"length": 3
+									},
+									{
+										"id": "550b4ce9-59f0-4df5-8706-2d506f079973",
+										"name": "GROSSAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 8,
+										"scale": 2
+									},
+									{
+										"id": "bad85b98-669a-4baa-bf2e-2f1b96c00b61",
+										"name": "NETAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"id": "73fbffa5-36b1-41b3-87bd-a213d711cc81",
+										"name": "TAXAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"id": "3d7b43dd-35c8-4744-8827-b7c3154bd8e0",
+										"name": "ITEMPOSITION",
+										"datatype": "int32",
+										"nullable": false
+									},
+									{
+										"id": "96e9d5e3-6d3d-485a-9cec-78586ee8953b",
+										"name": "PRODUCTID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 7
+									},
+									{
+										"id": "ed7cadef-847b-4c98-af6c-0d5c04ba4f38",
+										"name": "PRODUCTNAME",
+										"datatype": "string",
+										"nullable": false,
+										"length": 50
+									},
+									{
+										"id": "48719d6f-c025-4bbd-9359-6695ec72e016",
+										"name": "PRODUCTCATEGORY",
+										"datatype": "string",
+										"nullable": false,
+										"length": 27
+									},
+									{
+										"id": "b485a60d-e164-43df-a07d-049b112e18c1",
+										"name": "ITEMGROSSAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"id": "70bfb049-a52c-4f5c-986d-9fef2fa75630",
+										"name": "ITEMNETAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"id": "2150b0c7-797a-4b69-9572-7e3a60a92041",
+										"name": "ITEMTAXAMOUNT",
+										"datatype": "decimal",
+										"nullable": false,
+										"precision": 6,
+										"scale": 2
+									},
+									{
+										"id": "78b414b1-1e52-4f67-91c7-f0cc43cdb02b",
+										"name": "PRODUCTGUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "7a8059e0-8e0d-4f24-8084-c7ad3db5cd62",
+										"name": "TEXTGUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "45420cdb-6a17-4af8-82a6-94cade669161",
+										"name": "/1DH/CDS_VIEW",
+										"datatype": "string",
+										"nullable": false,
+										"length": 18
+									},
+									{
+										"id": "221d5384-a142-403e-beb0-176717b00fbb",
+										"name": "/1DH/OPERATION",
+										"datatype": "string",
+										"nullable": false,
+										"length": 5000
+									},
+									{
+										"id": "7d892103-ad2a-4fb9-a41a-f13f439aa9f4",
+										"name": "NODEKEY",
+										"datatype": "string",
+										"nullable": false,
+										"length": 64
+									},
+									{
+										"id": "20257d70-ee21-452f-94b2-ba0f81060a57",
+										"name": "BP_ROLE",
+										"datatype": "string",
+										"nullable": false,
+										"length": 8
+									},
+									{
+										"id": "32b60672-8bb5-4cfd-bddf-ab7e7cf57173",
+										"name": "EMAILADDRESS",
+										"datatype": "string",
+										"nullable": false,
+										"length": 256
+									},
+									{
+										"id": "016bd72f-498d-408f-a146-0f331d2c8541",
+										"name": "PHONE_NUMBER",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "4909d946-de4d-4de0-9444-04fb1bcc0b79",
+										"name": "FAX_NUMBER",
+										"datatype": "string",
+										"nullable": false,
+										"length": 64
+									},
+									{
+										"id": "f08146ed-e9e8-490f-843c-8b14a65a20e2",
+										"name": "WEB_ADDRESS",
+										"datatype": "string",
+										"nullable": false,
+										"length": 512
+									},
+									{
+										"id": "8a9c72de-489e-42f1-9e5f-1bca9ad0d160",
+										"name": "ADDRESS_GUID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 64
+									},
+									{
+										"id": "cc0a7f14-5aef-4ea8-8fd6-0bb44c975ef7",
+										"name": "BP_ID",
+										"datatype": "string",
+										"nullable": false,
+										"length": 16
+									},
+									{
+										"id": "144f1a28-06df-4dee-a254-633a050c23e3",
+										"name": "COMPANY_NAME",
+										"datatype": "string",
+										"nullable": false,
+										"length": 100
+									},
+									{
+										"id": "31479a51-8550-40f3-8f64-bb4fd8434680",
+										"name": "LEGAL_FORM",
+										"datatype": "string",
+										"nullable": false,
+										"length": 16
+									},
+									{
+										"id": "90abd7ff-bbc4-4ef4-bf7a-a38ea352e267",
+										"name": "CREATED_BY",
+										"datatype": "string",
+										"nullable": false,
+										"length": 64
+									},
+									{
+										"id": "a0fcf8e8-71f9-4a91-99bd-fab1eeab09bc",
+										"name": "CREATED_AT",
+										"datatype": "string",
+										"nullable": false,
+										"length": 32
+									},
+									{
+										"id": "a5c67c7c-9f95-475b-bc62-22fbff167172",
+										"name": "CHANGED_BY",
+										"datatype": "string",
+										"nullable": false,
+										"length": 36
+									},
+									{
+										"id": "4115db90-51a2-4375-a33f-d2844ee6645f",
+										"name": "CHANGED_AT",
+										"datatype": "string",
+										"nullable": false,
+										"length": 32
+									},
+									{
+										"id": "97f0fd01-f13e-4aa4-9173-cb047edb103f",
+										"name": "CURRENCY_CODE",
+										"datatype": "string",
+										"nullable": false,
+										"length": 5
+									},
+									{
+										"id": "c9055c50-d140-4f1f-93b8-3da1b3cbe655",
+										"name": "DUMMY_FIELD_BPA",
+										"datatype": "string",
+										"nullable": false,
+										"length": 1
+									},
+									{
+										"id": "63d717d6-1306-4967-bdc9-921a6e2cca65",
+										"name": "APPROVAL_STATUS",
+										"datatype": "string",
+										"nullable": false,
+										"length": 1
+									}
+								],
+								"mode": "OVERWRITE",
+								"UILayout": {
+									"x": 365,
+									"y": 85,
+									"height": 80,
+									"width": 80
+								}
+							}
+						],
+						"nodes": [
+							{
+								"id": "0d2fe36b-0b4f-46ae-9bdb-7516d3cf6b86",
+								"type": "JoinNode",
+								"nodeType": "JoinNode",
+								"name": "Join",
+								"inputs": [
+									{
+										"id": "9b3df19d-0ce4-4353-9812-b144d6ed5e94",
+										"name": "Join_Input1",
+										"attributes": [
+											{
+												"id": "9c425963-2cc2-4bcd-8f0d-5c5290999f53",
+												"name": "ITEMGUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "65fa2691-c590-4019-a77a-cbbad20b9309",
+												"name": "SALESORDERGUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "5c1a999b-968f-49ce-bb9a-5a41b2150558",
+												"name": "SALESORDERID",
+												"datatype": "int32",
+												"nullable": false
+											},
+											{
+												"id": "289eadd2-1259-46e6-af71-42e1252a3f40",
+												"name": "CREATEDAT",
+												"datatype": "string",
+												"nullable": false,
+												"length": 27
+											},
+											{
+												"id": "bb8f33c9-fd97-4c08-addb-324cae26d376",
+												"name": "CHANGEDAT",
+												"datatype": "string",
+												"nullable": false,
+												"length": 27
+											},
+											{
+												"id": "bf3eb746-0cf2-47a6-9bae-d8d940c4b2ad",
+												"name": "BUYERGUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "47484844-c67c-4e43-b5a3-a91d61d035ad",
+												"name": "CURRENCYCODE",
+												"datatype": "string",
+												"nullable": false,
+												"length": 3
+											},
+											{
+												"id": "d2a0d88d-00fe-4b02-a520-052655ef4d98",
+												"name": "GROSSAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 8,
+												"scale": 2
+											},
+											{
+												"id": "73d0318a-527e-4fdb-9a75-c9e06d617faa",
+												"name": "NETAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 7,
+												"scale": 2
+											},
+											{
+												"id": "8add4a32-884f-4887-b137-733261c0d6a5",
+												"name": "TAXAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 7,
+												"scale": 2
+											},
+											{
+												"id": "c7bcb0ee-7565-4892-8549-35f8a1338ec8",
+												"name": "ITEMPOSITION",
+												"datatype": "int32",
+												"nullable": false
+											},
+											{
+												"id": "6f401dc6-a69b-4a7e-9f3d-5f547e49bd8a",
+												"name": "PRODUCTID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 7
+											},
+											{
+												"id": "109449d0-3fa0-4371-8bd2-d9194cd1dd33",
+												"name": "PRODUCTNAME",
+												"datatype": "string",
+												"nullable": false,
+												"length": 50
+											},
+											{
+												"id": "9a41d507-0fea-4fea-84f5-1b9a67259900",
+												"name": "PRODUCTCATEGORY",
+												"datatype": "string",
+												"nullable": false,
+												"length": 27
+											},
+											{
+												"id": "8cdb12ae-9cc9-49c4-bcb6-913073f8e3d0",
+												"name": "ITEMGROSSAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 7,
+												"scale": 2
+											},
+											{
+												"id": "5de90439-b0e4-41ff-8542-90042fcc187b",
+												"name": "ITEMNETAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 7,
+												"scale": 2
+											},
+											{
+												"id": "8182f716-cef8-4f94-97f0-79a69ed86194",
+												"name": "ITEMTAXAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 6,
+												"scale": 2
+											},
+											{
+												"id": "b9133d20-cc19-4902-924a-6fa3bc5afa7b",
+												"name": "PRODUCTGUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "89792005-ea3a-4b1d-b36e-b2652095295a",
+												"name": "TEXTGUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "ec2f5cd0-1858-4762-8aec-6dae6a0c8cb3",
+												"name": "/1DH/CDS_VIEW",
+												"datatype": "string",
+												"nullable": false,
+												"length": 18
+											},
+											{
+												"id": "8353627b-d5c3-4f08-85e5-a71991ca775c",
+												"name": "/1DH/OPERATION",
+												"datatype": "string",
+												"nullable": false,
+												"length": 5000
+											}
+										],
+										"UILayout": {
+											"x": 12,
+											"y": 12
+										}
+									},
+									{
+										"id": "d94a97fb-7bfd-4654-ac53-d6be0a834449",
+										"name": "Join_Input2",
+										"attributes": [
+											{
+												"id": "3cd99046-b02f-4f19-8692-7b0e914ac012",
+												"name": "NODEKEY",
+												"datatype": "string",
+												"nullable": false,
+												"length": 64
+											},
+											{
+												"id": "02ad268c-a0c2-4d19-a6b6-a3ff308b8e40",
+												"name": "BP_ROLE",
+												"datatype": "string",
+												"nullable": false,
+												"length": 8
+											},
+											{
+												"id": "8c120a27-24c2-4de5-96d2-1f5cb3f42b8e",
+												"name": "EMAILADDRESS",
+												"datatype": "string",
+												"nullable": false,
+												"length": 256
+											},
+											{
+												"id": "194a4711-358a-4a92-b73d-be0e419ae5ad",
+												"name": "PHONE_NUMBER",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "005ca128-28d1-48ac-963f-2722a2e9186d",
+												"name": "FAX_NUMBER",
+												"datatype": "string",
+												"nullable": false,
+												"length": 64
+											},
+											{
+												"id": "a682f252-b6a1-4203-a012-aa5b0bb91d98",
+												"name": "WEB_ADDRESS",
+												"datatype": "string",
+												"nullable": false,
+												"length": 512
+											},
+											{
+												"id": "5c67f024-6ec5-4681-8ef5-d3b44593b1ff",
+												"name": "ADDRESS_GUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 64
+											},
+											{
+												"id": "9ea01714-a4f4-43ca-baed-517e31b9317b",
+												"name": "BP_ID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 16
+											},
+											{
+												"id": "568342f9-b6a7-4f62-9d02-5dbd4f0b2e2b",
+												"name": "COMPANY_NAME",
+												"datatype": "string",
+												"nullable": false,
+												"length": 100
+											},
+											{
+												"id": "24443b90-cddf-41c6-8b23-b21e2373e344",
+												"name": "LEGAL_FORM",
+												"datatype": "string",
+												"nullable": false,
+												"length": 16
+											},
+											{
+												"id": "196c6674-3e64-4ce1-9611-0f6c9da65e9c",
+												"name": "CREATED_BY",
+												"datatype": "string",
+												"nullable": false,
+												"length": 64
+											},
+											{
+												"id": "7a931535-afff-4616-8fa2-1605c476d4cb",
+												"name": "CREATED_AT",
+												"datatype": "string",
+												"nullable": false,
+												"length": 32
+											},
+											{
+												"id": "5a60de28-8558-47aa-9ebc-931eecfee2e3",
+												"name": "CHANGED_BY",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "62767f8d-5806-484f-a00c-9956c5a951ff",
+												"name": "CHANGED_AT",
+												"datatype": "string",
+												"nullable": false,
+												"length": 32
+											},
+											{
+												"id": "e321a469-03b1-4a46-8211-2fa0628c0258",
+												"name": "CURRENCY_CODE",
+												"datatype": "string",
+												"nullable": false,
+												"length": 5
+											},
+											{
+												"id": "9221b282-4d2c-4683-86cd-c068ff61fe47",
+												"name": "DUMMY_FIELD_BPA",
+												"datatype": "string",
+												"nullable": false,
+												"length": 1
+											},
+											{
+												"id": "c9b298ea-af07-439a-83d6-52bf348bc8ef",
+												"name": "APPROVAL_STATUS",
+												"datatype": "string",
+												"nullable": false,
+												"length": 1
+											},
+											{
+												"id": "49973b14-dfe9-4e97-8b9e-d814cc41f6db",
+												"name": "DH_CDS_VIEW",
+												"datatype": "string",
+												"nullable": false,
+												"length": 40
+											},
+											{
+												"id": "3a315c77-ac07-48d8-8506-427dacad54fe",
+												"name": "DH_OPERATION",
+												"datatype": "string",
+												"nullable": false,
+												"length": 2
+											}
+										],
+										"UILayout": {
+											"x": 374.34130859375,
+											"y": 61
+										}
+									}
+								],
+								"outputs": [
+									{
+										"id": "a5dea3f3-bb9b-4574-9286-c6c482807bdf",
+										"name": "Join_Output1",
+										"attributes": [
+											{
+												"id": "c6a72cb2-95d8-4b2d-9905-cb6dc30080b7",
+												"name": "BUYERGUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "7b8919a9-588c-47b5-a3de-d00477bfa488",
+												"name": "ITEMGUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "f8c00f15-3d4f-4edb-b647-53b138a828d5",
+												"name": "SALESORDERGUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "c34dd486-5806-447f-9dac-11604cbf3aed",
+												"name": "SALESORDERID",
+												"datatype": "int32",
+												"nullable": false
+											},
+											{
+												"id": "3897c0b5-0501-4c43-9ddf-8927e27377d8",
+												"name": "CREATEDAT",
+												"datatype": "string",
+												"nullable": false,
+												"length": 27
+											},
+											{
+												"id": "2943db6f-aabd-45ae-93b9-7f9d17de3b8e",
+												"name": "CHANGEDAT",
+												"datatype": "string",
+												"nullable": false,
+												"length": 27
+											},
+											{
+												"id": "c9173768-6916-491b-b173-a4532328d43a",
+												"name": "CURRENCYCODE",
+												"datatype": "string",
+												"nullable": false,
+												"length": 3
+											},
+											{
+												"id": "f0d6a7d3-ed56-4a15-b047-e1fb8e012ad9",
+												"name": "GROSSAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 8,
+												"scale": 2
+											},
+											{
+												"id": "fa7ef07d-8eb7-4f9f-bafd-427210de2599",
+												"name": "NETAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 7,
+												"scale": 2
+											},
+											{
+												"id": "04a8f19b-f11d-49bd-828c-ed667f8f8873",
+												"name": "TAXAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 7,
+												"scale": 2
+											},
+											{
+												"id": "a261ca24-bf30-4393-b978-7615d14bff3b",
+												"name": "ITEMPOSITION",
+												"datatype": "int32",
+												"nullable": false
+											},
+											{
+												"id": "61adae9a-68b6-42ed-a5c5-0409f8548fa0",
+												"name": "PRODUCTID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 7
+											},
+											{
+												"id": "5353490d-c925-4d56-8bcf-73e4be2d12fc",
+												"name": "PRODUCTNAME",
+												"datatype": "string",
+												"nullable": false,
+												"length": 50
+											},
+											{
+												"id": "6163b5e5-da4e-44a5-af70-7f0762a54812",
+												"name": "PRODUCTCATEGORY",
+												"datatype": "string",
+												"nullable": false,
+												"length": 27
+											},
+											{
+												"id": "c6dddc6d-829b-4159-93ef-69355ab7ee08",
+												"name": "ITEMGROSSAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 7,
+												"scale": 2
+											},
+											{
+												"id": "b31cd47c-e293-48d2-9e16-3ead7b6309d8",
+												"name": "ITEMNETAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 7,
+												"scale": 2
+											},
+											{
+												"id": "971697b1-b6b8-46c0-8424-4b20ee1c2b56",
+												"name": "ITEMTAXAMOUNT",
+												"datatype": "decimal",
+												"nullable": false,
+												"precision": 6,
+												"scale": 2
+											},
+											{
+												"id": "1ffd8cf9-3ffa-49f3-adb7-774a067e4c23",
+												"name": "PRODUCTGUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "ac7f4d29-bafc-4418-92d7-91fa9076cdc4",
+												"name": "TEXTGUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "f15c8689-9a13-4282-80b1-4e0b53b3fb9d",
+												"name": "/1DH/CDS_VIEW",
+												"datatype": "string",
+												"nullable": false,
+												"length": 18
+											},
+											{
+												"id": "a17f7ed7-70d2-4b23-9eb5-17f529bb63cc",
+												"name": "/1DH/OPERATION",
+												"datatype": "string",
+												"nullable": false,
+												"length": 5000
+											},
+											{
+												"id": "a84687b2-b806-4086-bdde-07c6e67f77ae",
+												"name": "NODEKEY",
+												"datatype": "string",
+												"nullable": false,
+												"length": 64
+											},
+											{
+												"id": "be9cf003-ef86-4c3b-8b06-e03e8412ff43",
+												"name": "BP_ROLE",
+												"datatype": "string",
+												"nullable": false,
+												"length": 8
+											},
+											{
+												"id": "b1b577c3-7fb2-44ed-9169-216fbb79d197",
+												"name": "EMAILADDRESS",
+												"datatype": "string",
+												"nullable": false,
+												"length": 256
+											},
+											{
+												"id": "a268ce05-31c0-4e1b-ad8d-dc45628afa93",
+												"name": "PHONE_NUMBER",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "60ed031d-d24d-4fa2-9181-cc2c77091790",
+												"name": "FAX_NUMBER",
+												"datatype": "string",
+												"nullable": false,
+												"length": 64
+											},
+											{
+												"id": "0dc89387-7d25-4b03-b090-cf1bfd11ee56",
+												"name": "WEB_ADDRESS",
+												"datatype": "string",
+												"nullable": false,
+												"length": 512
+											},
+											{
+												"id": "6cb187f0-cdf5-4ce2-982b-4c21069173f0",
+												"name": "ADDRESS_GUID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 64
+											},
+											{
+												"id": "1bfb076f-03d1-46e1-8649-2b7253513a85",
+												"name": "BP_ID",
+												"datatype": "string",
+												"nullable": false,
+												"length": 16
+											},
+											{
+												"id": "b2b40aad-41d1-4b0a-b484-4a93dd6c9a08",
+												"name": "COMPANY_NAME",
+												"datatype": "string",
+												"nullable": false,
+												"length": 100
+											},
+											{
+												"id": "58d336c2-9ced-4f4d-870c-4f1b9fb7180e",
+												"name": "LEGAL_FORM",
+												"datatype": "string",
+												"nullable": false,
+												"length": 16
+											},
+											{
+												"id": "0b8bccdf-fc68-4729-81fe-590f03e74528",
+												"name": "CREATED_BY",
+												"datatype": "string",
+												"nullable": false,
+												"length": 64
+											},
+											{
+												"id": "f9543d48-14d6-49ae-abcc-0dd6059297cb",
+												"name": "CREATED_AT",
+												"datatype": "string",
+												"nullable": false,
+												"length": 32
+											},
+											{
+												"id": "743653bd-3b94-48c1-8ed8-a59e726c9977",
+												"name": "CHANGED_BY",
+												"datatype": "string",
+												"nullable": false,
+												"length": 36
+											},
+											{
+												"id": "c31992a1-ee2a-4f9b-9802-954a63193277",
+												"name": "CHANGED_AT",
+												"datatype": "string",
+												"nullable": false,
+												"length": 32
+											},
+											{
+												"id": "131268c7-4c3c-49fa-935a-3ee42a25b2b7",
+												"name": "CURRENCY_CODE",
+												"datatype": "string",
+												"nullable": false,
+												"length": 5
+											},
+											{
+												"id": "84e2fe80-5caf-493f-9d5f-d35c3740ba3a",
+												"name": "DUMMY_FIELD_BPA",
+												"datatype": "string",
+												"nullable": false,
+												"length": 1
+											},
+											{
+												"id": "ec466726-55d5-40dc-ac7c-80c75e8c5efc",
+												"name": "APPROVAL_STATUS",
+												"datatype": "string",
+												"nullable": false,
+												"length": 1
+											}
+										]
+									}
+								],
+								"UILayout": {
+									"x": 178,
+									"y": 85,
+									"height": 80,
+									"width": 120
+								},
+								"joinDefinitions": [
+									{
+										"left": "9b3df19d-0ce4-4353-9812-b144d6ed5e94",
+										"right": "d94a97fb-7bfd-4654-ac53-d6be0a834449",
+										"type": "INNER",
+										"joinOptions": {
+											"leftCache": "automatic",
+											"rightCache": "automatic",
+											"leftRank": 0,
+											"rightRank": 0
+										},
+										"condition": "\"Join_Input1\".\"BUYERGUID\" = \"Join_Input2\".\"NODEKEY\""
+									}
+								],
+								"tableMappings": [
+									{
+										"source": "9b3df19d-0ce4-4353-9812-b144d6ed5e94",
+										"target": "a5dea3f3-bb9b-4574-9286-c6c482807bdf",
+										"attributeMappings": [
+											{
+												"source": "bf3eb746-0cf2-47a6-9bae-d8d940c4b2ad",
+												"target": "c6a72cb2-95d8-4b2d-9905-cb6dc30080b7"
+											},
+											{
+												"source": "9c425963-2cc2-4bcd-8f0d-5c5290999f53",
+												"target": "7b8919a9-588c-47b5-a3de-d00477bfa488"
+											},
+											{
+												"source": "65fa2691-c590-4019-a77a-cbbad20b9309",
+												"target": "f8c00f15-3d4f-4edb-b647-53b138a828d5"
+											},
+											{
+												"source": "5c1a999b-968f-49ce-bb9a-5a41b2150558",
+												"target": "c34dd486-5806-447f-9dac-11604cbf3aed"
+											},
+											{
+												"source": "289eadd2-1259-46e6-af71-42e1252a3f40",
+												"target": "3897c0b5-0501-4c43-9ddf-8927e27377d8"
+											},
+											{
+												"source": "bb8f33c9-fd97-4c08-addb-324cae26d376",
+												"target": "2943db6f-aabd-45ae-93b9-7f9d17de3b8e"
+											},
+											{
+												"source": "47484844-c67c-4e43-b5a3-a91d61d035ad",
+												"target": "c9173768-6916-491b-b173-a4532328d43a"
+											},
+											{
+												"source": "d2a0d88d-00fe-4b02-a520-052655ef4d98",
+												"target": "f0d6a7d3-ed56-4a15-b047-e1fb8e012ad9"
+											},
+											{
+												"source": "73d0318a-527e-4fdb-9a75-c9e06d617faa",
+												"target": "fa7ef07d-8eb7-4f9f-bafd-427210de2599"
+											},
+											{
+												"source": "8add4a32-884f-4887-b137-733261c0d6a5",
+												"target": "04a8f19b-f11d-49bd-828c-ed667f8f8873"
+											},
+											{
+												"source": "c7bcb0ee-7565-4892-8549-35f8a1338ec8",
+												"target": "a261ca24-bf30-4393-b978-7615d14bff3b"
+											},
+											{
+												"source": "6f401dc6-a69b-4a7e-9f3d-5f547e49bd8a",
+												"target": "61adae9a-68b6-42ed-a5c5-0409f8548fa0"
+											},
+											{
+												"source": "109449d0-3fa0-4371-8bd2-d9194cd1dd33",
+												"target": "5353490d-c925-4d56-8bcf-73e4be2d12fc"
+											},
+											{
+												"source": "9a41d507-0fea-4fea-84f5-1b9a67259900",
+												"target": "6163b5e5-da4e-44a5-af70-7f0762a54812"
+											},
+											{
+												"source": "8cdb12ae-9cc9-49c4-bcb6-913073f8e3d0",
+												"target": "c6dddc6d-829b-4159-93ef-69355ab7ee08"
+											},
+											{
+												"source": "5de90439-b0e4-41ff-8542-90042fcc187b",
+												"target": "b31cd47c-e293-48d2-9e16-3ead7b6309d8"
+											},
+											{
+												"source": "8182f716-cef8-4f94-97f0-79a69ed86194",
+												"target": "971697b1-b6b8-46c0-8424-4b20ee1c2b56"
+											},
+											{
+												"source": "b9133d20-cc19-4902-924a-6fa3bc5afa7b",
+												"target": "1ffd8cf9-3ffa-49f3-adb7-774a067e4c23"
+											},
+											{
+												"source": "89792005-ea3a-4b1d-b36e-b2652095295a",
+												"target": "ac7f4d29-bafc-4418-92d7-91fa9076cdc4"
+											},
+											{
+												"source": "ec2f5cd0-1858-4762-8aec-6dae6a0c8cb3",
+												"target": "f15c8689-9a13-4282-80b1-4e0b53b3fb9d"
+											},
+											{
+												"source": "8353627b-d5c3-4f08-85e5-a71991ca775c",
+												"target": "a17f7ed7-70d2-4b23-9eb5-17f529bb63cc"
+											}
+										]
+									},
+									{
+										"source": "d94a97fb-7bfd-4654-ac53-d6be0a834449",
+										"target": "a5dea3f3-bb9b-4574-9286-c6c482807bdf",
+										"attributeMappings": [
+											{
+												"source": "3cd99046-b02f-4f19-8692-7b0e914ac012",
+												"target": "a84687b2-b806-4086-bdde-07c6e67f77ae"
+											},
+											{
+												"source": "02ad268c-a0c2-4d19-a6b6-a3ff308b8e40",
+												"target": "be9cf003-ef86-4c3b-8b06-e03e8412ff43"
+											},
+											{
+												"source": "8c120a27-24c2-4de5-96d2-1f5cb3f42b8e",
+												"target": "b1b577c3-7fb2-44ed-9169-216fbb79d197"
+											},
+											{
+												"source": "194a4711-358a-4a92-b73d-be0e419ae5ad",
+												"target": "a268ce05-31c0-4e1b-ad8d-dc45628afa93"
+											},
+											{
+												"source": "005ca128-28d1-48ac-963f-2722a2e9186d",
+												"target": "60ed031d-d24d-4fa2-9181-cc2c77091790"
+											},
+											{
+												"source": "a682f252-b6a1-4203-a012-aa5b0bb91d98",
+												"target": "0dc89387-7d25-4b03-b090-cf1bfd11ee56"
+											},
+											{
+												"source": "5c67f024-6ec5-4681-8ef5-d3b44593b1ff",
+												"target": "6cb187f0-cdf5-4ce2-982b-4c21069173f0"
+											},
+											{
+												"source": "9ea01714-a4f4-43ca-baed-517e31b9317b",
+												"target": "1bfb076f-03d1-46e1-8649-2b7253513a85"
+											},
+											{
+												"source": "568342f9-b6a7-4f62-9d02-5dbd4f0b2e2b",
+												"target": "b2b40aad-41d1-4b0a-b484-4a93dd6c9a08"
+											},
+											{
+												"source": "24443b90-cddf-41c6-8b23-b21e2373e344",
+												"target": "58d336c2-9ced-4f4d-870c-4f1b9fb7180e"
+											},
+											{
+												"source": "196c6674-3e64-4ce1-9611-0f6c9da65e9c",
+												"target": "0b8bccdf-fc68-4729-81fe-590f03e74528"
+											},
+											{
+												"source": "7a931535-afff-4616-8fa2-1605c476d4cb",
+												"target": "f9543d48-14d6-49ae-abcc-0dd6059297cb"
+											},
+											{
+												"source": "5a60de28-8558-47aa-9ebc-931eecfee2e3",
+												"target": "743653bd-3b94-48c1-8ed8-a59e726c9977"
+											},
+											{
+												"source": "62767f8d-5806-484f-a00c-9956c5a951ff",
+												"target": "c31992a1-ee2a-4f9b-9802-954a63193277"
+											},
+											{
+												"source": "e321a469-03b1-4a46-8211-2fa0628c0258",
+												"target": "131268c7-4c3c-49fa-935a-3ee42a25b2b7"
+											},
+											{
+												"source": "9221b282-4d2c-4683-86cd-c068ff61fe47",
+												"target": "84e2fe80-5caf-493f-9d5f-d35c3740ba3a"
+											},
+											{
+												"source": "c9b298ea-af07-439a-83d6-52bf348bc8ef",
+												"target": "ec466726-55d5-40dc-ac7c-80c75e8c5efc"
+											}
+										]
+									}
+								]
+							}
+						],
+						"tableMappings": [
+							{
+								"source": "098c7440-9d3c-4990-bc8d-a6ca9ada862a",
+								"target": "9b3df19d-0ce4-4353-9812-b144d6ed5e94",
+								"attributeMappings": [
+									{
+										"source": "5c74c14e-9c06-40f5-966b-d11e2ac2d7a3",
+										"target": "9c425963-2cc2-4bcd-8f0d-5c5290999f53"
+									},
+									{
+										"source": "3f5db7d4-53cd-4878-bf4d-ef6983037119",
+										"target": "65fa2691-c590-4019-a77a-cbbad20b9309"
+									},
+									{
+										"source": "009d969d-e432-431e-ab73-710a8391a363",
+										"target": "5c1a999b-968f-49ce-bb9a-5a41b2150558"
+									},
+									{
+										"source": "17e9c160-2b65-4456-9e68-b43e2f95b12a",
+										"target": "289eadd2-1259-46e6-af71-42e1252a3f40"
+									},
+									{
+										"source": "4da889d3-005b-4ba7-8e18-2ef8b48410c0",
+										"target": "bb8f33c9-fd97-4c08-addb-324cae26d376"
+									},
+									{
+										"source": "6ac966f3-8651-43b2-8069-2ae286276e92",
+										"target": "bf3eb746-0cf2-47a6-9bae-d8d940c4b2ad"
+									},
+									{
+										"source": "6f7a0117-fa9b-43fd-9cce-d94f11569273",
+										"target": "47484844-c67c-4e43-b5a3-a91d61d035ad"
+									},
+									{
+										"source": "63b3a12c-d7b8-4190-8c01-be4f43cf9bd5",
+										"target": "d2a0d88d-00fe-4b02-a520-052655ef4d98"
+									},
+									{
+										"source": "fdf63d0c-deaf-4254-ac60-b2529db8811a",
+										"target": "73d0318a-527e-4fdb-9a75-c9e06d617faa"
+									},
+									{
+										"source": "c13472e5-73a4-4f55-a939-204456bc4620",
+										"target": "8add4a32-884f-4887-b137-733261c0d6a5"
+									},
+									{
+										"source": "32264228-30e0-4c59-8b5b-ef38e6c88baa",
+										"target": "c7bcb0ee-7565-4892-8549-35f8a1338ec8"
+									},
+									{
+										"source": "e241368d-be06-4d10-aef9-caee1f386365",
+										"target": "6f401dc6-a69b-4a7e-9f3d-5f547e49bd8a"
+									},
+									{
+										"source": "cea4e0cd-49b7-4563-b725-5ba75ac304ce",
+										"target": "109449d0-3fa0-4371-8bd2-d9194cd1dd33"
+									},
+									{
+										"source": "9bd87a4b-990c-4409-803d-8d9c8f3bc5a8",
+										"target": "9a41d507-0fea-4fea-84f5-1b9a67259900"
+									},
+									{
+										"source": "330c6fdf-afb8-45f6-a28d-97e07038f107",
+										"target": "8cdb12ae-9cc9-49c4-bcb6-913073f8e3d0"
+									},
+									{
+										"source": "fe58eb23-eb13-4273-82ec-0e892e5727d9",
+										"target": "5de90439-b0e4-41ff-8542-90042fcc187b"
+									},
+									{
+										"source": "4c56aafa-b298-4370-93b0-632098d19392",
+										"target": "8182f716-cef8-4f94-97f0-79a69ed86194"
+									},
+									{
+										"source": "abe1f7f8-afb5-4766-b813-b85164e841c5",
+										"target": "b9133d20-cc19-4902-924a-6fa3bc5afa7b"
+									},
+									{
+										"source": "3708d7c1-4b7c-4efd-8594-79737875495e",
+										"target": "89792005-ea3a-4b1d-b36e-b2652095295a"
+									},
+									{
+										"source": "df6f7754-e865-4aad-b0e0-586428712795",
+										"target": "ec2f5cd0-1858-4762-8aec-6dae6a0c8cb3"
+									},
+									{
+										"source": "fb90ff75-e39e-4223-a758-3673a3cd141f",
+										"target": "8353627b-d5c3-4f08-85e5-a71991ca775c"
+									}
+								],
+								"UILayout": {
+									"points": "97,52 135,52 135,116 173,116"
+								}
+							},
+							{
+								"source": "83654e73-eba5-4226-b395-a77bd750d9f6",
+								"target": "d94a97fb-7bfd-4654-ac53-d6be0a834449",
+								"attributeMappings": [
+									{
+										"source": "16d5c759-d901-496b-906c-dd80f87eeb1f",
+										"target": "3cd99046-b02f-4f19-8692-7b0e914ac012"
+									},
+									{
+										"source": "2afdb046-571d-40d9-9575-b4953fd8ac22",
+										"target": "02ad268c-a0c2-4d19-a6b6-a3ff308b8e40"
+									},
+									{
+										"source": "e7a07387-3e82-49d4-87b0-823252ad3072",
+										"target": "8c120a27-24c2-4de5-96d2-1f5cb3f42b8e"
+									},
+									{
+										"source": "944754b4-ba26-4d28-855f-0928cb988829",
+										"target": "194a4711-358a-4a92-b73d-be0e419ae5ad"
+									},
+									{
+										"source": "2dd8f9eb-8537-463c-a9b8-4de9e9a476c8",
+										"target": "005ca128-28d1-48ac-963f-2722a2e9186d"
+									},
+									{
+										"source": "3d6cb84c-36fc-4d13-a4b6-4e28856b4230",
+										"target": "a682f252-b6a1-4203-a012-aa5b0bb91d98"
+									},
+									{
+										"source": "3e11d493-3b01-4e9e-b2d2-13b57aacdeb5",
+										"target": "5c67f024-6ec5-4681-8ef5-d3b44593b1ff"
+									},
+									{
+										"source": "622f04d8-ae42-40c9-a060-998075f8e36b",
+										"target": "9ea01714-a4f4-43ca-baed-517e31b9317b"
+									},
+									{
+										"source": "e3ae013d-05cd-4806-81cc-15e03b3e2d6e",
+										"target": "568342f9-b6a7-4f62-9d02-5dbd4f0b2e2b"
+									},
+									{
+										"source": "774ec953-a9d1-4848-8cce-53fe914b44b5",
+										"target": "24443b90-cddf-41c6-8b23-b21e2373e344"
+									},
+									{
+										"source": "606981f4-8df5-4bbb-ae82-1954dc0df9f6",
+										"target": "196c6674-3e64-4ce1-9611-0f6c9da65e9c"
+									},
+									{
+										"source": "3e76bab2-bfca-4f8b-8f43-4a02f11a48e3",
+										"target": "7a931535-afff-4616-8fa2-1605c476d4cb"
+									},
+									{
+										"source": "f3f57152-ebb7-411e-9bd2-e3a9395e1028",
+										"target": "5a60de28-8558-47aa-9ebc-931eecfee2e3"
+									},
+									{
+										"source": "197bd1d6-7623-4698-9469-f9a7836df941",
+										"target": "62767f8d-5806-484f-a00c-9956c5a951ff"
+									},
+									{
+										"source": "15ff5481-fd09-45ee-99da-cf1011b7e0bd",
+										"target": "e321a469-03b1-4a46-8211-2fa0628c0258"
+									},
+									{
+										"source": "d9a18e15-4d22-4478-92b1-37c8d962d60c",
+										"target": "9221b282-4d2c-4683-86cd-c068ff61fe47"
+									},
+									{
+										"source": "b6c479bf-2a20-44b3-98a6-c9bc4b296bb4",
+										"target": "c9b298ea-af07-439a-83d6-52bf348bc8ef"
+									},
+									{
+										"source": "3db9295b-c04c-460e-b6b7-8fd416b9b3bd",
+										"target": "49973b14-dfe9-4e97-8b9e-d814cc41f6db"
+									},
+									{
+										"source": "7b01e119-a2b4-404e-b6a7-832c40cfd32d",
+										"target": "3a315c77-ac07-48d8-8506-427dacad54fe"
+									}
+								],
+								"UILayout": {
+									"points": "97,172 97,131 173,131"
+								}
+							},
+							{
+								"source": "a5dea3f3-bb9b-4574-9286-c6c482807bdf",
+								"target": "00627f6f-fc5e-46c9-adda-67df02152eaa",
+								"attributeMappings": [
+									{
+										"source": "c6a72cb2-95d8-4b2d-9905-cb6dc30080b7",
+										"target": "ccc82b8b-ba65-4fdc-9c9b-a10adb0502d1"
+									},
+									{
+										"source": "7b8919a9-588c-47b5-a3de-d00477bfa488",
+										"target": "b137d643-7432-43fd-a5c6-25b657885539"
+									},
+									{
+										"source": "f8c00f15-3d4f-4edb-b647-53b138a828d5",
+										"target": "e2e82b6b-0583-48a4-a97f-83399ed06231"
+									},
+									{
+										"source": "c34dd486-5806-447f-9dac-11604cbf3aed",
+										"target": "779baa96-75bc-4a1e-bb44-c49c5dcfa8ff"
+									},
+									{
+										"source": "3897c0b5-0501-4c43-9ddf-8927e27377d8",
+										"target": "df5b9b87-d508-4d1b-bf91-41e214ca23cb"
+									},
+									{
+										"source": "2943db6f-aabd-45ae-93b9-7f9d17de3b8e",
+										"target": "6838c1cd-98c5-45f8-8d1f-8c6f886fb3db"
+									},
+									{
+										"source": "c9173768-6916-491b-b173-a4532328d43a",
+										"target": "5d1b76a1-8b50-4441-be68-478072628590"
+									},
+									{
+										"source": "f0d6a7d3-ed56-4a15-b047-e1fb8e012ad9",
+										"target": "550b4ce9-59f0-4df5-8706-2d506f079973"
+									},
+									{
+										"source": "fa7ef07d-8eb7-4f9f-bafd-427210de2599",
+										"target": "bad85b98-669a-4baa-bf2e-2f1b96c00b61"
+									},
+									{
+										"source": "04a8f19b-f11d-49bd-828c-ed667f8f8873",
+										"target": "73fbffa5-36b1-41b3-87bd-a213d711cc81"
+									},
+									{
+										"source": "a261ca24-bf30-4393-b978-7615d14bff3b",
+										"target": "3d7b43dd-35c8-4744-8827-b7c3154bd8e0"
+									},
+									{
+										"source": "61adae9a-68b6-42ed-a5c5-0409f8548fa0",
+										"target": "96e9d5e3-6d3d-485a-9cec-78586ee8953b"
+									},
+									{
+										"source": "5353490d-c925-4d56-8bcf-73e4be2d12fc",
+										"target": "ed7cadef-847b-4c98-af6c-0d5c04ba4f38"
+									},
+									{
+										"source": "6163b5e5-da4e-44a5-af70-7f0762a54812",
+										"target": "48719d6f-c025-4bbd-9359-6695ec72e016"
+									},
+									{
+										"source": "c6dddc6d-829b-4159-93ef-69355ab7ee08",
+										"target": "b485a60d-e164-43df-a07d-049b112e18c1"
+									},
+									{
+										"source": "b31cd47c-e293-48d2-9e16-3ead7b6309d8",
+										"target": "70bfb049-a52c-4f5c-986d-9fef2fa75630"
+									},
+									{
+										"source": "971697b1-b6b8-46c0-8424-4b20ee1c2b56",
+										"target": "2150b0c7-797a-4b69-9572-7e3a60a92041"
+									},
+									{
+										"source": "1ffd8cf9-3ffa-49f3-adb7-774a067e4c23",
+										"target": "78b414b1-1e52-4f67-91c7-f0cc43cdb02b"
+									},
+									{
+										"source": "ac7f4d29-bafc-4418-92d7-91fa9076cdc4",
+										"target": "7a8059e0-8e0d-4f24-8084-c7ad3db5cd62"
+									},
+									{
+										"source": "f15c8689-9a13-4282-80b1-4e0b53b3fb9d",
+										"target": "45420cdb-6a17-4af8-82a6-94cade669161"
+									},
+									{
+										"source": "a17f7ed7-70d2-4b23-9eb5-17f529bb63cc",
+										"target": "221d5384-a142-403e-beb0-176717b00fbb"
+									},
+									{
+										"source": "a84687b2-b806-4086-bdde-07c6e67f77ae",
+										"target": "7d892103-ad2a-4fb9-a41a-f13f439aa9f4"
+									},
+									{
+										"source": "be9cf003-ef86-4c3b-8b06-e03e8412ff43",
+										"target": "20257d70-ee21-452f-94b2-ba0f81060a57"
+									},
+									{
+										"source": "b1b577c3-7fb2-44ed-9169-216fbb79d197",
+										"target": "32b60672-8bb5-4cfd-bddf-ab7e7cf57173"
+									},
+									{
+										"source": "a268ce05-31c0-4e1b-ad8d-dc45628afa93",
+										"target": "016bd72f-498d-408f-a146-0f331d2c8541"
+									},
+									{
+										"source": "60ed031d-d24d-4fa2-9181-cc2c77091790",
+										"target": "4909d946-de4d-4de0-9444-04fb1bcc0b79"
+									},
+									{
+										"source": "0dc89387-7d25-4b03-b090-cf1bfd11ee56",
+										"target": "f08146ed-e9e8-490f-843c-8b14a65a20e2"
+									},
+									{
+										"source": "6cb187f0-cdf5-4ce2-982b-4c21069173f0",
+										"target": "8a9c72de-489e-42f1-9e5f-1bca9ad0d160"
+									},
+									{
+										"source": "1bfb076f-03d1-46e1-8649-2b7253513a85",
+										"target": "cc0a7f14-5aef-4ea8-8fd6-0bb44c975ef7"
+									},
+									{
+										"source": "b2b40aad-41d1-4b0a-b484-4a93dd6c9a08",
+										"target": "144f1a28-06df-4dee-a254-633a050c23e3"
+									},
+									{
+										"source": "58d336c2-9ced-4f4d-870c-4f1b9fb7180e",
+										"target": "31479a51-8550-40f3-8f64-bb4fd8434680"
+									},
+									{
+										"source": "0b8bccdf-fc68-4729-81fe-590f03e74528",
+										"target": "90abd7ff-bbc4-4ef4-bf7a-a38ea352e267"
+									},
+									{
+										"source": "f9543d48-14d6-49ae-abcc-0dd6059297cb",
+										"target": "a0fcf8e8-71f9-4a91-99bd-fab1eeab09bc"
+									},
+									{
+										"source": "743653bd-3b94-48c1-8ed8-a59e726c9977",
+										"target": "a5c67c7c-9f95-475b-bc62-22fbff167172"
+									},
+									{
+										"source": "c31992a1-ee2a-4f9b-9802-954a63193277",
+										"target": "4115db90-51a2-4375-a33f-d2844ee6645f"
+									},
+									{
+										"source": "131268c7-4c3c-49fa-935a-3ee42a25b2b7",
+										"target": "97f0fd01-f13e-4aa4-9173-cb047edb103f"
+									},
+									{
+										"source": "84e2fe80-5caf-493f-9d5f-d35c3740ba3a",
+										"target": "c9055c50-d140-4f1f-93b8-3da1b3cbe655"
+									},
+									{
+										"source": "ec466726-55d5-40dc-ac7c-80c75e8c5efc",
+										"target": "63d717d6-1306-4967-bdc9-921a6e2cca65"
+									}
+								],
+								"UILayout": {
+									"points": "303,125 360,125"
+								}
+							}
+						],
+						"invalidMappings": []
+					}
+				},
+				"additionalinports": [
+					{
+						"name": "input1",
+						"type": "table",
+						"vtype-ID": "$GRAPH.generated.structuredfileconsumer1_outTable"
+					},
+					{
+						"name": "input2",
+						"type": "table",
+						"vtype-ID": "$GRAPH.generated.tableconsumer1_outTable"
+					}
+				],
+				"additionaloutports": [
+					{
+						"name": "output1",
+						"type": "table",
+						"vtype-ID": "$GRAPH.generated.datatransform1_output1"
+					}
+				]
+			}
+		},
+		"structuredfileproducer1": {
+			"component": "com.sap.storage.producer.v2",
+			"metadata": {
+				"label": "Structured File Producer",
+				"x": 1056,
+				"y": 186,
+				"height": 80,
+				"width": 120,
+				"extensible": false,
+				"generation": 1,
+				"config": {
+					"service": "S3",
+					"serviceConnection": {
+						"configurationType": "Configuration Manager",
+						"connectionID": "TechEd_S3"
+					},
+					"source": {
+						"remoteObjectReference": {
+							"connection": {
+								"id": "TechEd_S3",
+								"type": "S3"
+							},
+							"qualifiedName": "/DAT161/TA62/Enriched_Sales_Order",
+							"name": "Enriched_Sales_Order"
+						},
+						"schema": {
+							"genericType": "TABLE",
+							"tableBasedRepresentation": {
+								"attributes": [
+									{
+										"name": "BUYERGUID",
+										"templateType": "string",
+										"length": 36
+									},
+									{
+										"name": "ITEMGUID",
+										"templateType": "string",
+										"length": 36
+									},
+									{
+										"name": "SALESORDERGUID",
+										"templateType": "string",
+										"length": 36
+									},
+									{
+										"name": "SALESORDERID",
+										"templateType": "int32"
+									},
+									{
+										"name": "CREATEDAT",
+										"templateType": "string",
+										"length": 27
+									},
+									{
+										"name": "CHANGEDAT",
+										"templateType": "string",
+										"length": 27
+									},
+									{
+										"name": "CURRENCYCODE",
+										"templateType": "string",
+										"length": 3
+									},
+									{
+										"name": "GROSSAMOUNT",
+										"templateType": "decimal",
+										"precision": 8,
+										"scale": 2
+									},
+									{
+										"name": "NETAMOUNT",
+										"templateType": "decimal",
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"name": "TAXAMOUNT",
+										"templateType": "decimal",
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"name": "ITEMPOSITION",
+										"templateType": "int32"
+									},
+									{
+										"name": "PRODUCTID",
+										"templateType": "string",
+										"length": 7
+									},
+									{
+										"name": "PRODUCTNAME",
+										"templateType": "string",
+										"length": 50
+									},
+									{
+										"name": "PRODUCTCATEGORY",
+										"templateType": "string",
+										"length": 27
+									},
+									{
+										"name": "ITEMGROSSAMOUNT",
+										"templateType": "decimal",
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"name": "ITEMNETAMOUNT",
+										"templateType": "decimal",
+										"precision": 7,
+										"scale": 2
+									},
+									{
+										"name": "ITEMTAXAMOUNT",
+										"templateType": "decimal",
+										"precision": 6,
+										"scale": 2
+									},
+									{
+										"name": "PRODUCTGUID",
+										"templateType": "string",
+										"length": 36
+									},
+									{
+										"name": "TEXTGUID",
+										"templateType": "string",
+										"length": 36
+									},
+									{
+										"name": "/1DH/CDS_VIEW",
+										"templateType": "string",
+										"length": 18
+									},
+									{
+										"name": "/1DH/OPERATION",
+										"templateType": "string",
+										"length": 5000
+									},
+									{
+										"name": "NODEKEY",
+										"templateType": "string",
+										"length": 64
+									},
+									{
+										"name": "BP_ROLE",
+										"templateType": "string",
+										"length": 8
+									},
+									{
+										"name": "EMAILADDRESS",
+										"templateType": "string",
+										"length": 256
+									},
+									{
+										"name": "PHONE_NUMBER",
+										"templateType": "string",
+										"length": 36
+									},
+									{
+										"name": "FAX_NUMBER",
+										"templateType": "string",
+										"length": 64
+									},
+									{
+										"name": "WEB_ADDRESS",
+										"templateType": "string",
+										"length": 512
+									},
+									{
+										"name": "ADDRESS_GUID",
+										"templateType": "string",
+										"length": 64
+									},
+									{
+										"name": "BP_ID",
+										"templateType": "string",
+										"length": 16
+									},
+									{
+										"name": "COMPANY_NAME",
+										"templateType": "string",
+										"length": 100
+									},
+									{
+										"name": "LEGAL_FORM",
+										"templateType": "string",
+										"length": 16
+									},
+									{
+										"name": "CREATED_BY",
+										"templateType": "string",
+										"length": 64
+									},
+									{
+										"name": "CREATED_AT",
+										"templateType": "string",
+										"length": 32
+									},
+									{
+										"name": "CHANGED_BY",
+										"templateType": "string",
+										"length": 36
+									},
+									{
+										"name": "CHANGED_AT",
+										"templateType": "string",
+										"length": 32
+									},
+									{
+										"name": "CURRENCY_CODE",
+										"templateType": "string",
+										"length": 5
+									},
+									{
+										"name": "DUMMY_FIELD_BPA",
+										"templateType": "string",
+										"length": 1
+									},
+									{
+										"name": "APPROVAL_STATUS",
+										"templateType": "string",
+										"length": 1
+									}
+								]
+							}
+						}
+					},
+					"attributeMappings": [
+						{
+							"expression": "\"BUYERGUID\"",
+							"target": "BUYERGUID"
+						},
+						{
+							"expression": "\"ITEMGUID\"",
+							"target": "ITEMGUID"
+						},
+						{
+							"expression": "\"SALESORDERGUID\"",
+							"target": "SALESORDERGUID"
+						},
+						{
+							"expression": "\"SALESORDERID\"",
+							"target": "SALESORDERID"
+						},
+						{
+							"expression": "\"CREATEDAT\"",
+							"target": "CREATEDAT"
+						},
+						{
+							"expression": "\"CHANGEDAT\"",
+							"target": "CHANGEDAT"
+						},
+						{
+							"expression": "\"CURRENCYCODE\"",
+							"target": "CURRENCYCODE"
+						},
+						{
+							"expression": "\"GROSSAMOUNT\"",
+							"target": "GROSSAMOUNT"
+						},
+						{
+							"expression": "\"NETAMOUNT\"",
+							"target": "NETAMOUNT"
+						},
+						{
+							"expression": "\"TAXAMOUNT\"",
+							"target": "TAXAMOUNT"
+						},
+						{
+							"expression": "\"ITEMPOSITION\"",
+							"target": "ITEMPOSITION"
+						},
+						{
+							"expression": "\"PRODUCTID\"",
+							"target": "PRODUCTID"
+						},
+						{
+							"expression": "\"PRODUCTNAME\"",
+							"target": "PRODUCTNAME"
+						},
+						{
+							"expression": "\"PRODUCTCATEGORY\"",
+							"target": "PRODUCTCATEGORY"
+						},
+						{
+							"expression": "\"ITEMGROSSAMOUNT\"",
+							"target": "ITEMGROSSAMOUNT"
+						},
+						{
+							"expression": "\"ITEMNETAMOUNT\"",
+							"target": "ITEMNETAMOUNT"
+						},
+						{
+							"expression": "\"ITEMTAXAMOUNT\"",
+							"target": "ITEMTAXAMOUNT"
+						},
+						{
+							"expression": "\"PRODUCTGUID\"",
+							"target": "PRODUCTGUID"
+						},
+						{
+							"expression": "\"TEXTGUID\"",
+							"target": "TEXTGUID"
+						},
+						{
+							"expression": "\"/1DH/CDS_VIEW\"",
+							"target": "/1DH/CDS_VIEW"
+						},
+						{
+							"expression": "\"/1DH/OPERATION\"",
+							"target": "/1DH/OPERATION"
+						},
+						{
+							"expression": "\"NODEKEY\"",
+							"target": "NODEKEY"
+						},
+						{
+							"expression": "\"BP_ROLE\"",
+							"target": "BP_ROLE"
+						},
+						{
+							"expression": "\"EMAILADDRESS\"",
+							"target": "EMAILADDRESS"
+						},
+						{
+							"expression": "\"PHONE_NUMBER\"",
+							"target": "PHONE_NUMBER"
+						},
+						{
+							"expression": "\"FAX_NUMBER\"",
+							"target": "FAX_NUMBER"
+						},
+						{
+							"expression": "\"WEB_ADDRESS\"",
+							"target": "WEB_ADDRESS"
+						},
+						{
+							"expression": "\"ADDRESS_GUID\"",
+							"target": "ADDRESS_GUID"
+						},
+						{
+							"expression": "\"BP_ID\"",
+							"target": "BP_ID"
+						},
+						{
+							"expression": "\"COMPANY_NAME\"",
+							"target": "COMPANY_NAME"
+						},
+						{
+							"expression": "\"LEGAL_FORM\"",
+							"target": "LEGAL_FORM"
+						},
+						{
+							"expression": "\"CREATED_BY\"",
+							"target": "CREATED_BY"
+						},
+						{
+							"expression": "\"CREATED_AT\"",
+							"target": "CREATED_AT"
+						},
+						{
+							"expression": "\"CHANGED_BY\"",
+							"target": "CHANGED_BY"
+						},
+						{
+							"expression": "\"CHANGED_AT\"",
+							"target": "CHANGED_AT"
+						},
+						{
+							"expression": "\"CURRENCY_CODE\"",
+							"target": "CURRENCY_CODE"
+						},
+						{
+							"expression": "\"DUMMY_FIELD_BPA\"",
+							"target": "DUMMY_FIELD_BPA"
+						},
+						{
+							"expression": "\"APPROVAL_STATUS\"",
+							"target": "APPROVAL_STATUS"
+						}
+					],
+					"format": "CSV",
+					"additionalProperties_csv": {
+						"columnDelimiter": ",",
+						"csvHeaderIncluded": true
+					},
+					"writePartFiles": true,
+					"partFileWriteMode": "append",
+					"batchSize": 10000
+				},
+				"inports": [
+					{
+						"name": "inTable",
+						"type": "table",
+						"vtype-ID": "$GRAPH.generated.datatransform1_output1"
+					}
+				]
+			}
+		},
+		"getheader2": {
+			"component": "teched.GetHeader",
+			"metadata": {
+				"label": "Get Header",
+				"x": 179,
+				"y": 3,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"filesRequired": [
+					"script.py"
+				],
+				"generation": 1,
+				"config": {
+					"runmode": "for each batch"
+				}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "474,52 501.99999952316284,52 501.99999952316284,61 529.9999990463257,61"
+			},
+			"src": {
+				"port": "out",
+				"process": "wiretap1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "tofile1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "588.9999990463257,52 628.9999990463257,52"
+			},
+			"src": {
+				"port": "file",
+				"process": "tofile1"
+			},
+			"tgt": {
+				"port": "file",
+				"process": "writefile1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "757.9999990463257,43 808,43 808,102 425.5,102 425.5,161 475.49999952316284,161"
+			},
+			"src": {
+				"port": "file",
+				"process": "writefile1"
+			},
+			"tgt": {
+				"port": "file",
+				"process": "fromfile1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "534.4999995231628,152 584.5,152 584.5,177 429,177 429,202 479,202"
+			},
+			"src": {
+				"port": "path",
+				"process": "fromfile1"
+			},
+			"tgt": {
+				"port": "inTrigger",
+				"process": "structuredfileconsumer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "783,176 827,176 827,217 871,217"
+			},
+			"src": {
+				"port": "outTable",
+				"process": "structuredfileconsumer1"
+			},
+			"tgt": {
+				"port": "input1",
+				"process": "datatransform1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "764,280 827,280 827,235 890,235"
+			},
+			"src": {
+				"port": "outTable",
+				"process": "tableconsumer1"
+			},
+			"tgt": {
+				"port": "input2",
+				"process": "datatransform1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "1000,226 1051,226"
+			},
+			"src": {
+				"port": "output1",
+				"process": "datatransform1"
+			},
+			"tgt": {
+				"port": "inTable",
+				"process": "structuredfileproducer1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "136,52 155,52 155,43 174,43"
+			},
+			"src": {
+				"port": "outMessageData",
+				"process": "abapcdsreader1"
+			},
+			"tgt": {
+				"port": "input",
+				"process": "getheader2"
+			}
+		},
+		{
+			"metadata": {
+				"points": "303,43 324,43 324,52 345,52"
+			},
+			"src": {
+				"port": "data",
+				"process": "getheader2"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "wiretap1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {},
+	"metadata": {
+		"generation": 1
+	}
+}

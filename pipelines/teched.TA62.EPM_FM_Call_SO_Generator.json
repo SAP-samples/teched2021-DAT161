@@ -1,0 +1,81 @@
+{
+	"properties": {},
+	"description": "TA62 - Generate EPM SO data via ABAP FM call",
+	"processes": {
+		"customabapoperator1": {
+			"component": "com.sap.abap.custom",
+			"metadata": {
+				"label": "Operator Class: Creation of EPM Sales Order",
+				"x": 106,
+				"y": 131,
+				"height": 80,
+				"width": 120,
+				"extensible": true,
+				"generation": 1,
+				"config": {
+					"connectionID": "S4_RFC_TechEd",
+					"operatorID": "customer.teched.socreate"
+				},
+				"additionalinports": [
+					{
+						"name": "in",
+						"type": "string"
+					}
+				],
+				"additionaloutports": [
+					{
+						"name": "out",
+						"type": "string"
+					}
+				]
+			}
+		},
+		"terminal1": {
+			"component": "com.sap.util.terminal",
+			"metadata": {
+				"label": "Terminal",
+				"x": 311,
+				"y": 277,
+				"height": 80,
+				"width": 120,
+				"generation": 1,
+				"ui": "dynpath",
+				"config": {}
+			}
+		}
+	},
+	"groups": [],
+	"connections": [
+		{
+			"metadata": {
+				"points": "435,317 485,317 485,244 51,244 51,171 101,171"
+			},
+			"src": {
+				"port": "out1",
+				"process": "terminal1"
+			},
+			"tgt": {
+				"port": "in",
+				"process": "customabapoperator1"
+			}
+		},
+		{
+			"metadata": {
+				"points": "230,171 268,171 268,317 306,317"
+			},
+			"src": {
+				"port": "out",
+				"process": "customabapoperator1"
+			},
+			"tgt": {
+				"port": "in1",
+				"process": "terminal1"
+			}
+		}
+	],
+	"inports": {},
+	"outports": {},
+	"metadata": {
+		"generation": 1
+	}
+}
