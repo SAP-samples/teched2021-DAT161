@@ -47,7 +47,7 @@ After completing these steps you will have created a Pipeline that reads EPM Cus
 	![](/exercises/ex1/images/ex1-128b.JPG)<br><br>	
 	The Get Header Operator is a small Python operator that is taking care of adding column names of the CDS View as header line into the output CSV data stream.
 	Then connect the output port of the ABAP CDS Reader with the input port of the Get Header operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.  <br><br>
-![](/exercises/ex1/images/ex1-010b.JPG)<br><br>
+![](/exercises/ex1/images/ex1-137b.JPG)<br><br>
 Open the configuration of the ***Get Header*** operator and select ***only once*** for the Add column names configuration parameter. The ***only once*** selection will make sure that the column names of the CDS View will only be added once for all data packages being received from S/4 HANA. <br><br>
 ![](/exercises/ex1/images/ex1-124b.JPG)<br><br>
 
@@ -207,7 +207,7 @@ In the next section, we'll also take care for the Sales Order transaction data f
 7. From the operator list on the left side, drag and drop the ***Get Header*** operator into the Pipeline canvas.  When searching for the ***Get Header*** operator make sure you include the category **Teched** in your search:<br><br>
 	![](/exercises/ex1/images/ex1-128b.JPG)<br><br>	
 	Then connect the output port of the ABAP CDS Reader with the input port of the Get Header operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
-![](/exercises/ex1/images/ex1-040b.JPG)<br><br>
+![](/exercises/ex1/images/ex1-138b.JPG)<br><br>
 Open the configuration of the ***Get Header*** operator and select ***only once*** for the Add column names configuration parameter. The ***only once*** selection will make sure that the column names of the CDS View will only be added once for all data packages being received from S/4 HANA. This is required as we want to Append the data using the Write File operator. <br><br>
 ![](/exercises/ex1/images/ex1-130b.JPG)<br><br>
 
