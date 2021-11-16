@@ -43,7 +43,7 @@ After completing these steps you will have created a Pipeline that reads EPM Cus
       - Leave all other parameters as-is.<br><br>
    ![](/exercises/ex1/images/ex1-009b.JPG)<br><br>
 
-7.	From the operator list on the left side, drag the ***Get Header*** operator and drop it into the Pipeline canvas. When searching for the ***Get Header*** operator make sure you include the category **Others** in your search:<br><br>
+7.	From the operator list on the left side, drag the ***Get Header*** operator and drop it into the Pipeline canvas. When searching for the ***Get Header*** operator make sure you include the category **Teched** in your search:<br><br>
 	![](/exercises/ex1/images/ex1-128b.JPG)<br><br>	
 	The Get Header Operator is a small Python operator that is taking care of adding column names of the CDS View as header line into the output CSV data stream.
 	Then connect the output port of the ABAP CDS Reader with the input port of the Get Header operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.  <br><br>
@@ -204,7 +204,7 @@ In the next section, we'll also take care for the Sales Order transaction data f
       - Leave all other parameters as-is.<br><br>
    ![](/exercises/ex1/images/ex1-039b.JPG)<br><br>
    
-7. From the operator list on the left side, drag and drop the ***Get Header*** operator into the Pipeline canvas.  When searching for the ***Get Header*** operator make sure you include the category **Others** in your search:<br><br>
+7. From the operator list on the left side, drag and drop the ***Get Header*** operator into the Pipeline canvas.  When searching for the ***Get Header*** operator make sure you include the category **Teched** in your search:<br><br>
 	![](/exercises/ex1/images/ex1-128b.JPG)<br><br>	
 	Then connect the output port of the ABAP CDS Reader with the input port of the Get Header operator by pulling the mouse pointer from one port to the other while the left mouse button is pressed.<br><br>
 ![](/exercises/ex1/images/ex1-040b.JPG)<br><br>
