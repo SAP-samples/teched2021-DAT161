@@ -89,9 +89,9 @@ then ![](/exercises/dd1/images/1-008b.jpeg))<br><br>
 We have now successfully created the first simple CDS View in SAP S/4HANA. In the next step we'll showing how we can enable it for delta processing based on CDC.
 
 
-## Deep Dive 1.2 - Delta-enablement for simple ABAP CDS Views
+## Deep Dive 1.2 - Extraction and Delta enablement for simple ABAP CDS Views
 
-Delta-enablement for simple ABAP CDS Views is pretty easy! The only step to do is adding the `@Analytics` annotation to the view that sets the enabled flag and the change data capture approach.<br>
+The extraction and delta enablement for simple ABAP CDS Views is pretty easy! The only step to do is adding the `@Analytics` annotations to the view that sets the enabled flag and the change data capture approach.<br>
 
 Let's continue with the simple ABAP CDS View that we have implemented in the previous section and introduce the CDC delta for **`Z_CDS_EPM_BUPA`**.<br><br>
 
