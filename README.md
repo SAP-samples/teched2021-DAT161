@@ -1,8 +1,5 @@
 # DAT161 - Integrating SAP S/4HANA into SAP Data Intelligence: Deep Dive and Hands On
 
-## Information about Landscape availability
-### The systems of the hands-on exercise will be available until Friday November 19th 12:00 PM CET time and deleted afterwards!
-
 ## Description
 
 This repository contains the material for the SAP TechEd 2021 session called
