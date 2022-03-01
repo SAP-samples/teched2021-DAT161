@@ -202,6 +202,7 @@ In the next section, we'll also take care for the Sales Order transaction data f
       - Subscription Name: `SO001_XXXX`, where XXXX is your user name, for example "SO001_TA99"
       - ABAP CDS Name: `Z_CDS_SO_SOI_Delta`, which is the "more complex" CDS View that got created in the Deep Dive 1 demo
       - Transfer Mode: `Replication`
+      - Records per Roundtrip: 5000
       - Leave all other parameters as-is.<br><br>
    ![](/exercises/ex1/images/ex1-039b.JPG)<br><br>
    
