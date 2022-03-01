@@ -40,6 +40,7 @@ After completing these steps you will have created a Pipeline that reads EPM Cus
       - Subscription Name: `BP001_XXXX`, where XXXX is your user name, for example "BP001_TA99"
       - ABAP CDS Name: `Z_CDS_BUYER_Delta`, which is the "simple" CDS View that got created in the Deep Dive 1 demo
       - Transfer Mode: `Initial Load`
+      - Records per Roundtrip: 5000
       - Leave all other parameters as-is.<br><br>
    ![](/exercises/ex1/images/ex1-009b.JPG)<br><br>
 
