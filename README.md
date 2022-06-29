@@ -1,3 +1,5 @@
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/teched2021-DAT161)](https://api.reuse.software/info/github.com/SAP-samples/teched2021-DAT161)
+
 # DAT161 - Integrating SAP S/4HANA into SAP Data Intelligence: Deep Dive and Hands On
 
 ## Description
