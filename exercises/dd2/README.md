@@ -63,7 +63,7 @@ Here is a step-by-step guideline for creating a custom ABAP Operator. In the spe
 1. Logon to the SAP GUI of your conneted S/4HANA system and run transaction `DHAPE` (ABAP Editor), enter `DHAPE_CREATE_OPERATOR_CLASS` and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
 ![](images/dd2-002a.JPG)<br>
 
-   Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPERATOR_CLASS and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
+   **Alternatively**, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPERATOR_CLASS and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
    ![](images/dd2-002b.JPG)<br>
 
 2. Enter the required parameters and ***Execute***.<br><br>
@@ -75,15 +75,15 @@ Here is a step-by-step guideline for creating a custom ABAP Operator. In the spe
 4. You should now see the following screen. Close that windows by clicking ***Exit*** (or ***Shift+F3***).<br><br>
 ![](images/dd2-005a.JPG)<br>
 
-5. Go back to transaction `DHAPE` and click on “Operator BaDI Implementation Generator” <br><br>
+5. You are now back on the SAP Data Intelligence Operator Workbench (transaction `DHAPE`). Click on “Generate BAdI Implementation” <br><br>
 ![](images/dd2-006a.JPG)<br>
 
-   Alternatively, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPER_BADI_IMPL and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
+   **Alternatively**, you can directly run transaction SE38 (ABAP Editor) and enter DHAPE_CREATE_OPER_BADI_IMPL and ***Execute*** (![](images/Execute.JPG) or ***F8***) this report.<br><br>
 
 6. Enter the required parameters and ***Execute*** (![](images/Execute.jpeg)).<br><br>
 ![](images/dd2-007a.JPG)<br>
 
-7. Now assign a package or choose 'Local Object', then ***Save*** (![](images/Save.JPG)).<br><br>
+7. Now choose 'Local Object' or assign an existing package, then ***Save*** (![](images/Save.JPG)).<br><br>
 ![](images/dd2-008a.JPG)<br>
 
 8. On the next screen (Enhancement Implementation), click on ***Implementing Class*** on the left side, then double click on the name of your Implementing Class, in this case `ZCL_DHAPE_GET_RECORD_COUNT`.<br><br>
